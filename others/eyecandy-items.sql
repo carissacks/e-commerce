@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2019 at 12:55 PM
+-- Generation Time: Nov 10, 2019 at 12:53 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eyecandy`
+-- Database: `eyecandies`
 --
 
 -- --------------------------------------------------------
@@ -64,7 +64,7 @@ INSERT INTO `items` (`id_item`, `item_name`, `item_desc`, `weight`, `selling_pri
 --
 
 CREATE TABLE `item_colored` (
-  `id_item_colored` int(11) PRIMARY KEY,
+  `id_item_colored` int(11) NOT NULL,
   `id_item` varchar(10) NOT NULL,
   `item_color` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -263,15 +263,15 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T002-Turquoise-2.jpg', 3),
 ('T002-Turquoise-3.jpg', 3),
 ('T002-Turquoise-4.jpg', 3),
+('T003-Black-1.jpg', 5),
+('T003-Black-2.jpg', 5),
+('T003-Black-3.jpg', 5),
 ('T003-Floral-1.jpg', 8),
 ('T003-Floral-2.jpg', 8),
 ('T003-Floral-3.jpg', 8),
 ('T003-Red-1.jpg', 7),
 ('T003-Red-2.jpg', 7),
 ('T003-Red-3.jpg', 7),
-('T003-Black-1.jpg', 5),
-('T003-Black-2.jpg', 5),
-('T003-Black-3.jpg', 5),
 ('T003-White-Blue-1.jpg', 6),
 ('T003-White-Blue-2.jpg', 6),
 ('T003-White-Blue-3.jpg', 6),
@@ -357,6 +357,29 @@ CREATE TABLE `shopping_cart` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id_status` int(3) NOT NULL,
+  `status_desc` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id_status`, `status_desc`) VALUES
+(1, 'Waiting for payment'),
+(2, 'Processing order'),
+(3, 'Ready to send'),
+(4, 'Shipping'),
+(5, 'Received'),
+(6, 'Cancelled');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transactions`
 --
 
@@ -367,6 +390,14 @@ CREATE TABLE `transactions` (
   `item_size` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `item_size`) VALUES
+('1', 1, 1, 'M'),
+('1', 1, 1, 'S');
+
 -- --------------------------------------------------------
 
 --
@@ -376,7 +407,7 @@ CREATE TABLE `transactions` (
 CREATE TABLE `transaction_detail` (
   `id_trans` varchar(10) NOT NULL,
   `email_user` varchar(50) NOT NULL,
-  `stats` varchar(10) NOT NULL,
+  `id_status` int(3) NOT NULL,
   `trans_date` date NOT NULL,
   `totalpayment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -433,7 +464,7 @@ ALTER TABLE `items`
 -- Indexes for table `item_colored`
 --
 ALTER TABLE `item_colored`
-  -- ADD PRIMARY KEY (`id_item_colored`),
+  ADD PRIMARY KEY (`id_item_colored`),
   ADD KEY `item_colored_ibfk_1` (`id_item`);
 
 --
@@ -453,7 +484,8 @@ ALTER TABLE `ms_users`
 -- Indexes for table `photos`
 --
 ALTER TABLE `photos`
-  ADD PRIMARY KEY (`item_photo`,`id_item_colored`);
+  ADD PRIMARY KEY (`item_photo`,`id_item_colored`),
+  ADD KEY `photos_ibfk_1` (`id_item_colored`);
 
 --
 -- Indexes for table `reviews`
@@ -469,6 +501,12 @@ ALTER TABLE `shopping_cart`
   ADD PRIMARY KEY (`id_item_colored`,`email_user`,`item_size`);
 
 --
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id_status`);
+
+--
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -478,7 +516,8 @@ ALTER TABLE `transactions`
 -- Indexes for table `transaction_detail`
 --
 ALTER TABLE `transaction_detail`
-  ADD PRIMARY KEY (`id_trans`,`email_user`);
+  ADD PRIMARY KEY (`id_trans`,`email_user`),
+  ADD KEY `transdetail_FOREIGNKEY` (`id_status`);
 
 --
 -- Indexes for table `type`
@@ -501,6 +540,12 @@ ALTER TABLE `wishlist`
 --
 ALTER TABLE `item_colored`
   MODIFY `id_item_colored` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `id_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `type`
@@ -542,6 +587,12 @@ ALTER TABLE `photos`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`email_user`) REFERENCES `ms_users` (`email_user`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`id_item_colored`) REFERENCES `item_colored` (`id_item_colored`);
+
+--
+-- Constraints for table `transaction_detail`
+--
+ALTER TABLE `transaction_detail`
+  ADD CONSTRAINT `transdetail_FOREIGNKEY` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

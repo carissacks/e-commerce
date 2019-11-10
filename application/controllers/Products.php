@@ -52,4 +52,14 @@ class Products extends CI_Controller{
 		$data['types']= $this->product_model->get_types();
 		$this->load->view('pages/productview.php',$data);
 	}
+
+	public function showDetail($id){
+		$data['header']= $this->load->view('pages/header.php',NULL,TRUE);
+		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
+		$data['items']= $this->product_model->get_item($id);
+		$data['photos']= $this->product_model->get_photo($id);
+		$data['stocks']= $this->product_model->get_stock($id);
+		// // $data['color']= $this->product_model->get_color($id);
+		$this->load->view('pages/productDetailview.php',$data);
+	}
 }
