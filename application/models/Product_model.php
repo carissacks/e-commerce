@@ -33,13 +33,14 @@ class Product_model extends CI_Model{
 		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->group_by('item_colored.id_item_colored',);
-	$query= $this->db->query("SELECT * FROM item_colored AS ic
-	JOIN items AS i ON i.id_item= ic.id_item
-	JOIN photos AS p ON p.id_item_colored= ic.id_item_colored
-	JOIN item_stock AS ist ON ist.id_item_colored= ic.id_item_colored
-	JOIN type AS t ON t.id_type= i.id_type
-	GROUP BY ic.id_item_colored
-	LIMIT $limit OFFSET $start; ");
+		$query= $this->db->get();
+	// $query= $this->db->query("SELECT * FROM item_colored AS ic
+	// JOIN items AS i ON i.id_item= ic.id_item
+	// JOIN photos AS p ON p.id_item_colored= ic.id_item_colored
+	// JOIN item_stock AS ist ON ist.id_item_colored= ic.id_item_colored
+	// JOIN type AS t ON t.id_type= i.id_type
+	// GROUP BY ic.id_item_colored
+	// LIMIT $limit OFFSET $start; ");
 		return $query->result_array();
 	}
 
