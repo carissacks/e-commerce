@@ -12,7 +12,7 @@ class Product_model extends CI_Model{
 		$this->db->from('item_colored');
 		$this->db->join('items', 'item_colored.id_item = items.id_item');
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
-		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		// $this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->group_by('item_colored.id_item_colored');
 
@@ -25,16 +25,23 @@ class Product_model extends CI_Model{
 		return $query->result_array();
 	}
 
-	// function get_item_pagination($limit, $start){
-	// $query= $this->db->query("SELECT * FROM item_colored AS ic
-	// JOIN items AS i ON i.id_item= ic.id_item
-	// JOIN photos AS p ON p.id_item_colored= ic.id_item_colored
-	// JOIN item_stock AS ist ON ist.id_item_colored= ic.id_item_colored
-	// JOIN type AS t ON t.id_type= i.id_type
-	// GROUP BY ic.id_item_colored
-	// LIMIT $limit OFFSET $start; ");
-	// 	return $query->result_array();
-	// }
+	function get_item_pagination($limit, $start){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->group_by('item_colored.id_item_colored',);
+	$query= $this->db->query("SELECT * FROM item_colored AS ic
+	JOIN items AS i ON i.id_item= ic.id_item
+	JOIN photos AS p ON p.id_item_colored= ic.id_item_colored
+	JOIN item_stock AS ist ON ist.id_item_colored= ic.id_item_colored
+	JOIN type AS t ON t.id_type= i.id_type
+	GROUP BY ic.id_item_colored
+	LIMIT $limit OFFSET $start; ");
+		return $query->result_array();
+	}
 
 	// SELECT ic.id_item_colored, p.item_photo, i.id_item, ic.item_color, i.item_name, i.item_desc, i.weight, i.selling_price, i.buying_price, i.care_ins FROM item_colored AS ic
 	// JOIN items AS i ON i.id_item= ic.id_item
@@ -73,6 +80,20 @@ class Product_model extends CI_Model{
 
 	function total_data(){
 		return $this->db->get('item_colored')->num_rows();
+	}
+
+	function get_item_type($type){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		// $this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('type.type_desc',$type);
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
 	}
 }
 ?>

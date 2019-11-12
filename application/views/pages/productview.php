@@ -1,4 +1,4 @@
-<?=$header?>
+
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -31,7 +31,91 @@
 							</span>
 						</div>
 					</li>
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
 
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="images/item-cart-02.jpg" alt="IMG">
@@ -91,7 +175,7 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1">
 						All Products
 					</button>
 
@@ -99,9 +183,16 @@
 						$type_name= $type['type_desc'];
 					?>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<?=$type_name?>">
+
+					<a href="<?=base_url('index.php/Products/showTypes/'.$type_name)?>">
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+							<?=$type_name?>
+						</button>
+					</a>
+
+					<!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<?=$type_name?>">
 						<?=$type_name?>
-					</button>
+					</button> -->
 					<?php endforeach;?>
 				</div>
 
@@ -139,18 +230,6 @@
 							</div>
 
 							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Popularity
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Average rating
-									</a>
-								</li>
-
 								<li class="p-b-6">
 									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
 										Newness
@@ -220,12 +299,12 @@
 			</div>
 
 			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
+			<!-- <div class="flex-c-m flex-w w-full p-t-45">
 				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
 					Load More
 				</a>
-			</div>
-			<!-- <p><?=$links?></p> -->
+			</div> -->
+			<p>Page <?=$links?></p>
 		</div>
 	</div>
 		
