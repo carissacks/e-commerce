@@ -1,5 +1,3 @@
-<?=$header?>
-
 <!-- Cart -->
 <div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -105,7 +103,7 @@
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="<?=base_url('index.php/Products/showTypes/'.$type_item)?>" class="stext-109 cl8 hov-cl1 trans-04">
 				<?= $type_item?>
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
