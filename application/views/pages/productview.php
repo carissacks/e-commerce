@@ -176,7 +176,7 @@
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<a href="<?=base_url('index.php/Products')?>">
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1">
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 <?php if ($selected_type=='') echo 'how-active1'?>">
 							All Products
 						</button>
 					</a>
@@ -187,7 +187,7 @@
 
 
 					<a href="<?=base_url('index.php/Products/showTypes/'.$type_name)?>">
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 <?php if ($selected_type==$type_name) echo 'how-active1'?>">
 							<?=$type_name?>
 						</button>
 					</a>
@@ -306,7 +306,7 @@
 					Load More
 				</a>
 			</div> -->
-			<p>Page <?=$links?></p>
+				<p><?=$links?></p>
 		</div>
 	</div>
 		
@@ -369,7 +369,7 @@
 						</div>
 					</div>
 					
-					<div class="col-md-6 col-lg-5 p-b-30">
+					<!-- <div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								Lightweight Jacket
@@ -383,7 +383,6 @@
 								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
 							</p>
 							
-							<!--  -->
 							<div class="p-t-33">
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
@@ -444,7 +443,7 @@
 								</div>	
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

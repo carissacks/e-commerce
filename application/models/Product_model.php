@@ -28,7 +28,35 @@ class Product_model extends CI_Model{
 		return $query->result_array();
 	}
 
-	function get_related(){}
+	function get_related($id){
+		// $this->db->select('id_type')->from('item_colored')->join('items', 'item_colored.id_item = items.id_item')->where('id_item_colored',$id);
+		// $sub= $this->subquery->start_subquery('where_in');
+
+		// $this->db->select('*');
+		// $this->db->from('item_colred');
+		// $this->db->join('items', 'item_colored.id_item = items.id_item');
+		// $this->subquery->end_subquery('id_type');
+		// $this->db->limit(4);
+		// $query= $this->db->get();
+
+		$this->db->select('id_type');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->where('id_item_colored',$id);
+		$where_clause= $this->db->get_compiled_select();
+
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where("items.id_type = ($where_clause)");
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$this->db->limit(4);
+		$query= $this->db->get();
+		return $query->result_array();
+	}
 
 	function get_items_pagination($limit, $start){
 		$this->db->select('*');

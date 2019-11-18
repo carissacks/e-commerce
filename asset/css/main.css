@@ -3330,3 +3330,11 @@ input.num-product::-webkit-inner-spin-button {
   }
 
 }
+
+#login-form{
+	padding: 2%;
+	box-shadow: 0 16px 16px 0 rgba(0,0,0,0.2);
+	border-radius: 30px;
+  transition: 0.3s;
+	border: 1px solid #d5d5d5;
+}
