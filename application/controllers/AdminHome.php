@@ -162,9 +162,11 @@ class AdminHome extends CI_Controller{
 
             $data = array();
             $index = 0; // Set index array awal dengan 0
-            $totalcolors = $this->AdminHome_model->countidcolor();
-            // $totalcolors = 
+            $totalcolors = $this->AdminHome_model->countidcolor($ItemID); 
             var_dump($totalcolors);
+
+            // $select_id_type_color = $this->AdminHome_model->select_id_type_color(); 
+
             foreach($ItemColor as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
 				array_push($data, array(
 					// 'id_item_colored'=>$datacolors,

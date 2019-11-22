@@ -122,11 +122,17 @@ class AdminHome_model extends CI_Model{
 	// }
 
 	public function countidcolor(){
-		$this->db->select('count(id_item_colored) as totalcolors');
-		$hasil = $this->db->get('item_colored');
-		return $hasil->result();
-		// $query = $this->db->query("SELECT count(id_item_colored) FROM item_colored");
-        // return $query->result();
+		// $this->db->select('count(id_item_colored) as totalcolors');
+		// $hasil = $this->db->get('item_colored');
+		// return $hasil->result();
+		$query = $this->db->query("SELECT count(id_item_colored) FROM item_colored");
+		return $query->result();
+		
+		// $this->db->select('count(id_item_colored)');
+		// // $this->db->from('item_colored');
+		// $query = $this->db->get('item_colored');
+
+		// return $query->num_rows();
 	}
 
 	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data)
@@ -172,7 +178,7 @@ class AdminHome_model extends CI_Model{
 			// $sql = $this->SiswaModel->save_batch($data);
 
 			// var_dump($data);
-			var_dump($id_item_colored);
+			// var_dump($id_item_colored);
 
 			$this->db->insert_batch('item_colored', $data);
 	
@@ -186,17 +192,17 @@ class AdminHome_model extends CI_Model{
 
 			// echo var_dump($ItemType);
 
-			$this->db->select('id_item_colored'); 
-			$this->db->where('item_photo');
-			$query = $this->db->get('item_colored');
-			return $hasil;
+			// $this->db->select('id_item_colored'); 
+			// $this->db->where('item_photo');
+			// $query = $this->db->get('item_colored');
+			// return $hasil;
 
-			$photo = array(
-				'item_photo'   => $ItemPicture,
-				'id_item_colored'   => $id_item_colored
-			);
+			// $photo = array(
+			// 	'item_photo'   => $ItemPicture,
+			// 	'id_item_colored'   => $id_item_colored
+			// );
 
-			$this->db->insert('photos', $photo);
+			// $this->db->insert('photos', $photo);
 		
 		if($this->db->trans_status() === FALSE)
 		{
