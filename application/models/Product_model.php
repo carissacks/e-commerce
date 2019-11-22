@@ -7,7 +7,7 @@ class Product_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		// $this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
-		$this->db->group_by('item_colored.id_item_colored');
+		// $this->db->group_by('item_colored.id_item_colored');
 
 		$query= $this->db->get();
 		return $query->result_array();
