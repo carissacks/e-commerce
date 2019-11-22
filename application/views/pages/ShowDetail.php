@@ -129,11 +129,11 @@
 							<div class="slick3 gallery-lb">
 
 								<?php foreach ($photos as $photo):?>
-								<div class="item-slick3" data-thumb="<?= base_url('asset/images/'.$type_item.'/'.$photo['item_photo'])?>">
+								<div class="item-slick3" data-thumb="<?= base_url('assets/images/'.$type_item.'/'.$photo['item_photo'])?>">
 									<div class="wrap-pic-w pos-relative">
-										<img src="<?= base_url('asset/images/'.$type_item.'/'.$photo['item_photo'])?>" alt="IMG-PRODUCT">
+										<img src="<?= base_url('assets/images/'.$type_item.'/'.$photo['item_photo'])?>" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= base_url('asset/images/'.$type_item.'/'.$photo['item_photo'])?>">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= base_url('assets/images/'.$type_item.'/'.$photo['item_photo'])?>">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -454,7 +454,7 @@
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$type_item?>">
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="<?=base_url('asset/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
+							<img src="<?=base_url('assets/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
 
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Add to Cart
@@ -474,8 +474,8 @@
 
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
+									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('assets/images/icons/icon-heart-01.png')?>" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('assets/images/icons/icon-heart-02.png')?>" alt="ICON">
 								</a>
 							</div>
 						</div>
