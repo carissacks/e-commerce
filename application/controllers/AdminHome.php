@@ -169,15 +169,11 @@ class AdminHome extends CI_Controller{
 
             foreach($ItemColor as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
 				array_push($data, array(
-					// 'id_item_colored'=>$datacolors,
 					'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
-                    'item_color'=>$datacolors,
-                 // Ambil dan set data alamat sesuai index array dari $index
+                    'item_color'=>$datacolors, // Ambil dan set data alamat sesuai index array dari $index
                 ));
-                // var_dump($ItemColor);
 			$index++;
             }
-            // var_dump($data);
             
             $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data);
             

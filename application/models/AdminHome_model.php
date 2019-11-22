@@ -128,8 +128,8 @@ class AdminHome_model extends CI_Model{
 		$query = $this->db->query("SELECT count(id_item_colored) FROM item_colored");
 		return $query->result();
 		
-		// $this->db->select('count(id_item_colored)');
-		// // $this->db->from('item_colored');
+		// $this->db->select('id_item_colored');
+		// $this->db->from('item_colored');
 		// $query = $this->db->get('item_colored');
 
 		// return $query->num_rows();
