@@ -1,4 +1,3 @@
-<?=$header?>
 <!----------------------------------------------- CART ----------------------------------------------->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -113,7 +112,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-02.jpg')?>);">
+				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-05.jpg')?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -137,7 +136,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-03.jpg')?>);">
+				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-04.jpg')?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -261,7 +260,7 @@
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
-				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+				<!-- <div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 						All Products
 					</button>
@@ -274,7 +273,7 @@
 						<?=$type_name?>
 					</button>
 					<?php endforeach;?>
-				</div>
+				</div> -->
 				
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
@@ -304,8 +303,8 @@
 						<div class="block2-pic hov-img0">
 							<img src="<?=base_url('asset/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Add to Cart
+							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								Detail
 							</a>
 						</div>
 
@@ -403,7 +402,7 @@
 
 					<!-- MODAL DETAIL -->
 					
-					<div class="col-md-6 col-lg-5 p-b-30">
+					<!-- <div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								Lightweight Jacket
@@ -424,7 +423,7 @@
 									</a>
 								</div>
 							
-							<!--  -->
+							
 							<div class="p-t-33">
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
@@ -485,7 +484,7 @@
 								</div>	
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- MODEL DETAIL END  -->
 
 				</div>

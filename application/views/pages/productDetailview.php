@@ -1,5 +1,3 @@
-<?=$header?>
-
 <!-- Cart -->
 <div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -88,7 +86,8 @@
 
 	<!-- breadcrumb -->
 	<div class="container">
-		<?php foreach ($items as $row):
+		<?php 
+		foreach ($items as $row):
 			$id_item= $row['id_item'];
 			$id_item_col= $row['id_item_colored'];
 			$name_item= $row['item_name'];
@@ -105,7 +104,7 @@
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="<?=base_url('index.php/Products/showTypes/'.$type_item)?>" class="stext-109 cl8 hov-cl1 trans-04">
 				<?= $type_item?>
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
@@ -441,42 +440,49 @@
 				</h3>
 			</div>
 
-			<!-- Slide2 -->
-			<div class="wrap-slick2">
-				<div class="slick2">
-					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-						<!-- Block2 -->
-						<div class="block2">
-							<div class="block2-pic hov-img0">
-								<img src="images/product-01.jpg" alt="IMG-PRODUCT">
+			<div class="row isotope-grid">
+				<?php foreach ($related as $row):
+					$id_item= $row['id_item'];
+					$id_item_col= $row['id_item_colored'];
+					$name_item= $row['item_name'];
+					$color_item= $row['item_color'];
+					$desc_item= $row['item_desc'];
+					$price_item= $row['selling_price'];
+					$photo_item= $row['item_photo'];
+					$type_item= $row['type_desc'];
+				?>
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$type_item?>">
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="<?=base_url('asset/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
 
-								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-									Add to Cart
+							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Cart
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?=$name_item?>
 								</a>
+
+								<span class="stext-105 cl3">
+									IDR <?=$price_item?>
+								</span>
 							</div>
 
-							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										Esprit Ruffle Shirt
-									</a>
-
-									<span class="stext-105 cl3">
-										$16.64
-									</span>
-								</div>
-
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-									</a>
-								</div>
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
+								</a>
 							</div>
 						</div>
 					</div>
-
 				</div>
+
+				<?php endforeach;?>
 			</div>
 		</div>
 	</section>
@@ -540,7 +546,7 @@
 						</div>
 					</div>
 					
-					<div class="col-md-6 col-lg-5 p-b-30">
+					<!-- <div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								Lightweight Jacket
@@ -554,7 +560,7 @@
 								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
 							</p>
 							
-							<!--  -->
+							
 							<div class="p-t-33">
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
@@ -615,7 +621,6 @@
 								</div>	
 							</div>
 
-							<!--  -->
 							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 								<div class="flex-m bor9 p-r-10 m-r-11">
 									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
@@ -636,7 +641,7 @@
 								</a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

@@ -175,9 +175,11 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1">
-						All Products
-					</button>
+					<a href="<?=base_url('index.php/Products')?>">
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 <?php if ($selected_type=='') echo 'how-active1'?>">
+							All Products
+						</button>
+					</a>
 
 					<?php foreach($types as $type):
 						$type_name= $type['type_desc'];
@@ -185,7 +187,7 @@
 
 
 					<a href="<?=base_url('index.php/Products/showTypes/'.$type_name)?>">
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 <?php if ($selected_type==$type_name) echo 'how-active1'?>">
 							<?=$type_name?>
 						</button>
 					</a>
@@ -269,8 +271,8 @@
 						<div class="block2-pic hov-img0">
 							<img src="<?=base_url('asset/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Add to Cart
+							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								Detail
 							</a>
 						</div>
 
@@ -304,7 +306,7 @@
 					Load More
 				</a>
 			</div> -->
-			<p>Page <?=$links?></p>
+				<p><?=$links?></p>
 		</div>
 	</div>
 		
@@ -367,7 +369,7 @@
 						</div>
 					</div>
 					
-					<div class="col-md-6 col-lg-5 p-b-30">
+					<!-- <div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								Lightweight Jacket
@@ -381,7 +383,6 @@
 								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
 							</p>
 							
-							<!--  -->
 							<div class="p-t-33">
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
@@ -442,7 +443,7 @@
 								</div>	
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
