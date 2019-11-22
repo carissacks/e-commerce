@@ -17,7 +17,7 @@
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="assets/images/item-cart-01.jpg" alt="IMG">
+							<img src="asset/images/item-cart-01.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -33,7 +33,7 @@
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="assets/images/item-cart-02.jpg" alt="IMG">
+							<img src="asset/images/item-cart-02.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -49,7 +49,7 @@
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="assets/images/item-cart-03.jpg" alt="IMG">
+							<img src="asset/images/item-cart-03.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -88,7 +88,7 @@
 	<section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(<?=base_url('assets/images/slide-01.jpg')?>);">
+				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-01.jpg')?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -112,7 +112,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(<?=base_url('assets/images/slide-05.jpg')?>);">
+				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-05.jpg')?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -136,7 +136,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(<?=base_url('assets/images/slide-04.jpg')?>);">
+				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-04.jpg')?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -172,7 +172,7 @@
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
-						<img src="assets/images/banner-01.jpg" alt="IMG-BANNER">
+						<img src="asset/images/banner-01.jpg" alt="IMG-BANNER">
 
 						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
@@ -197,7 +197,7 @@
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
-						<img src="assets/images/banner-02.jpg" alt="IMG-BANNER">
+						<img src="asset/images/banner-02.jpg" alt="IMG-BANNER">
 
 						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
@@ -222,7 +222,7 @@
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
-						<img src="assets/images/banner-03.jpg" alt="IMG-BANNER">
+						<img src="asset/images/banner-03.jpg" alt="IMG-BANNER">
 
 						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
@@ -301,7 +301,7 @@
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$type_item?>">
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="<?=base_url('assets/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
+							<img src="<?=base_url('asset/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
 
 							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Detail
@@ -321,8 +321,8 @@
 
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('assets/images/icons/icon-heart-01.png')?>" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('assets/images/icons/icon-heart-02.png')?>" alt="ICON">
+									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
 								</a>
 							</div>
 						</div>
@@ -355,7 +355,7 @@
 		<div class="container">
 			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
 				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="assets/images/icons/icon-close.png" alt="CLOSE">
+					<img src="asset/images/icons/icon-close.png" alt="CLOSE">
 				</button>
 
 				<div class="row">
@@ -366,31 +366,31 @@
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="assets/images/product-detail-01.jpg">
+									<div class="item-slick3" data-thumb="asset/images/product-detail-01.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="assets/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+											<img src="asset/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="assets/images/product-detail-01.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="asset/images/product-detail-01.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="assets/images/product-detail-02.jpg">
+									<div class="item-slick3" data-thumb="asset/images/product-detail-02.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="assets/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+											<img src="asset/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="assets/images/product-detail-02.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="asset/images/product-detail-02.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="assets/images/product-detail-03.jpg">
+									<div class="item-slick3" data-thumb="asset/images/product-detail-03.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="assets/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+											<img src="asset/images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="assets/images/product-detail-03.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="asset/images/product-detail-03.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
