@@ -46,6 +46,16 @@
                             'name' => 'weight',
                             'type' => 'number'
                         );
+                        
+                        $size = array(
+                            'name' => 'size',
+                            'type' => 'text'
+                        );
+
+                        $stock = array(
+                            'name' => 'stock',
+                            'type' => 'number'
+                        );
 
                         $sellingprice = array(
                             'name' => 'sellingprice',
@@ -74,6 +84,7 @@
                                 echo form_label('Item ID :',' ',$attribute_label) . form_input('itemid', '', $style);
                                 echo form_error('itemid','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
+
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-5'>";
                                 echo form_label('Item Name :',' ',$attribute_label) . form_input('itemname', '', $style);
@@ -95,20 +106,27 @@
                         echo "</div>";
 
                         echo "<div class='form-row'>";
-                            echo "<div class='form-group row col-md-5'>";
+                            echo "<div class='form-group row col-md-4'>";
                                 echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor[]', '', $style);
                                 echo form_error('itemcolor','<small class="text-danger">','</small>') . "<br>";
                                 echo '<div id="insert-form"></div>';
-                                echo '<button type="button" id="btn-tambah-form">Tambah Data Form</button>';
+                                echo '<button type="button" id="btn-tambah-form">Add Color</button>';
                                 echo '<button type="button" id="btn-reset-form">Reset Form</button><br><br>';
                                 echo '<input type="hidden" id="jumlah-form" value="1">';
                             echo "</div>";
+                        echo "</div>";
 
-                            // echo "<div class='form-group row col-md-5 offset-2'>";
-                            //     echo form_label('Item Size  :', ' ',$attribute_label);
-                            //         echo form_dropdown('itemsize', $size,' ', $attribute_selectlabel);
-                            //         echo form_error('itemsize','<small class="text-danger">','</small>');
-                            // echo "</div>";
+                        echo "<div class='form-row'>";
+                            echo "<div class='form-group row col-md-4'>";
+                                echo form_label('Item Size :',' ',$attribute_label) . form_input('itemsize[]', '', $style);
+                                echo form_error('itemsize','<small class="text-danger">','</small>') . "<br>";
+                                echo form_label('Item Stock :',' ',$attribute_label) . form_input('itemstock[]', '', $style);
+                                echo form_error('itemstock','<small class="text-danger">','</small>') . "<br>";
+                                echo '<div id="insert-form2"></div>';
+                                echo '<button type="button" id="btn-tambah-form2">Add Stock and Size</button>';
+                                echo '<button type="button" id="btn-reset-form2">Reset Form</button><br><br>';
+                                echo '<input type="hidden" id="jumlah-form2" value="1">';
+                            echo "</div>";
                         echo "</div>";
 
                         echo "<div class='form-row'>";
@@ -175,11 +193,35 @@
       
       $("#jumlah-form").val(nextform); // Ubah value textbox jumlah-form dengan variabel nextform
     });
+
+    $("#btn-tambah-form2").click(function(){ // Ketika tombol Tambah Data Form di klik
+      var jumlah2 = parseInt($("#jumlah-form2").val()); // Ambil jumlah data form pada textbox jumlah-form
+      var nextform2 = jumlah2 + 1; // Tambah 1 untuk jumlah form nya
+      
+      // Kita akan menambahkan form dengan menggunakan append
+      // pada sebuah tag div yg kita beri id insert-form
+      $("#insert-form2").append("<b>Data ke " + nextform2 + " :</b>" +
+        "<table>" +
+        "<tr>" +
+        "<td><input type='text' name='itemsize[]' required></td>" +
+        "<td><input type='text' name='itemstock[]' required></td>" +
+        "</tr>" +
+        "</table>" +
+        "<br><br>");
+      
+      $("#jumlah-form").val(nextform2); // Ubah value textbox jumlah-form dengan variabel nextform
+    });
     
     // Buat fungsi untuk mereset form ke semula
     $("#btn-reset-form").click(function(){
       $("#insert-form").html(""); // Kita kosongkan isi dari div insert-form
       $("#jumlah-form").val("1"); // Ubah kembali value jumlah form menjadi 1
+    });
+
+    // Buat fungsi untuk mereset form ke semula
+    $("#btn-reset-form2").click(function(){
+      $("#insert-form2").html(""); // Kita kosongkan isi dari div insert-form
+      $("#jumlah-form2").val("1"); // Ubah kembali value jumlah form menjadi 1
     });
   });
   </script>

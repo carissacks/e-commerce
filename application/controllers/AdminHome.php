@@ -81,7 +81,7 @@ class AdminHome extends CI_Controller{
     public function FormAddProduct()
 	{
         $data['type']  = $this->AdminHome_model->getType();
-        $data['size']  = $this->AdminHome_model->getSize();
+        // $data['size']  = $this->AdminHome_model->getSize();
         $data = array(
             'button' => 'Create',
             'type' => $this->AdminHome_model->getType(),
@@ -172,9 +172,9 @@ class AdminHome extends CI_Controller{
 					'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
                     'item_color'=>$datacolors, // Ambil dan set data alamat sesuai index array dari $index
                 ));
-			$index++;
+			    $index++;
             }
-            
+
             $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data);
             
             // $data = array();
@@ -190,7 +190,7 @@ class AdminHome extends CI_Controller{
 
             // $sql = $this->AdminHome_model->AddProduct($data);
             
-            // redirect('AdminHome');   
+            redirect('AdminHome');   
 		// }
     }
     

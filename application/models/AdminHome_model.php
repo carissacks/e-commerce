@@ -109,10 +109,10 @@ class AdminHome_model extends CI_Model{
 		// return $query->result_array();
 	}
 
-	function getSize(){
-		$query = $this->db->get('item_stock');
-		return $query->result_array();
-	}
+	// function getSize(){
+	// 	$query = $this->db->get('item_stock');
+	// 	return $query->result_array();
+	// }
 
 	// function getItemColored(){
 	// 	$this->db->select('id_item_colored'); 
@@ -154,6 +154,7 @@ class AdminHome_model extends CI_Model{
 
 			//AUTO GENERATE id_item_colored
 			$id_item_colored = $this->db->insert_id();
+
 
 			// $result = array();
             //     foreach($type AS $key => $val){
@@ -218,6 +219,7 @@ class AdminHome_model extends CI_Model{
 		$this->db->trans_begin();
 		$this->db->delete('items', array('id_item' => $id));
 		$this->db->delete('item_colored', array('id_item' => $id));
+		// $this->db->delete('item_stock', array('id_item_colored' => $id));
 		// $this->db->delete('photos', array('photoooooooooooooooo' => $id));
 		if($this->db->trans_status() === FALSE)
 		{
