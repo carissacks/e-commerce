@@ -2,21 +2,21 @@
 <html lang="en">
 
 <head>
-	<link rel="icon" type="image.png" href="<?=base_url('assets/images/icons/favicon.png')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/bootstrap/css/bootstrap.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/fonts/iconic/css/material-design-iconic-font.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/fonts/linearicons-v1.0.0/icon-font.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/animate/animate.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/css-hamburgers/hamburgers.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/animsition/css/animsition.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/select2/select2.min.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/daterangepicker/daterangepicker.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/slick/slick.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/MagnificPopup/magnific-popup.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/vendor/perfect-scrollbar/perfect-scrollbar.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/util.css')?>"/>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/main.css')?>"/>
+	<link rel="icon" type="image.png" href="<?=base_url('asset/images/icons/favicon.png')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/bootstrap/css/bootstrap.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/fonts/font-awesome-4.7.0/css/font-awesome.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/fonts/iconic/css/material-design-iconic-font.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/fonts/linearicons-v1.0.0/icon-font.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/animate/animate.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/css-hamburgers/hamburgers.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/animsition/css/animsition.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/select2/select2.min.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/daterangepicker/daterangepicker.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/slick/slick.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/MagnificPopup/magnific-popup.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/vendor/perfect-scrollbar/perfect-scrollbar.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/css/util.css')?>"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('asset/css/main.css')?>"/>
 
 	<title>Eye Candy</title>
 </head>
@@ -49,7 +49,7 @@
 
 					<!-- Logo desktop -->
 					<a href="#" class="logo">
-						<img src="<?=base_url('assets/images/icons/logo-01.png')?>" alt="IMG-LOGO">
+						<img src="<?=base_url('asset/images/icons/logo-01.png')?>" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
@@ -130,7 +130,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.html"><img src="<?=base_url('assets/images/icons/logo-01.png')?>" alt="IMG-LOGO"></a>
+				<a href="index.html"><img src="<?=base_url('asset/images/icons/logo-01.png')?>" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -228,7 +228,7 @@
 		<!-- <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-					<img src="<?=base_url('assets/images/icons/icon-close2.png')?>" alt="CLOSE">
+					<img src="<?=base_url('asset/images/icons/icon-close2.png')?>" alt="CLOSE">
 				</button>
 
 				<form class="wrap-search-header flex-w p-l-15">

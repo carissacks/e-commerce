@@ -127,11 +127,11 @@
 				</div>
 			</div>
 		</footer>
-		<script src="<?=base_url('assets/vendor/jquery/jquery-3.2.1.min.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/animsition/js/animsition.min.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/bootstrap/js/popper.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.min.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/select2/select2.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/jquery/jquery-3.2.1.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/animsition/js/animsition.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/bootstrap/js/popper.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/bootstrap/js/bootstrap.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/select2/select2.min.js')?>"></script>
 		<script>
 			$(".js-select2").each(function () {
 				$(this).select2({
@@ -141,16 +141,16 @@
 			})
 
 		</script>
-		<script src="<?=base_url('assets/vendor/daterangepicker/moment.min.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/daterangepicker/daterangepicker.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/slick/slick.min.js')?>"></script>
-		<script src="<?=base_url('assets/js/slick-custom.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/parallax100/parallax100.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/daterangepicker/moment.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/daterangepicker/daterangepicker.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/slick/slick.min.js')?>"></script>
+		<script src="<?=base_url('asset/js/slick-custom.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/parallax100/parallax100.js')?>"></script>
 		<script>
 			$('.parallax100').parallax100();
 
 		</script>
-		<script src="<?=base_url('assets/vendor/MagnificPopup/jquery.magnific-popup.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/MagnificPopup/jquery.magnific-popup.min.js')?>"></script>
 		<script>
 			$('.gallery-lb').each(function () { // the containers for all your galleries
 				$(this).magnificPopup({
@@ -164,8 +164,8 @@
 			});
 
 		</script>
-		<script src="<?=base_url('assets/vendor/isotope/isotope.pkgd.min.js')?>"></script>
-		<script src="<?=base_url('assets/vendor/sweetalert/sweetalert.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/isotope/isotope.pkgd.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/sweetalert/sweetalert.min.js')?>"></script>
 		<script>
 			$('.js-addwish-b2').on('click', function (e) {
 				e.preventDefault();
@@ -202,7 +202,7 @@
 			});
 
 		</script>
-		<script src="<?=base_url('assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')?>"></script>
+		<script src="<?=base_url('asset/vendor/perfect-scrollbar/perfect-scrollbar.min.js')?>"></script>
 		<script>
 			$('.js-pscroll').each(function () {
 				$(this).css('position', 'relative');
@@ -219,7 +219,7 @@
 			});
 
 		</script>
-		<script src="<?=base_url('assets/js/main.js')?>"></script>
+		<script src="<?=base_url('asset/js/main.js')?>"></script>
 
 		</body>
 

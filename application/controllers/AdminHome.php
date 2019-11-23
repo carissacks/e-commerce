@@ -177,14 +177,14 @@ class AdminHome extends CI_Controller{
             $Description = $this->input->post('description');
             $Careinstruction = $this->input->post('careinstruction');
 
-            $config['upload_path'] = './assets/itempicture';
+            $config['upload_path'] = './asset/itempicture';
 		    $config['allowed_types'] = 'jpg|png|jpeg';
             $config['file_name'] = $ItemName;
             
             $this->load->library('upload', $config);
             $this->upload->do_upload('itempicture');
             
-            $ItemPicture='assets/itempicture/' . $this->upload->data('file_name');
+            $ItemPicture='asset/itempicture/' . $this->upload->data('file_name');
 
             $data = array();
             $index = 0; // Set index array awal dengan 0
