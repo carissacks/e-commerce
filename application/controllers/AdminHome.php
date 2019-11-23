@@ -28,30 +28,56 @@ class AdminHome extends CI_Controller{
         $this->load->view('pages/Dashboard.php',$data);
     }
 
+    public function Detail($id){
+        $data['details']= $this->AdminHome_model->get_detail($id);
+        $data['size_stock']= $this->AdminHome_model->get_size_stock($id);
+        $data['photos']= $this->AdminHome_model->get_photo_detail($id);
+        $data['color']= $this->AdminHome_model->get_color($id);
+        $data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
+		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        $this->load->view('pages/Detail.php',$data);
+	}
+
+    public function showDetailTransaction(){
+        // $data['items']= $this->AdminHome_model->get_item_detail($_GET['id']);
+		// $data['photos']= $this->AdminHome_model->get_photo_detail($_GET['id']);
+        // $data['stocks']= $this->AdminHome_model->get_stock_detail($_GET['id']);
+        $data['transaction']= $this->AdminHome_model->get_transaction($_GET['id']);
+        $data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['Detail'] = $this->load->view('include/TabelDetail', $data, TRUE);
+		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        
+        $this->load->view('pages/DetailTabel.php',$data);
+	}
+
     public function AllProduct()
 	{
-        // buat pagination
-		// $config= $this->pagination_config();
-		// $config['base_url']= base_url('index.php/Products/index');
-		// $config['total_rows']= $this->Product_model->total_data();
-		// $this->pagination->initialize($config);
-
-		// $page= ($this->uri->segment(3))? $this->uri->segment(3):0;
 		$data['items']= $this->Product_model->get_items();
-		// $data['links']= $this->pagination->create_links();
-        // endof pagination
-        
-        $data['data'] = $this->Product_model->get_items();
-		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+		$data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-        $data['types']= $this->Product_model->get_types();
-		$data['selected_type']='';
         $data['card'] = $this->load->view('include/CardProduct', $data, TRUE);
-        
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
 
         $this->load->view('pages/AllProduct.php',$data);
+    }
+
+    public function DressProduct()
+	{
+		$data['items']= $this->AdminHome_model->get_dress();
+		$data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['types']= $this->Product_model->get_types();
+        $data['card'] = $this->load->view('include/CardProduct', $data, TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+
+        $this->load->view('pages/DressProduct.php',$data);
     }
     
     public function MonthlyView()
@@ -176,18 +202,6 @@ class AdminHome extends CI_Controller{
             }
 
             $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data);
-            
-            // $data = array();
-			// $index = 0; // Set index array awal dengan 0
-			// foreach($id_item_colored as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
-			// 	array_push($data, array(
-			// 		'id_item_colored'=>$datacolors,
-			// 		'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
-			// 		'item_color'=>$color[$index], // Ambil dan set data alamat sesuai index array dari $index
-			// 	));
-			// $index++;
-			// }
-
             // $sql = $this->AdminHome_model->AddProduct($data);
             
             redirect('AdminHome');   
@@ -226,5 +240,20 @@ class AdminHome extends CI_Controller{
             $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture);
             redirect('AdminHome');   
 		}
-	}
+    }
+    
+    public function Delete()
+	{
+        $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
+        $data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
+		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        
+        $id = $_GET['id'];
+        // $this->AdminHome_model->get_id_item($id);
+        $this->AdminHome_model->DeleteProduct($id);
+        // redirect('AdminHome');
+    }
 }
