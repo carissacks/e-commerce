@@ -121,6 +121,11 @@ class AdminHome_model extends CI_Model{
 	// 	return $query->result_array();
 	// }
 
+	public function getIDItemColored($ItemID){
+		$query = $this->db->query("SELECT id_item_colored FROM item_colored where id_item = '$ItemID'");
+		return $query->result();
+	}
+
 	public function countidcolor(){
 		// $this->db->select('count(id_item_colored) as totalcolors');
 		// $hasil = $this->db->get('item_colored');
@@ -135,6 +140,19 @@ class AdminHome_model extends CI_Model{
 		// return $query->num_rows();
 	}
 
+	public function AddProductDetail($data){
+		$this->db->trans_start();
+		$this->db->insert_batch('item_stock', $data);
+		
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else
+		{
+			$this->db->trans_commit();
+		}
+	}
 	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data)
 	{
 		$this->db->trans_start();
@@ -154,8 +172,7 @@ class AdminHome_model extends CI_Model{
 
 			//AUTO GENERATE id_item_colored
 			$id_item_colored = $this->db->insert_id();
-
-
+			
 			// $result = array();
             //     foreach($type AS $key => $val){
             //          $result[] = array(
@@ -216,9 +233,10 @@ class AdminHome_model extends CI_Model{
 	}
 
 	function DeletePoduct($id){
+		getIDItemColored($id);
 		$this->db->trans_begin();
-		$this->db->delete('items', array('id_item' => $id));
-		$this->db->delete('item_colored', array('id_item' => $id));
+		// $this->db->delete('items', array('id_item' => $id));
+		// $this->db->delete('item_colored', array('id_item' => $id));
 		// $this->db->delete('item_stock', array('id_item_colored' => $id));
 		// $this->db->delete('photos', array('photoooooooooooooooo' => $id));
 		if($this->db->trans_status() === FALSE)

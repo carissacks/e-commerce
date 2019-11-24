@@ -12,7 +12,7 @@
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$type_item?>">
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="<?=base_url('assets/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
+							<img src="<?=base_url('asset/images/'.$type_item.'/'.$photo_item)?>" alt="IMG-PRODUCT">
 
 							<a href="<?=base_url('index.php/Products/ShowDetail/'.$id_item_col)?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Detail
