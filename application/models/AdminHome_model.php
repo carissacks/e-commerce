@@ -214,6 +214,27 @@ class AdminHome_model extends CI_Model{
 		}
 	}
 
+	public function AddPhoto($id_item_colored, $ItemPicture)
+	{
+		$this->db->trans_start();
+			
+		$photo = array(
+			'id_item_colored'   => $id_item_colored,
+			'item_photo'   => $ItemPicture,
+		);
+
+		$this->db->insert('photos', $photo);
+		
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else
+		{
+			$this->db->trans_commit();
+		}
+	}
+
 	function get_jumpsuit(){
 		$this->db->select('*');
 		$this->db->from('item_colored');
@@ -277,6 +298,18 @@ class AdminHome_model extends CI_Model{
 
 		$query= $this->db->get();
 		return $query->result_array();
+	}
+
+	function get_item_colored_detail($id){
+		$query = $this->db->query("SELECT id_item_colored, item_color FROM item_colored where id_item = '$id'");
+		return $query->result_array();
+
+		// $this->db->select('id_item_colored, item_color');
+		// $this->db->from('item_colored');
+		// $this->db->where('id_item',$id);
+
+		// $query= $this->db->get();
+		// return $query->result_array();
 	}
 
 	function get_color($id){
