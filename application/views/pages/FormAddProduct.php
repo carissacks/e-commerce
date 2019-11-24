@@ -14,12 +14,6 @@
             <h4 class="font-weight-bold py-3 mb-0 card-header">Add Product</h4>
             <div class="card mb-4">
                 <div class="card-body">
-                <?php 
-                    // foreach($type as $tipe){
-                    //     $type_name= $tipe['type_desc'];
-                    //     echo $tipe['type_desc'];
-                    // }
-                    ?>
                     <?php
                         echo form_open_multipart('AdminHome/addProduct');
                         $style = array(
@@ -79,6 +73,14 @@
                         $attribute_selectlabel = array(
                             'class' => 'custom-select'
                         );
+
+                        $button_add_color = array(
+                            'name' => 'buttoncolor',
+                            'id' => 'btn-tambah-form',
+                            "type" => 'button',
+                            'value' => 'true',
+                            'class'=>'btn btn-primary btn-sm icon-plus-circle'
+                        );
                         
                         echo "<div class='form-group row'>";
                                 echo form_label('Item ID :',' ',$attribute_label) . form_input('itemid', '', $style);
@@ -93,14 +95,8 @@
 
                             echo "<div class='form-group row col-md-5 offset-2'>";
                                 echo form_label('Item Type  :', ' ',$attribute_label);
-                                $dd_provinsi_attribute = 'class="form-control select2"';
-                                echo form_dropdown('type', $type, $type_selected, $dd_provinsi_attribute);
-                                //echo form_dropdown('itemtype', $type,' ', $attribute_selectlabel);
-                                //echo "<select class='form-control' name='type' id='type'>";
-                                //foreach($type as $tipe){
-                                    //echo "<option value=" . $tipe['id_type'] . ">" . $tipe['type_desc'] . "</option>";
-                                //}
-                                //echo "</select>";
+                                $types = 'class="form-control select2"';
+                                echo form_dropdown('type', $type, $type_selected, $types);
                                 echo form_error('itemtype','<small class="text-danger">','</small>');
                             echo "</div>";
                         echo "</div>";
@@ -159,7 +155,7 @@
                         // echo "</div>";
 
                         echo form_submit('Submit', 'Add Product', $buttonadd);
-                        echo '	<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                        echo '<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>

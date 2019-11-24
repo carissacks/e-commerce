@@ -43,7 +43,7 @@
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_alert.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/DressProduct')?>" class="sidenav-link">
                                     <div>Dress</div>
                                 </a>
                             </li>

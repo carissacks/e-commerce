@@ -10,8 +10,10 @@
 <body>
     <?php echo $header; ?>
     <div class="container-fluid flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-0">Monthly Order</h4>
-        
+        <h4 class="font-weight-bold py-3 mb-0">Transaction Detail</h4>
+        <?php
+            echo $Detail;
+        ?>
     </div>
     <?php echo $footer; ?>
 </body>
