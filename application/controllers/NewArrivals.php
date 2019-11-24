@@ -17,18 +17,36 @@ class NewArrivals extends CI_Controller{
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['items']= $this->newArr_model->get_items();
 		$data['types']= $this->newArr_model->get_types();
+		if($this->session->has_userdata('email')):
+			$email= $this->session->email;
+			$data['cart_items']= $this->newArr_model->get_itemInCart($email);
+		else:
+			$data['cart_items']='';
+		endif;
 		$this->load->view('pages/newArrview.php',$data);
 	}
 
 	private function head_class(){
-		// $login = $this->session->login;
-		if($this->session->has_userdata('login')) $login=true;
-		else $login=false;
-		return array(
-			'login'=> $login,
-			'new_class' => 'active-menu',
-			'shop_class' => '',
-			'sale_class' => ''
-		);
+		if($this->session->has_userdata('login')) {
+			$login=true;
+			$email= $this->session->email;
+			return array(
+				'login'=> $login,
+				'new_class' => 'active-menu',
+				'shop_class' => '',
+				'sale_class' => '',
+				'total_cart_items' => $this->newArr_model->get_totalCartData($email)
+			);
+		}
+		else {
+			$login=false;
+			return array(
+				'login'=> $login,
+				'new_class' => 'active-menu',
+				'shop_class' => '',
+				'sale_class' => '',
+			);
+		}
 	}
+	
 }

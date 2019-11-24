@@ -16,5 +16,26 @@ class NewArr_model extends CI_Model{
 		$query= $this->db->query("SELECT * FROM type");
 		return $query->result_array();
 	}
+
+	function get_itemInCart($email){
+		$this->db->select('*');
+		$this->db->from('shopping_cart');
+		$this->db->join('item_colored', 'item_colored.id_item_colored = shopping_cart.id_item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('email_user',$email);
+		$this->db->group_by('shopping_cart.id_item_colored');
+
+		$query= $this->db->get();
+		// return $query;
+		return $query->result_array();
+	}
+
+	function get_totalCartData($email){
+		$this->db->select_sum('quantity');
+		$query= $this->db->get_where('shopping_cart',array('email_user'=>$email));
+		return $query->row()->quantity;
+	}
 }
 ?>

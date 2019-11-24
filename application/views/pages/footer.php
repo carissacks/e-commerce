@@ -201,6 +201,11 @@
 				});
 			});
 
+			// $('.js-thanks').ready(function () {
+			// 		swal('Thank you for your purchase!');
+			
+			// });
+
 		</script>
 		<script src="<?=base_url('asset/vendor/perfect-scrollbar/perfect-scrollbar.min.js')?>"></script>
 		<script>

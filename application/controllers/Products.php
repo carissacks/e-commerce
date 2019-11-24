@@ -34,7 +34,7 @@ class Products extends CI_Controller{
 		$data['photos']= $this->product_model->get_photo($id);
 		$data['stocks']= $this->product_model->get_stock($id);
 		$data['related']= $this->product_model->get_related($id);
-		// $data['color']= $this->product_model->get_color($id);
+		$data['color']= $this->product_model->get_other_color($id);
 		$this->load->view('pages/productDetailview.php',$data);
 	}
 
@@ -90,13 +90,25 @@ class Products extends CI_Controller{
 	}
 
 	private function head_class(){
-		if($this->session->has_userdata('login')) $login=true;
-		else $login=false;
-		return array(
-			'login' =>$login,
-			'new_class' => '',
-			'shop_class' => 'active-menu',
-			'sale_class' => ''
-		);
+		if($this->session->has_userdata('login')) {
+			$login=true;
+			$email= $this->session->email;
+			return array(
+				'login'=> $login,
+				'new_class' => '',
+				'shop_class' => 'active-menu',
+				'sale_class' => '',
+				'total_cart_items' => $this->product_model->get_totalCartData($email)
+			);
+		}
+		else {
+			$login=false;
+			return array(
+				'login'=> $login,
+				'new_class' => '',
+				'shop_class' => 'active-menu',
+				'sale_class' => '',
+			);
+		}
 	}
 }

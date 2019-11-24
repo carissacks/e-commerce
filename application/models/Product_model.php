@@ -58,6 +58,21 @@ class Product_model extends CI_Model{
 		return $query->result_array();
 	}
 
+	function get_other_color($id){
+
+		$this->db->select('id_item');
+		$this->db->from('item_colored');
+		$this->db->where('id_item_colored',$id);
+		$where_clause= $this->db->get_compiled_select();
+
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->where("id_item = ($where_clause) AND id_item_colored != $id ");
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
 	function get_items_pagination($limit, $start){
 		$this->db->select('*');
 		$this->db->from('item_colored');
@@ -145,6 +160,16 @@ class Product_model extends CI_Model{
 		$this->db->limit($limit, $start);
 		$query= $this->db->get();
 		return $query->result_array();
+	}
+
+	function get_totalCartData($email){
+		$this->db->select_sum('quantity');
+		$query= $this->db->get_where('shopping_cart',array('email_user'=>$email));
+		return $query->row()->quantity;
+	}
+
+	public function total_price(){
+		
 	}
 }
 ?>
