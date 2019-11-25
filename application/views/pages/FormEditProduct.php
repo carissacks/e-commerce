@@ -5,45 +5,84 @@
     <script src="<?php echo base_url("js/jquery.min.js"); ?>" type="text/javascript"></script>
     <?php 
         echo $style;
-        echo $script;  
+        echo $script; 
+        // var_dump($details);
+        foreach ($details as $row){
+			$id_item= $row['id_item'];
+			// $id_item_col= $row['id_item_colored'];
+            $name_item= $row['item_name'];
+			// $color_item= $row['item_color'];
+			$desc_item= $row['item_desc'];
+			$price_item= $row['selling_price'];
+			$buying_item= $row['buying_price'];
+			// $type_item= $row['type_desc'];
+			$weight_item= $row['weight'];
+			$care_ins= $row['care_ins'];
+			// $id = $row['id_item_colored'];
+		}
     ?>
 </head>
 <body>
     <?php echo $header; ?>
         <div class="container-fluid flex-grow-1 container-p-y">
-            <h4 class="font-weight-bold py-3 mb-0 card-header">Add Product</h4>
+            <h4 class="font-weight-bold py-3 mb-0 card-header">Edit Product</h4>
             <div class="card mb-4">
                 <div class="card-body">
                     <?php
+                        // echo $details;
+                        $id_item = $_GET['id_item'];
+                        $id_item_colored = $_GET['id'];
                         echo form_open_multipart('AdminHome/EditProduct');
                         $style = array(
                             'class' => 'form-control'
                         );
 
+                        $idItemColored = array(
+                            'name' => 'itemidcolored',
+                            'type' => 'hidden',
+                            'value' => $id_item_colored
+                        );
+
+                        $itemid = array(
+                            'name' => 'itemid',
+                            'type' => 'hidden',
+                            'value' => $id_item
+                        );
+
+                        $itemname = array(
+                            'name' => 'itemname',
+                            'type' => 'text',
+                            'value' => $name_item
+                        );
+
                         $description = array(
                             'name' => 'description',
                             'type' => 'text',
-                            
+                            'value' => $desc_item
                         );
 
                         $careinstruction = array(
                             'name' => 'careinstruction',
-                            'type' => 'text'
+                            'type' => 'text',
+                            'value' => $care_ins
                         );
 
                         $weight = array(
                             'name' => 'weight',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'value' => $weight_item
                         );
 
                         $sellingprice = array(
                             'name' => 'sellingprice',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'value' => $price_item
                         );
 
                         $buyingprice = array(
                             'name' => 'buyingprice',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'value' => $buying_item
                         );
 
                         $buttonadd = array(
@@ -68,13 +107,13 @@
                         );
                         
                         echo "<div class='form-group row'>";
-                                echo form_label('Item ID :',' ',$attribute_label) . form_input('itemid', '', $style);
-                                echo form_error('itemid','<small class="text-danger">','</small>') . "<br>";
+                                echo form_input($idItemColored, '', $style);
+                                echo form_input($itemid, '', $style);
                         echo "</div>";
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-5'>";
-                                echo form_label('Item Name :',' ',$attribute_label) . form_input('itemname', '', $style);
+                                echo form_label('Item Name :',' ',$attribute_label) . form_input($itemname, '', $style);
                                 echo form_error('itemname','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
 
@@ -118,7 +157,7 @@
                         echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
-                        echo form_submit('Submit', 'Add Product', $buttonadd);
+                        echo form_submit('Submit', 'Edit Product', $buttonadd);
                         echo '<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";

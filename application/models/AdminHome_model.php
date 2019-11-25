@@ -152,7 +152,7 @@ class AdminHome_model extends CI_Model{
             foreach ($result->result() as $row) {
                 $dd[$row->id_type] = $row->type_desc;
             }
-        }
+		}
         return $dd;
 	}
 
@@ -191,6 +191,7 @@ class AdminHome_model extends CI_Model{
 			$this->db->trans_commit();
 		}
 	}
+
 	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data)
 	{
 		$this->db->trans_start();
@@ -320,7 +321,7 @@ class AdminHome_model extends CI_Model{
 	// 	$query= $this->db->get();
 	// 	return $query->result_array();
 	// }
-
+	
 	function get_items(){
 		$this->db->select('*');
 		$this->db->from('item_colored');
@@ -335,6 +336,14 @@ class AdminHome_model extends CI_Model{
 		return $query->result_array();
 	}
 
+	function get_specific_data($id){
+		$query = $this->db->query(
+			"SELECT * FROM items WHERE id_item = '$id'"
+		);
+
+		return $query->result_array();
+	}
+	
 	function get_detail($id){
 		$query = $this->db->query("SELECT * 
 									FROM items as i 

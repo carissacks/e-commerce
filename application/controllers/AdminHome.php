@@ -181,22 +181,22 @@ class AdminHome extends CI_Controller{
 
     public function FormEditProduct()
 	{
-        // $data['type']  = $this->AdminHome_model->getType();
+        $item_type = $_GET['type'];
+        $data['type']  = $this->AdminHome_model->getType();
         
-        // $data = array(
-        //     'button' => 'Create',
-        //     'type' => $this->AdminHome_model->getType(),
-        //     'type_selected' => $this->input->post('type') ? $this->input->post('type') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
-        // );
+        $data = array(
+            'button' => 'Create',
+            'type' => $this->AdminHome_model->getType(),
+            'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type, // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+        );
+        $data['details']= $this->AdminHome_model->get_specific_data($_GET['id_item']);
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-        $data['itemtype']  = $this->AdminHome_model->getItemType();
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-
 		$this->load->view('pages/FormEditProduct.php',$data);
     }
-    
+
     public function AddProductDetail(){
         $ItemIDColored = $this->input->post('id_item_colored');
         $ItemID = $this->input->post('itemID');
@@ -382,45 +382,45 @@ class AdminHome extends CI_Controller{
 
     public function EditProduct()
 	{
-		$this->form_validation->set_rules('itemname', 'itemname', 'required|trim',[
-            'required' => '*You must provide a string!'
-        ]);
-        $this->form_validation->set_rules('year', 'Year', 'required|trim|numeric|min_length[4]|max_length[5]',[
-            'required' => '*You must input year!',
-            'numeric' => '*You should input a number not string!',
-            'min_length' => '*Input minimal 4 number!',
-            'max_length' => '*Input maximal 5 number!'
-        ]);
-        $this->form_validation->set_rules('director', 'Director', 'required|trim|max_length[30]',[
-            'required' => '*You must input director!',
-            'max_length' => '*The Director field cannot exceed 30 character in length!'
-        ]);
-        $this->form_validation->set_rules('posterLink', 'PosterLink', 'required',[
-			'required' => '*The filetype you are attempting to upload is not allowed!',
-		]);
+		// $this->form_validation->set_rules('itemname', 'itemname', 'required|trim',[
+        //     'required' => '*You must provide a string!'
+        // ]);
+        // $this->form_validation->set_rules('year', 'Year', 'required|trim|numeric|min_length[4]|max_length[5]',[
+        //     'required' => '*You must input year!',
+        //     'numeric' => '*You should input a number not string!',
+        //     'min_length' => '*Input minimal 4 number!',
+        //     'max_length' => '*Input maximal 5 number!'
+        // ]);
+        // $this->form_validation->set_rules('director', 'Director', 'required|trim|max_length[30]',[
+        //     'required' => '*You must input director!',
+        //     'max_length' => '*The Director field cannot exceed 30 character in length!'
+        // ]);
+        // $this->form_validation->set_rules('posterLink', 'PosterLink', 'required',[
+		// 	'required' => '*The filetype you are attempting to upload is not allowed!',
+		// ]);
 
-        if($this->form_validation->run() == false){
-            $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-            $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-            $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-            $data['itemtype']  = $this->AdminHome_model->getItemType();
-            $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-            $this->load->view('pages/FormEditProduct.php?id='.$_GET['id'], $data);
-        }
-        else{
-            // $ItemID = $this->input->post('itemid');
-            // $ItemName = $this->input->post('itemname');
-            // $ItemType = $this->input->post('type');
-            // $ItemColor = $this->input->post('itemcolor');
-            // $Weight = $this->input->post('weight');
-            // $Sellingprice = $this->input->post('sellingprice');
-            // $Buyingprice = $this->input->post('buyingprice');
-            // $Description = $this->input->post('description');
-            // $Careinstruction = $this->input->post('careinstruction');
+        // if($this->form_validation->run() == false){
+        //     $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        //     $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        //     $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        //     // $data['itemtype']  = $this->AdminHome_model->getItemType();
+        //     $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        //     $this->load->view('pages/FormEditProduct.php', $data);
+        // }
+        // else{
+            $ItemID = $this->input->post('itemid');
+            $ItemName = $this->input->post('itemname');
+            $ItemType = $this->input->post('type');
+            $ItemColor = $this->input->post('itemcolor');
+            $Weight = $this->input->post('weight');
+            $Sellingprice = $this->input->post('sellingprice');
+            $Buyingprice = $this->input->post('buyingprice');
+            $Description = $this->input->post('description');
+            $Careinstruction = $this->input->post('careinstruction');
             
-            // $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
+            $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
             redirect('AdminHome');   
-		}
+		// }
     }
     
     public function Delete()

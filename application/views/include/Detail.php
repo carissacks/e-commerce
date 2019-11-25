@@ -8,6 +8,7 @@
 			$desc_item= $row['item_desc'];
 			$price_item= $row['selling_price'];
 			$buying_item= $row['buying_price'];
+			$id_type = $row['id_type'];
 			$type_item= $row['type_desc'];
 			$weight_item= $row['weight'];
 			$care_ins= $row['care_ins'];
@@ -99,7 +100,7 @@
 				<a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 					Delete
 				</a>
-				<a href="<?=base_url("index.php/AdminHome/EditProduct?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+				<a href="<?=base_url("index.php/AdminHome/FormEditProduct?id=$id&id_item=$id_item&type=$id_type")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 					Edit
 				</a>
 				<!-- <a href="<?=base_url("index.php/AdminHome/DeleteWishlist?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
