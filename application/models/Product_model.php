@@ -112,7 +112,7 @@ class Product_model extends CI_Model{
 		$this->db->group_by('item_colored.id_item_colored');
 
 		$query= $this->db->get();
-		return $query->result_array();
+		return $query->row();
 	}
 
 
@@ -167,8 +167,61 @@ class Product_model extends CI_Model{
 		return $query->row()->quantity;
 	}
 
-	public function total_price(){
-		
+	function get_itemInCart($email){
+		$this->db->select('*');
+		$this->db->from('shopping_cart');
+		$this->db->join('item_colored', 'item_colored.id_item_colored = shopping_cart.id_item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('email_user',$email);
+		$this->db->group_by('shopping_cart.id_item_colored');
+
+		$query= $this->db->get();
+		// return $query;
+		return $query->result_array();
+	}
+
+	function is_item_in_cart($id,$email,$size){
+		$data= array(
+			'id_item_colored' => $id,
+			'email_user' => $email,
+			'item_size' => $size
+		);
+		$query= $this->db->get_where('shopping_cart',$data);
+		return $query->row();
+	}
+
+	function add_shopping_cart($id,$email,$size,$qty){
+		$data= array(
+			'id_item_colored' => $id,
+			'email_user' => $email,
+			'quantity' => $qty,
+			'item_size' => $size
+		);
+
+		$this->db->trans_begin();
+		$this->db->insert('shopping_cart', $data);
+		if ($this->db->trans_status() === FALSE)
+			$this->db->trans_rollback();
+		else
+			$this->db->trans_commit();
+	}
+
+	function update_shopping_cart($id,$email,$size,$qty){
+		$data= array(
+			'id_item_colored' => $id,
+			'email_user' => $email,
+			'quantity' => $qty,
+			'item_size' => $size
+		);
+
+		$this->db->trans_begin();
+		$this->db->replace('shopping_cart', $data);
+		if ($this->db->trans_status() === FALSE)
+			$this->db->trans_rollback();
+		else
+			$this->db->trans_commit();
 	}
 }
 ?>

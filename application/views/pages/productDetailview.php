@@ -15,66 +15,48 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
+					<?php 
+						$total=0;
+						foreach($cart_items as $cart_row):
+							$cart_name= $cart_row['item_name'];
+							$cart_price= $cart_row['selling_price'];
+							$id_item_col= $cart_row['id_item_colored'];
+							$cart_color= $cart_row['item_color'];
+							$cart_photo= $cart_row['item_photo'];
+							$cart_type= $cart_row['type_desc'];
+							$cart_qty= $cart_row['quantity'];
+							$cart_size= $cart_row['item_size'];
+							$total+= $cart_qty*$cart_price;
+						?>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
+							<img src="<?=base_url('asset/images/'.$cart_type.'/'.$cart_photo)?>" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
+								<?=$cart_name?>
 							</a>
 
 							<span class="header-cart-item-info">
-								1 x $19.00
+								<?=$cart_qty?> x IDR <?=$cart_price?>
 							</span>
 						</div>
 					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
+					<?php endforeach;?>
 				</ul>
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+						Total   IDR <?=$total?>
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="<?=base_url('index.php/Cart')?>" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						<a href="<?=base_url('index.php/Cart/proceed')?>" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
 					</div>
@@ -87,16 +69,16 @@
 	<!-- breadcrumb -->
 	<div class="container">
 		<?php 
-		foreach ($items as $row):
-			$id_item= $row['id_item'];
-			$id_item_col= $row['id_item_colored'];
-			$name_item= $row['item_name'];
-			$color_item= $row['item_color'];
-			$desc_item= $row['item_desc'];
-			$price_item= $row['selling_price'];
-			$type_item= $row['type_desc'];
-			$weight_item= $row['weight'];
-			$care_ins= $row['care_ins'];
+		// foreach ($items as $row):
+			$id_item= $items->id_item;
+			$id_item_col= $items->id_item_colored;
+			$name_item= $items->item_name;
+			$color_item= $items->item_color;
+			$desc_item= $items->item_desc;
+			$price_item= $items->selling_price;
+			$type_item= $items->type_desc;
+			$weight_item= $items->weight;
+			$care_ins= $items->care_ins;
 		?>
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-100 p-lr-0-lg">
 			<a href="<?=base_url('index.php/Products')?>" class="stext-109 cl8 hov-cl1 trans-04">
@@ -165,7 +147,12 @@
 						</p>
 						
 						<!--  -->
+					<?php if($login):?>
+						<form action="<?=base_url('index.php/Products/add_to_cart')?>" method="post" class="p-t-33">
+					<?php else:?>
 						<div class="p-t-33">
+					<?php endif;?>
+							<?=form_hidden('idColor', $id_item_col)?>
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
 									Size
@@ -209,17 +196,22 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
 
+								<?php if ($login):?>
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>
-									
+								<?php else:?>
+									<a href="<?=base_url('index.php/Login')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Add to cart
+									</a>
+								<?php endif;?>
 								</div>
 							</div>	
 						</div>
@@ -240,9 +232,6 @@
 							<a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
 						</li>
 
-						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
-						</li>
 					</ul>
 
 					<!-- Tab panes -->
@@ -280,16 +269,6 @@
 												<?= $care_ins?>
 											</span>
 										</li>
-<!-- 
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Materials
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												60% cotton
-											</span>
-										</li> -->
 
 										<li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
@@ -297,8 +276,12 @@
 											</span>
 
 											<span class="stext-102 cl6 size-206">
-												Black, Blue, Grey, Green, Red, White
+											<?php foreach ($color as $color_choice):?>
+												<?=$color_choice['item_color']?>
+											<?php endforeach;?>
+											<?=$color_item?>
 											</span>
+
 										</li>
 
 										<li class="flex-w flex-t p-b-7">
@@ -316,89 +299,6 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- - -->
-						<div class="tab-pane fade" id="reviews" role="tabpanel">
-							<div class="row">
-								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-									<div class="p-b-30 m-lr-15-sm">
-										<!-- Review -->
-										<div class="flex-w flex-t p-b-68">
-											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="images/avatar-01.jpg" alt="AVATAR">
-											</div>
-
-											<div class="size-207">
-												<div class="flex-w flex-sb-m p-b-17">
-													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
-													</span>
-
-													<span class="fs-18 cl11">
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
-													</span>
-												</div>
-
-												<p class="stext-102 cl6">
-													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
-												</p>
-											</div>
-										</div>
-										
-										<!-- Add review -->
-										<form class="w-full">
-											<h5 class="mtext-108 cl2 p-b-7">
-												Add a review
-											</h5>
-
-											<p class="stext-102 cl6">
-												Your email address will not be published. Required fields are marked *
-											</p>
-
-											<div class="flex-w flex-m p-t-50 p-b-23">
-												<span class="stext-102 cl3 m-r-16">
-													Your Rating
-												</span>
-
-												<span class="wrap-rating fs-18 cl11 pointer">
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
-												</span>
-											</div>
-
-											<div class="row p-b-25">
-												<div class="col-12 p-b-5">
-													<label class="stext-102 cl3" for="review">Your review</label>
-													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="name">Name</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="email">Email</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
-												</div>
-											</div>
-
-											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-												Submit
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -413,7 +313,7 @@
 				Categories: <?= $type_item?>
 			</span>
 		</div>
-		<?php endforeach;?>
+		<?php //endforeach;?>
 	</section>
 
 
@@ -481,3 +381,13 @@
 	</div>
 
 <?=$footer?>
+<?php if ($modal):?>
+<script>
+	$('.js-addcart-detail').each(function () {
+		var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+		$(this).ready(function () {
+			swal(nameProduct, "is added to cart !", "success");
+		});
+	});
+</script>
+<?php endif;?>

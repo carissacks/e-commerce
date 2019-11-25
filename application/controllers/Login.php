@@ -12,7 +12,7 @@ class Login extends CI_Controller{
 		$data['label_attr']= array('class' =>'col-sm-2 col-form-label');
 		$data['email_attr']= $this->form_attr('email');
 		$data['password_attr']= $this->form_attr('password');
-		$data['submit_attr']['class']= 'btn btn-primary';
+		$data['submit_attr']['class']= 'btn cl2 bg8 bor13 hov-btn3';
 		$data['error']= $error;
 		$this->load->view('pages/loginview',$data);
 	}
