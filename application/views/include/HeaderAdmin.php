@@ -23,7 +23,7 @@
 
                     <!-- Dashboards -->
                     <li class="sidenav-header small font-weight-semibold">Home</li>
-                    <li class="sidenav-item active">
+                    <li class="sidenav-item">
                         <a href="<?=base_url()?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-home"></i>
                             <div>Dashboards</div>
@@ -37,7 +37,7 @@
                             <div>All Products</div>
                         </a>
                         <ul class="sidenav-menu">
-                        <li class="sidenav-item">
+                            <li class="sidenav-item">
                                 <a href="<?=base_url('index.php/AdminHome/AllProduct')?>" class="sidenav-link">
                                     <div>All Products</div>
                                 </a>
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_badges.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/JumpsuitProduct')?>" class="sidenav-link">
                                     <div>Jumpsuit</div>
                                 </a>
                             </li>
@@ -82,13 +82,18 @@
                                     <div>Shorts</div>
                                 </a>
                             </li>
+                            <li class="sidenav-item">
+                                <a href="<?=base_url('index.php/AdminHome/HideProduct')?>" class="sidenav-link">
+                                    <div>Products Hide</div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
                     <!-- Forms & Tables -->
                     <li class="sidenav-divider mb-1"></li>
                     <li class="sidenav-header small font-weight-semibold">Transactions</li>
-                    <li class="sidenav-item active">
+                    <li class="sidenav-item">
                         <a href="<?php echo base_url('index.php/AdminHome/TodayView') ?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-clipboard"></i>
                             <div>Today's Order</div>
@@ -104,7 +109,7 @@
                     <!-- Add & Edit Product -->
                     <li class="sidenav-divider mb-1"></li>
                     <li class="sidenav-header small font-weight-semibold">Add & Edit Product</li>
-                    <li class="sidenav-item active">
+                    <li class="sidenav-item">
                         <a href="<?php echo base_url('index.php/AdminHome/FormAddProduct') ?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-clipboard"></i>
                             <div>Add Product</div>
@@ -153,7 +158,7 @@
                             <label class="nav-item navbar-text navbar-search-box p-0 active">
                                 <i class="feather icon-search navbar-icon align-middle"></i>
                                 <span class="navbar-search-input pl-2">
-                                    <input type="text" class="form-control navbar-text mx-2" placeholder="Search...">
+                                    <!-- <input type="text" class="form-control navbar-text mx-2" placeholder="Search..."> -->
                                 </span>
                             </label>
                         </div>
@@ -163,7 +168,7 @@
                             <!-- Divider -->
                             <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
                             <div class="demo-navbar-user nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle" href="<?= base_url('index.php/AdminHome/FormEditProduct') ?>" data-toggle="dropdown">
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                                         <img src="assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
                                         <span class="px-1 mr-lg-2 ml-2 ml-lg-0">

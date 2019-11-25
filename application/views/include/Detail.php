@@ -1,5 +1,5 @@
-<!-- breadcrumb -->
-<div class="container">
+
+<div class="container col-12">
 		<?php foreach ($details as $row):
 			$id_item= $row['id_item'];
 			$id_item_col= $row['id_item_colored'];
@@ -13,7 +13,6 @@
 			$care_ins= $row['care_ins'];
 			$id = $row['id_item_colored'];
 		?>
-	</div>
 		
 
 	<!-- Product Detail -->
@@ -59,8 +58,6 @@
 							<?php echo $desc_item; ?>
 						</p>
 						
-						<!--  -->
-						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -85,25 +82,30 @@
 												<p><?=$item_color= $row['item_color'];?></p>
 												<?php endforeach;?>
 											</dd>
-                                            <dt>Malesuada porta</dt>
-                                            <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                                            <!-- <dt>Malesuada porta</dt>
+                                            <dd>Etiam porta sem malesuada magna mollis euismod.</dd> -->
                                         </dl>
                                     </div>
                                 </div>
 							</div>
-							<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-							</button>
-							<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-							</button>
-
-							<a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+							<!-- <a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 								Delete
 							</a>
-						</div>
+							<a href="<?=base_url("index.php/AdminHome/EditProduct?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								Edit
+							</a> -->
 					</div>
 				</div>
+				<a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+					Delete
+				</a>
+				<a href="<?=base_url("index.php/AdminHome/EditProduct?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+					Edit
+				</a>
+				<a href="<?=base_url("index.php/AdminHome/DeleteWishlist?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+					Delete Wishlist
+				</a>
 			</div>
 		<?php endforeach;?>
 	</section>
+	</div>

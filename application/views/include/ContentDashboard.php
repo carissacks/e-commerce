@@ -1,33 +1,49 @@
-<!-- [ Layout content ] Start -->
-<div class="layout-content">
 
-<!-- [ content ] Start -->
+<div class="layout-content">
 <div class="container-fluid flex-grow-1 container-p-y">
+<!-- 1st row (count show, hide product, dan monthly sales) -->
     <div class="row">
-        <!-- 1st row Start -->
-        <div class="col-lg-5">
+        <div class="col-lg-12">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card mb-4 bg-pattern-2-dark">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="lnr lnr-gift display-4 text-primary"></div>
                                 <div class="ml-3">
-                                    <div class="text-muted small">Products</div>
+                                    <div class="text-muted small">Products Show</div>
                                     <div class="text-large">
                                         <?php 
-                                            foreach($countproduct->result_array() as $row){
+                                            foreach($countproductshow->result_array() as $row){
                                                 echo $total = $row['totalproduct'];
                                             }
                                         ?>
                                     </div>
                                 </div>
                             </div>
-                            <div id="ecom-chart-3" class="mt-3 chart-shadow-primary" style="height:40px"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="card mb-4 bg-pattern-2-dark">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="lnr lnr-gift display-4 text-primary"></div>
+                                <div class="ml-3">
+                                    <div class="text-muted small">Products Hide</div>
+                                    <div class="text-large">
+                                        <?php 
+                                            foreach($countproducthide->result_array() as $row){
+                                                echo $total = $row['totalproduct'];
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="card mb-4 bg-pattern-2 bg-primary text-white">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -43,31 +59,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="order-chart-1" class="mt-3 chart-shadow" style="height:40px"></div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-sm-12">
-                    <div class="card d-flex w-100 mb-4">
-                        <div class="row no-gutters row-bordered row-border-light h-100">
-                            <div class="d-flex col-sm-6 col-md-4 col-lg-6 align-items-center">
-                                <div class="card-body media align-items-center text-dark">
-                                    <i class="lnr lnr-diamond display-4 d-block text-primary"></i>
-                                    <span class="media-body d-block ml-3"><span class="text-big mr-1 text-primary">$1584.78</span>
-                                        <br>
-                                        <small class="text-muted">Earned this month</small>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
-        <!-- 1st row Start -->
     </div>
+    <!-- 1st row END -->
+    <!-- untuk rating,  -->
     <div class="row">
-        <!-- 2nd row Start -->
         <div class="col-md-12">
             <div class="card d-flex w-100 mb-4">
                 <div class="row no-gutters row-bordered row-border-light h-100">
@@ -85,7 +85,6 @@
                                                 echo $total = $row['avgrating'];
                                             }
                                         ?>
-                                    <!-- <i class="ion ion-md-arrow-round-down ml-3 text-danger"></i> -->
                                     </h4>
                                 </div>
                             </div>
@@ -106,7 +105,6 @@
                                                 echo $total = $row['totalorder'];
                                             }
                                         ?>
-                                    <!-- <i class="ion ion-md-arrow-round-up ml-3 text-success"></i> -->
                                     </h4>
                                 </div>
                             </div>
@@ -127,7 +125,6 @@
                                                 echo $total = $row['totaluser'];
                                             }
                                         ?>
-                                    <!-- <i class="ion ion-md-arrow-round-down ml-3 text-danger"></i> -->
                                     </h4>
                                 </div>
                             </div>
@@ -149,7 +146,6 @@
                                             }
                                         ?>
                                     </h4>
-                                    <!-- <i class="ion ion-md-arrow-round-up ml-3 text-success"></i></h4> -->
                                 </div>
                             </div>
                             <p class="mb-0 text-muted">From This Month</p>
@@ -157,7 +153,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Staustic card 3 Start -->
+
         </div>
         <!-- 2nd row Start -->
     </div>
