@@ -102,9 +102,9 @@
 				<a href="<?=base_url("index.php/AdminHome/EditProduct?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 					Edit
 				</a>
-				<a href="<?=base_url("index.php/AdminHome/DeleteWishlist?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+				<!-- <a href="<?=base_url("index.php/AdminHome/DeleteWishlist?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 					Delete Wishlist
-				</a>
+				</a> -->
 			</div>
 		<?php endforeach;?>
 	</section>

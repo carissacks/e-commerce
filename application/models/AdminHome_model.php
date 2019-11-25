@@ -440,6 +440,10 @@ class AdminHome_model extends CI_Model{
 		$this->db->where('id_item_colored', $id );
 		$this->db->update('item_colored');
 
+		$this->db->delete('wishlist', array('id_item_colored' => $id));
+
+		$this->db->delete('shopping_cart', array('id_item_colored' => $id));
+
 		if($this->db->trans_status() === FALSE)
 		{
 			$this->db->trans_rollback();
@@ -449,17 +453,17 @@ class AdminHome_model extends CI_Model{
 		}
 	}
 	
-	function DeleteWishlist($id){
-		$this->db->trans_begin();	
-		$this->db->delete('wishlist', array('id_item_colored' => $id));
+	// function DeleteWishlist($id){
+	// 	$this->db->trans_begin();	
+	// 	$this->db->delete('wishlist', array('id_item_colored' => $id));
 
-		if($this->db->trans_status() === FALSE)
-		{
-			$this->db->trans_rollback();
-			return FALSE;
-		}else{
-			$this->db->trans_commit();
-		}
-    }
+	// 	if($this->db->trans_status() === FALSE)
+	// 	{
+	// 		$this->db->trans_rollback();
+	// 		return FALSE;
+	// 	}else{
+	// 		$this->db->trans_commit();
+	// 	}
+    // }
 }
 ?>

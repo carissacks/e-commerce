@@ -431,33 +431,33 @@ class AdminHome extends CI_Controller{
         redirect('AdminHome');
     }
 
-    public function DeleteWishlist()
-	{
-        $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
-        $data['style'] = $this->load->view('include/css', NULL, TRUE);
-        $data['script'] = $this->load->view('include/js', NULL, TRUE);
-        $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
-		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
-        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+    // public function DeleteWishlist()
+	// {
+    //     $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
+    //     $data['style'] = $this->load->view('include/css', NULL, TRUE);
+    //     $data['script'] = $this->load->view('include/js', NULL, TRUE);
+    //     $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
+	// 	$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+    //     $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
         
-        $id = $_GET['id'];
-        // $this->AdminHome_model->get_id_item($id);
-        $this->AdminHome_model->DeleteWishlist($id);
-        redirect('AdminHome');
-    }
+    //     $id = $_GET['id'];
+    //     // $this->AdminHome_model->get_id_item($id);
+    //     $this->AdminHome_model->DeleteWishlist($id);
+    //     redirect('AdminHome');
+    // }
 
-    public function DeleteShoppingCart()
-	{
-        $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
-        $data['style'] = $this->load->view('include/css', NULL, TRUE);
-        $data['script'] = $this->load->view('include/js', NULL, TRUE);
-        $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
-		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
-        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+    // public function DeleteShoppingCart()
+	// {
+    //     $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
+    //     $data['style'] = $this->load->view('include/css', NULL, TRUE);
+    //     $data['script'] = $this->load->view('include/js', NULL, TRUE);
+    //     $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
+	// 	$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+    //     $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
         
-        $id = $_GET['id'];
-        // $this->AdminHome_model->get_id_item($id);
-        $this->AdminHome_model->DeleteWishlist($id);
-        redirect('AdminHome');
-    }
+    //     $id = $_GET['id'];
+    //     // $this->AdminHome_model->get_id_item($id);
+    //     $this->AdminHome_model->DeleteWishlist($id);
+    //     redirect('AdminHome');
+    // }
 }
