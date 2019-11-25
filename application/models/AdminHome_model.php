@@ -50,6 +50,41 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 	
+	function EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction){
+		$item = array(
+			'id_item' => $ItemID,
+			'item_name' => $ItemName,
+			'item_desc' => $Description,
+			'weight' => $Weight,
+			'selling_price' => $Sellingprice,
+			'buying_price' => $Buyingprice,
+			'care_ins' => $Careinstruction,
+			'id_type' => $ItemType
+		);
+		
+		$this->db->where('id_item', $ItemID);
+		$this->db->update('items', $item);
+	}
+
+	function EditProductDetail($id_item_colored, $item_size, $item_stock){
+		$item = array(
+			'id_item_colored' => $id_item_colored,
+			'item_size' => $item_size,
+			'stock' => $item_stock
+		);
+		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->update('item_colored', $item);
+	}
+
+	function EditProductPhoto($id_item_colored, $ItemPicture){
+		$item = array(
+			'id_item_colored' => $id_item_colored,
+			'item_photo' => $ItemPicture
+		);
+		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->update('photos', $item);
+	}
+
 	function countMonthlysales(){
 		$this->db->select('COUNT(id_trans) as totalmonthlysales'); 
 		$this->db->where('extract(month from trans_date) = extract(month from current_date)'); 
@@ -150,7 +185,7 @@ class AdminHome_model extends CI_Model{
 			$this->db->trans_commit();
 		}
 	}
-	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data)
+	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data)
 	{
 		$this->db->trans_start();
 			//INSERT TO ITEM
