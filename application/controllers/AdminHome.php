@@ -6,11 +6,12 @@ class AdminHome extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
         $this->load->model('AdminHome_model');
-        $this->load->model('Product_model');
+        // $this->load->model('Product_model');
 	}
 
 	public function index(){
-        $data['countproduct'] = $this->AdminHome_model->countProduct();
+        $data['countproductshow'] = $this->AdminHome_model->countProductShow();
+        $data['countproducthide'] = $this->AdminHome_model->countProductHide();
         $data['countmonthlysale'] = $this->AdminHome_model->countMonthlysales();
         $data['reviews'] = $this->AdminHome_model->reviews();
         $data['latestsales'] = $this->AdminHome_model->latestsales();
@@ -46,6 +47,7 @@ class AdminHome extends CI_Controller{
 		// $data['photos']= $this->AdminHome_model->get_photo_detail($_GET['id']);
         // $data['stocks']= $this->AdminHome_model->get_stock_detail($_GET['id']);
         $data['transaction']= $this->AdminHome_model->get_transaction($_GET['id']);
+        $data['totalpayment']= $this->AdminHome_model->get_totalpayment($_GET['id']);
         $data['style'] = $this->load->view('include/css', NULL, TRUE);
         $data['script'] = $this->load->view('include/js', NULL, TRUE);
         $data['Detail'] = $this->load->view('include/TabelDetail', $data, TRUE);
@@ -57,7 +59,7 @@ class AdminHome extends CI_Controller{
 
     public function AllProduct()
 	{
-		$data['items']= $this->Product_model->get_items();
+		$data['items']= $this->AdminHome_model->get_items();
 		$data['style'] = $this->load->view('include/css', NULL, TRUE);
         $data['script'] = $this->load->view('include/js', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
@@ -73,11 +75,34 @@ class AdminHome extends CI_Controller{
 		$data['style'] = $this->load->view('include/css', NULL, TRUE);
         $data['script'] = $this->load->view('include/js', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-        $data['types']= $this->Product_model->get_types();
         $data['card'] = $this->load->view('include/CardProduct', $data, TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
 
         $this->load->view('pages/DressProduct.php',$data);
+    }
+
+    public function JumpsuitProduct()
+	{
+		$data['items']= $this->AdminHome_model->get_jumpsuit();
+		$data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['card'] = $this->load->view('include/CardProduct', $data, TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+
+        $this->load->view('pages/JumpsuitProduct.php',$data);
+    }
+
+    public function HideProduct()
+	{
+		$data['items']= $this->AdminHome_model->get_items_hide();
+		$data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['card'] = $this->load->view('include/CardProduct', $data, TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+
+        $this->load->view('pages/HideProduct.php',$data);
     }
     
     public function MonthlyView()
@@ -111,7 +136,7 @@ class AdminHome extends CI_Controller{
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
         
-        $this->load->view('pages/FormAddStockSizePhoto.php',$data);
+        $this->load->view('pages/FormAddStockSize.php',$data);
     }
 
     public function FormAddProduct()
@@ -131,6 +156,29 @@ class AdminHome extends CI_Controller{
 		$this->load->view('pages/FormAddProduct.php',$data);
     }
 
+    public function form_attr($name){
+		if($name=='item_photo')
+			$class='form-control-file';
+		else $class='form-control';
+		return array(
+			'class'=>$class,
+			'name'=>$name,
+			'id'=>$name
+		);
+    }
+    
+    public function showProductColor(){
+        $data['data'] = $this->AdminHome_model->get_item_colored_detail($_GET['id']);
+		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['poster_attr']= $this->form_attr('item_photo');
+        $data['datatabel'] = $this->load->view('include/TableColorDetail', $data, TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+
+		$this->load->view('pages/TableProductColor.php',$data);
+    }
+
     public function FormEditProduct()
 	{
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
@@ -143,26 +191,49 @@ class AdminHome extends CI_Controller{
     }
     
     public function AddProductDetail(){
-        $ItemIDColored = $thic->input->post('id_item_colored');
-        // $itemSize = $this->input->post('itemsize');
-        // $itemStock = $this->input->post('itemstock');
+        $ItemIDColored = $this->input->post('id_item_colored');
+        $ItemID = $this->input->post('itemID');
+        $itemSize = $this->input->post('itemsize');
+        $itemStock = $this->input->post('itemstock');
 
         $data = array();
-            // $index = 0; // Set index array awal dengan 0
-            // $totalcolors = $this->AdminHome_model->countidcolor($ItemID); 
+            $index = 0; // Set index array awal dengan 0
 
-            // var_dump($totalcolors);
-
-            // $select_id_type_color = $this->AdminHome_model->select_id_type_color(); 
-
-            foreach($Item as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+            foreach($itemSize as $datasizes){ // Kita buat perulangan berdasarkan nis sampai data terakhir
 				array_push($data, array(
 					'id_item_colored' => $ItemIDColored,  // Ambil dan set data nama sesuai index array dari $index
-                    'item_color'=>$datacolors, // Ambil dan set data alamat sesuai index array dari $index
+                    'item_size'=>$datasizes, // Ambil dan set data alamat sesuai index array dari $index
+                    'stock'=>$itemStock[$index],
                 ));
-			    // $index++;
+			    $index++;
             }
             $this->AdminHome_model->AddProductDetail($data);
+
+            redirect('AdminHome/showProductColor?id='.$ItemID);   
+    }
+
+    public function AddPhoto()
+    {
+        $ItemIDColored = $this->input->post('id_item_colored');
+        $ItemID = $this->input->post('item_id');
+        $filename = pathinfo($_FILES['item_photo']['name'], PATHINFO_FILENAME); // get photo name
+        $config['upload_path']          = './asset/images';
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size'] = '4960';
+        $config['overwrite']			= false;
+
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('upload', $config);
+
+        $success = $this->upload->do_upload('item_photo');
+        if(!$success){
+            print_r($this->upload->display_errors());
+        }
+        else {
+            $this->AdminHome_model->AddPhoto($ItemIDColored, $filename);
+            redirect('AdminHome/showProductColor?id='.$ItemID); 
+        }
+            
     }
 
     public function AddProduct()
@@ -236,12 +307,12 @@ class AdminHome extends CI_Controller{
                 ));
 			    // $index++;
             }
-            $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data);
+            $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data);
             
-            $idItemColored = $this->AdminHome_model->getIdItemColored($ItemID);
+            // $idItemColored = $this->AdminHome_model->getIdItemColored($ItemID);
             
-            var_dump($idItemColored);
-            var_dump($idItemColored[0]);
+            // var_dump($idItemColored);
+            // var_dump($idItemColored[0]);
 
             // $this->AdminHome_model->AddStock($idItemColored);
 
@@ -268,10 +339,40 @@ class AdminHome extends CI_Controller{
 
             // $sql = $this->AdminHome_model->AddProduct($data);
             
-            // redirect('AdminHome/FormAddProductDetail?id='.$idItemColored[0]);   
+            redirect('AdminHome/showProductColor?id='.$ItemID);   
 		// }
     }
     
+    public function EditProductDetail(){
+        $id_item_colored = $this->input->post('id_item_colored');
+        $item_size = $this->input->post('item_size');
+        $item_stock = $this->input->post('item_stock');
+        
+        $this->AdminHome_model->EditProductDetail($id_item_colored, $item_size, $item_stock);
+    }
+
+    public function EditProductPhoto(){
+        $id_item_colored = $this->input->post('id_item_colored');
+        $filename = pathinfo($_FILES['item_photo']['name'], PATHINFO_FILENAME); // get photo name
+        $config['upload_path']          = './asset/images';
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size'] = '4960';
+        $config['overwrite']			= false;
+
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('upload', $config);
+
+        $success = $this->upload->do_upload('item_photo');
+        if(!$success){
+            print_r($this->upload->display_errors());
+        }
+        else {
+            $this->AdminHome_model->EditProductDetail($id_item_colored, $filename);
+        }
+        
+        
+    }
+
     public function EditProduct()
 	{
 		$this->form_validation->set_rules('itemname', 'itemname', 'required|trim',[
@@ -300,8 +401,17 @@ class AdminHome extends CI_Controller{
             $this->load->view('pages/FormEditProduct.php', $data);
         }
         else{
+            $ItemID = $this->input->post('itemid');
+            $ItemName = $this->input->post('itemname');
+            $ItemType = $this->input->post('type');
+            $ItemColor = $this->input->post('itemcolor');
+            $Weight = $this->input->post('weight');
+            $Sellingprice = $this->input->post('sellingprice');
+            $Buyingprice = $this->input->post('buyingprice');
+            $Description = $this->input->post('description');
+            $Careinstruction = $this->input->post('careinstruction');
             
-            $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture);
+            $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
             redirect('AdminHome');   
 		}
     }
@@ -318,6 +428,36 @@ class AdminHome extends CI_Controller{
         $id = $_GET['id'];
         // $this->AdminHome_model->get_id_item($id);
         $this->AdminHome_model->DeleteProduct($id);
-        // redirect('AdminHome');
+        redirect('AdminHome');
+    }
+
+    public function DeleteWishlist()
+	{
+        $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
+        $data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
+		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        
+        $id = $_GET['id'];
+        // $this->AdminHome_model->get_id_item($id);
+        $this->AdminHome_model->DeleteWishlist($id);
+        redirect('AdminHome');
+    }
+
+    public function DeleteShoppingCart()
+	{
+        $data['details']= $this->AdminHome_model->get_detail($_GET['id']);
+        $data['style'] = $this->load->view('include/css', NULL, TRUE);
+        $data['script'] = $this->load->view('include/js', NULL, TRUE);
+        $data['Detail'] = $this->load->view('include/Detail', $data, TRUE);
+		$data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        
+        $id = $_GET['id'];
+        // $this->AdminHome_model->get_id_item($id);
+        $this->AdminHome_model->DeleteWishlist($id);
+        redirect('AdminHome');
     }
 }
