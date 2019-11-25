@@ -22,7 +22,8 @@
 
                         $description = array(
                             'name' => 'description',
-                            'type' => 'text'
+                            'type' => 'text',
+                            
                         );
 
                         $careinstruction = array(
