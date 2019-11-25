@@ -147,7 +147,11 @@
 						</p>
 						
 						<!--  -->
+					<?php if($login):?>
 						<form action="<?=base_url('index.php/Products/add_to_cart')?>" method="post" class="p-t-33">
+					<?php else:?>
+						<div class="p-t-33">
+					<?php endif;?>
 							<?=form_hidden('idColor', $id_item_col)?>
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
@@ -199,13 +203,18 @@
 										</div>
 									</div>
 
+								<?php if ($login):?>
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>
-									
+								<?php else:?>
+									<a href="<?=base_url('index.php/Login')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Add to cart
+									</a>
+								<?php endif;?>
 								</div>
 							</div>	
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>

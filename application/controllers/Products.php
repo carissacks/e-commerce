@@ -39,8 +39,10 @@ class Products extends CI_Controller{
 		if($this->session->has_userdata('email')):
 			$email= $this->session->email;
 			$data['cart_items']= $this->product_model->get_itemInCart($email);
+			$data['login']= TRUE;
 		else:
 			$data['cart_items']='';
+			$data['login']= FALSE;
 		endif;
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['items']= $this->product_model->get_item($id);
