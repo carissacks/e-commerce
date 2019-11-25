@@ -42,6 +42,41 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 	
+	function EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction){
+		$item = array(
+			'id_item' => $ItemID,
+			'item_name' => $ItemName,
+			'item_desc' => $Description,
+			'weight' => $Weight,
+			'selling_price' => $Sellingprice,
+			'buying_price' => $Buyingprice,
+			'care_ins' => $Careinstruction,
+			'id_type' => $ItemType
+		);
+		
+		$this->db->where('id_item', $ItemID);
+		$this->db->update('items', $item);
+	}
+
+	function EditProductDetail($id_item_colored, $item_size, $item_stock){
+		$item = array(
+			'id_item_colored' => $id_item_colored,
+			'item_size' => $item_size,
+			'stock' => $item_stock
+		);
+		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->update('item_colored', $item);
+	}
+
+	function EditProductPhoto($id_item_colored, $ItemPicture){
+		$item = array(
+			'id_item_colored' => $id_item_colored,
+			'item_photo' => $ItemPicture
+		);
+		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->update('photos', $item);
+	}
+
 	function countMonthlysales(){
 		$this->db->select('COUNT(id_trans) as totalmonthlysales'); 
 		$this->db->where('extract(month from trans_date) = extract(month from current_date)'); 
@@ -121,12 +156,42 @@ class AdminHome_model extends CI_Model{
         return $dd;
 	}
 
+	// function getSize(){
+	// 	$query = $this->db->get('item_stock');
+	// 	return $query->result_array();
+	// }
+
+	// function getItemColored(){
+	// 	$this->db->select('id_item_colored'); 
+	// 	$this->db->where('item_photo');
+	// 	$query = $this->db->get('item_colored');
+	// 	return $query->result_array();
+	// }
+
+	public function getIDItemColored($ItemID){
+		$query = $this->db->query("SELECT id_item_colored FROM item_colored where id_item = '$ItemID'");
+		return $query->result();
+	}
+
 	public function countidcolor(){
 		$query = $this->db->query("SELECT count(id_item_colored) FROM item_colored");
 		return $query->result();
 	}
 
-	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data)
+	public function AddProductDetail($data){
+		$this->db->trans_start();
+		$this->db->insert_batch('item_stock', $data);
+		
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else
+		{
+			$this->db->trans_commit();
+		}
+	}
+	public function AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data)
 	{
 		$this->db->trans_start();
 			//INSERT TO ITEM
@@ -145,6 +210,31 @@ class AdminHome_model extends CI_Model{
 
 			//AUTO GENERATE id_item_colored
 			$id_item_colored = $this->db->insert_id();
+			
+			// $result = array();
+            //     foreach($type AS $key => $val){
+            //          $result[] = array(
+            //           'id_type'   => $package_id,
+            //           'type_desc'   => $_POST['halo'][$key]
+            //          );
+			// 	} 
+			
+			// $this->db->insert_batch('items', $result);
+			// $data = array();
+			// $index = 0; // Set index array awal dengan 0
+			// foreach($id_item_colored as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+			// 	array_push($data, array(
+			// 		'id_item_colored'=>$datacolors,
+			// 		'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
+			// 		'item_color'=>$color[$index], // Ambil dan set data alamat sesuai index array dari $index
+			// 	));
+			// $index++;
+			// }
+
+			// $sql = $this->SiswaModel->save_batch($data);
+
+			// var_dump($data);
+			// var_dump($id_item_colored);
 
 			$this->db->insert_batch('item_colored', $data);
 	
@@ -154,6 +244,27 @@ class AdminHome_model extends CI_Model{
 			// );
 
 			// $this->db->insert('photos', $photo);
+		
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else
+		{
+			$this->db->trans_commit();
+		}
+	}
+
+	public function AddPhoto($id_item_colored, $ItemPicture)
+	{
+		$this->db->trans_start();
+			
+		$photo = array(
+			'id_item_colored'   => $id_item_colored,
+			'item_photo'   => $ItemPicture,
+		);
+
+		$this->db->insert('photos', $photo);
 		
 		if($this->db->trans_status() === FALSE)
 		{
@@ -245,6 +356,18 @@ class AdminHome_model extends CI_Model{
 
 		$query= $this->db->get();
 		return $query->result_array();
+	}
+
+	function get_item_colored_detail($id){
+		$query = $this->db->query("SELECT id_item_colored, item_color FROM item_colored where id_item = '$id'");
+		return $query->result_array();
+
+		// $this->db->select('id_item_colored, item_color');
+		// $this->db->from('item_colored');
+		// $this->db->where('id_item',$id);
+
+		// $query= $this->db->get();
+		// return $query->result_array();
 	}
 
 	function get_color($id){

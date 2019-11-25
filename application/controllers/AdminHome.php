@@ -129,6 +129,16 @@ class AdminHome extends CI_Controller{
 		$this->load->view('pages/Today.php',$data);
     }
     
+    public function FormAddProductDetail(){
+        // $data['idItemColored']  = $this->AdminHome_model->getIDItemColored($_GET["id"]);
+        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        
+        $this->load->view('pages/FormAddStockSize.php',$data);
+    }
+
     public function FormAddProduct()
 	{
         $data['type']  = $this->AdminHome_model->getType();
@@ -146,6 +156,29 @@ class AdminHome extends CI_Controller{
 		$this->load->view('pages/FormAddProduct.php',$data);
     }
 
+    public function form_attr($name){
+		if($name=='item_photo')
+			$class='form-control-file';
+		else $class='form-control';
+		return array(
+			'class'=>$class,
+			'name'=>$name,
+			'id'=>$name
+		);
+    }
+    
+    public function showProductColor(){
+        $data['data'] = $this->AdminHome_model->get_item_colored_detail($_GET['id']);
+		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['poster_attr']= $this->form_attr('item_photo');
+        $data['datatabel'] = $this->load->view('include/TableColorDetail', $data, TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+
+		$this->load->view('pages/TableProductColor.php',$data);
+    }
+
     public function FormEditProduct()
 	{
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
@@ -157,6 +190,52 @@ class AdminHome extends CI_Controller{
 		$this->load->view('pages/FormEditProduct.php',$data);
     }
     
+    public function AddProductDetail(){
+        $ItemIDColored = $this->input->post('id_item_colored');
+        $ItemID = $this->input->post('itemID');
+        $itemSize = $this->input->post('itemsize');
+        $itemStock = $this->input->post('itemstock');
+
+        $data = array();
+            $index = 0; // Set index array awal dengan 0
+
+            foreach($itemSize as $datasizes){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+				array_push($data, array(
+					'id_item_colored' => $ItemIDColored,  // Ambil dan set data nama sesuai index array dari $index
+                    'item_size'=>$datasizes, // Ambil dan set data alamat sesuai index array dari $index
+                    'stock'=>$itemStock[$index],
+                ));
+			    $index++;
+            }
+            $this->AdminHome_model->AddProductDetail($data);
+
+            redirect('AdminHome/showProductColor?id='.$ItemID);   
+    }
+
+    public function AddPhoto()
+    {
+        $ItemIDColored = $this->input->post('id_item_colored');
+        $ItemID = $this->input->post('item_id');
+        $filename = pathinfo($_FILES['item_photo']['name'], PATHINFO_FILENAME); // get photo name
+        $config['upload_path']          = './asset/images';
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size'] = '4960';
+        $config['overwrite']			= false;
+
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('upload', $config);
+
+        $success = $this->upload->do_upload('item_photo');
+        if(!$success){
+            print_r($this->upload->display_errors());
+        }
+        else {
+            $this->AdminHome_model->AddPhoto($ItemIDColored, $filename);
+            redirect('AdminHome/showProductColor?id='.$ItemID); 
+        }
+            
+    }
+
     public function AddProduct()
 	{
         // $this->form_validation->set_rules('itemid', 'itemid', 'required|trim',[
@@ -196,25 +275,28 @@ class AdminHome extends CI_Controller{
             $ItemName = $this->input->post('itemname');
             $ItemType = $this->input->post('type');
             $ItemColor = $this->input->post('itemcolor');
+            $itemSize = $this->input->post('itemsize');
+            $itemStock = $this->input->post('itemstock');
             $Weight = $this->input->post('weight');
             $Sellingprice = $this->input->post('sellingprice');
             $Buyingprice = $this->input->post('buyingprice');
             $Description = $this->input->post('description');
             $Careinstruction = $this->input->post('careinstruction');
 
-            $config['upload_path'] = './asset/itempicture';
-		    $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['file_name'] = $ItemName;
+            // $config['upload_path'] = './asset/itempicture';
+		    // $config['allowed_types'] = 'jpg|png|jpeg';
+            // $config['file_name'] = $ItemName;
             
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('itempicture');
+            // $this->load->library('upload', $config);
+            // $this->upload->do_upload('itempicture');
             
-            $ItemPicture='asset/itempicture/' . $this->upload->data('file_name');
+            // $ItemPicture='asset/itempicture/' . $this->upload->data('file_name');
 
             $data = array();
-            $index = 0; // Set index array awal dengan 0
-            $totalcolors = $this->AdminHome_model->countidcolor($ItemID); 
-            var_dump($totalcolors);
+            // $index = 0; // Set index array awal dengan 0
+            // $totalcolors = $this->AdminHome_model->countidcolor($ItemID); 
+
+            // var_dump($totalcolors);
 
             // $select_id_type_color = $this->AdminHome_model->select_id_type_color(); 
 
@@ -223,16 +305,74 @@ class AdminHome extends CI_Controller{
 					'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
                     'item_color'=>$datacolors, // Ambil dan set data alamat sesuai index array dari $index
                 ));
-			    $index++;
+			    // $index++;
             }
+            $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data);
+            
+            // $idItemColored = $this->AdminHome_model->getIdItemColored($ItemID);
+            
+            // var_dump($idItemColored);
+            // var_dump($idItemColored[0]);
 
-            $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture, $data);
+            // $this->AdminHome_model->AddStock($idItemColored);
+
+            // var_dump();
+            // foreach($ItemSize as $datasizes){
+            //     array_push($size, array(
+			// 		'id_item_colored' => $idItemColored,  // Ambil dan set data nama sesuai index array dari $index
+            //         'item_size'=>$datasizes,
+            //         'item_stock'=>$itemStock // Ambil dan set data alamat sesuai index array dari $index
+            //     ));
+            // }
+
+
+            // $data = array();
+			// $index = 0; // Set index array awal dengan 0
+			// foreach($id_item_colored as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+			// 	array_push($data, array(
+			// 		'id_item_colored'=>$datacolors,
+			// 		'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
+			// 		'item_color'=>$color[$index], // Ambil dan set data alamat sesuai index array dari $index
+			// 	));
+			// $index++;
+			// }
+
             // $sql = $this->AdminHome_model->AddProduct($data);
             
-            redirect('AdminHome');   
+            redirect('AdminHome/showProductColor?id='.$ItemID);   
 		// }
     }
     
+    public function EditProductDetail(){
+        $id_item_colored = $this->input->post('id_item_colored');
+        $item_size = $this->input->post('item_size');
+        $item_stock = $this->input->post('item_stock');
+        
+        $this->AdminHome_model->EditProductDetail($id_item_colored, $item_size, $item_stock);
+    }
+
+    public function EditProductPhoto(){
+        $id_item_colored = $this->input->post('id_item_colored');
+        $filename = pathinfo($_FILES['item_photo']['name'], PATHINFO_FILENAME); // get photo name
+        $config['upload_path']          = './asset/images';
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size'] = '4960';
+        $config['overwrite']			= false;
+
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('upload', $config);
+
+        $success = $this->upload->do_upload('item_photo');
+        if(!$success){
+            print_r($this->upload->display_errors());
+        }
+        else {
+            $this->AdminHome_model->EditProductDetail($id_item_colored, $filename);
+        }
+        
+        
+    }
+
     public function EditProduct()
 	{
 		$this->form_validation->set_rules('itemname', 'itemname', 'required|trim',[
@@ -261,8 +401,17 @@ class AdminHome extends CI_Controller{
             $this->load->view('pages/FormEditProduct.php', $data);
         }
         else{
+            $ItemID = $this->input->post('itemid');
+            $ItemName = $this->input->post('itemname');
+            $ItemType = $this->input->post('type');
+            $ItemColor = $this->input->post('itemcolor');
+            $Weight = $this->input->post('weight');
+            $Sellingprice = $this->input->post('sellingprice');
+            $Buyingprice = $this->input->post('buyingprice');
+            $Description = $this->input->post('description');
+            $Careinstruction = $this->input->post('careinstruction');
             
-            $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $ItemPicture);
+            $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
             redirect('AdminHome');   
 		}
     }

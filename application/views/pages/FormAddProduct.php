@@ -41,15 +41,15 @@
                             'type' => 'number'
                         );
                         
-                        $size = array(
-                            'name' => 'size',
-                            'type' => 'text'
-                        );
+                        // $size = array(
+                        //     'name' => 'size',
+                        //     'type' => 'text'
+                        // );
 
-                        $stock = array(
-                            'name' => 'stock',
-                            'type' => 'number'
-                        );
+                        // $stock = array(
+                        //     'name' => 'stock',
+                        //     'type' => 'number'
+                        // );
 
                         $sellingprice = array(
                             'name' => 'sellingprice',
@@ -105,30 +105,19 @@
                             echo "<div class='form-group row col-md-4'>";
                                 echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor[]', '', $style);
                                 echo form_error('itemcolor','<small class="text-danger">','</small>') . "<br>";
-                                echo '<div id="insert-form"></div>';
-                                // echo form_button($button_add_color);
-                                // echo '<button type="button" id="btn-reset-form">Reset Form</button><br><br>';
-                                // echo '<input type="hidden" id="jumlah-form" value="1">';
                             echo "</div>";
-                            // echo "<i class='sidenav-icon feather icon-home'></i>";
-                                echo form_button($button_add_color);
-                                echo '<button type="button" id="btn-reset-form">Reset Form</button><br><br>';
-                                echo '<input type="hidden" id="jumlah-form" value="1">';
                         echo "</div>";
+
+                        echo '<div id="insert-form"></div>';
 
                         echo "<div class='form-row'>";
-                            echo "<div class='form-group row col-md-4'>";
-                                echo form_label('Item Size :',' ',$attribute_label) . form_input('itemsize[]', '', $style);
-                                echo form_error('itemsize','<small class="text-danger">','</small>') . "<br>";
-                                echo form_label('Item Stock :',' ',$attribute_label) . form_input('itemstock[]', '', $style);
-                                echo form_error('itemstock','<small class="text-danger">','</small>') . "<br>";
-                                echo '<div id="insert-form2"></div>';
-                                echo '<button type="button" id="btn-tambah-form2">Add Stock and Size</button>';
-                                echo '<button type="button" id="btn-reset-form2">Reset Form</button><br><br>';
-                                echo '<input type="hidden" id="jumlah-form2" value="1">';
+                            echo "<div class='form-group row col-md-3'>";
+                                echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-tambah-form"> + Color </button>';
+                                echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-reset-forms">Reset</button>';
+                                echo '<input type="hidden" id="jumlah-form" value="1">';
                             echo "</div>";
                         echo "</div>";
-
+                        
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-12'>";
                                 echo form_label('Weight :',' ',$attribute_label) . form_input($weight, '', $style);
@@ -161,9 +150,9 @@
                         echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
-                        echo "<div class='form-group row'>";
-                        echo form_label('Picture   :',' ',$attribute_label) . form_upload($picture, 'picture', '', $style) . "<br><br>";
-                        echo "</div>";
+                        // echo "<div class='form-group row'>";
+                        // echo form_label('Picture   :',' ',$attribute_label) . form_upload($picture, 'picture', '', $style) . "<br><br>";
+                        // echo "</div>";
 
                         echo form_submit('Submit', 'Add Product', $buttonadd);
                         echo '<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
@@ -177,52 +166,23 @@
     <?php echo $footer; ?>
     <script>
   $(document).ready(function(){ // Ketika halaman sudah diload dan siap
-    $("#btn-tambah-form").click(function(){ // Ketika tombol Tambah Data Form di klik
-      var jumlah = parseInt($("#jumlah-form").val()); // Ambil jumlah data form pada textbox jumlah-form
-      var nextform = jumlah + 1; // Tambah 1 untuk jumlah form nya
+    $("#btn-tambah-form").click(function(){ 
+      var jumlah = parseInt($("#jumlah-form").val());
+      var nextform = jumlah + 1;
       
-      // Kita akan menambahkan form dengan menggunakan append
-      // pada sebuah tag div yg kita beri id insert-form
-    //   $("#insert-form").append("<b>Data ke " + nextform + " :</b>" +
-    $("#insert-form").append(
-        "<table>" +
-        "<tr>" +
-        "<td><input class='form-control' type='text' name='itemcolor[]' required></td>" +
-        "</tr>" +
-        "</table>" +
-        "<br><br>");
+      $("#insert-form").append(
+        "<div class='form-row'>" + 
+        "<div class='form-group row col-md-4'>" + 
+        "<input type='text' class='form-control' name='itemcolor[]' placeholder="+ '"Type Color"' + ">" + 
+        "</div></div>");
       
       $("#jumlah-form").val(nextform); // Ubah value textbox jumlah-form dengan variabel nextform
     });
-
-    $("#btn-tambah-form2").click(function(){ // Ketika tombol Tambah Data Form di klik
-      var jumlah2 = parseInt($("#jumlah-form2").val()); // Ambil jumlah data form pada textbox jumlah-form
-      var nextform2 = jumlah2 + 1; // Tambah 1 untuk jumlah form nya
-      
-      // Kita akan menambahkan form dengan menggunakan append
-      // pada sebuah tag div yg kita beri id insert-form
-      $("#insert-form2").append("<b>Data ke " + nextform2 + " :</b>" +
-        "<table>" +
-        "<tr>" +
-        "<td><input type='text' name='itemsize[]' required></td>" +
-        "<td><input type='text' name='itemstock[]' required></td>" +
-        "</tr>" +
-        "</table>" +
-        "<br><br>");
-      
-      $("#jumlah-form").val(nextform2); // Ubah value textbox jumlah-form dengan variabel nextform
-    });
     
     // Buat fungsi untuk mereset form ke semula
-    $("#btn-reset-form").click(function(){
+    $("#btn-reset-forms").click(function(){
       $("#insert-form").html(""); // Kita kosongkan isi dari div insert-form
-      $("#jumlah-form").val("1"); // Ubah kembali value jumlah form menjadi 1
-    });
-
-    // Buat fungsi untuk mereset form ke semula
-    $("#btn-reset-form2").click(function(){
-      $("#insert-form2").html(""); // Kita kosongkan isi dari div insert-form
-      $("#jumlah-form2").val("1"); // Ubah kembali value jumlah form menjadi 1
+      $("#jumlah-form").val("1");
     });
   });
   </script>

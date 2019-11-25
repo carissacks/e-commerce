@@ -29,12 +29,6 @@
                             'type' => 'text'
                         );
 
-                        $picture = array(
-                            'name' => 'poster',
-                            'type' => 'file',
-                            'class' => 'form-label w-100'
-                        );
-
                         $weight = array(
                             'name' => 'weight',
                             'type' => 'number'
@@ -87,10 +81,10 @@
                             echo "</div>";
                         echo "</div>";
 
-                        echo "<div class='form-group row'>";
-                                echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor', '', $style);
-                                echo form_error('itemcolor','<small class="text-danger">','</small>') . "<br>";
-                        echo "</div>";
+                        // echo "<div class='form-group row'>";
+                        //         echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor', '', $style);
+                        //         echo form_error('itemcolor','<small class="text-danger">','</small>') . "<br>";
+                        // echo "</div>";
                         
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-12'>";
@@ -124,9 +118,9 @@
                         echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
-                        echo "<div class='form-group row'>";
-                        echo form_label('Picture   :',' ',$attribute_label) . form_upload($picture, 'picture', '', $style) . "<br><br>";
-                        echo "</div>";
+                        // echo "<div class='form-group row'>";
+                        // echo form_label('Picture   :',' ',$attribute_label) . form_upload($picture, 'picture', '', $style) . "<br><br>";
+                        // echo "</div>";
 
                         echo form_submit('Submit', 'Update Product', $buttonadd);
                         echo '	<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';

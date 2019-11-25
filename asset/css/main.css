@@ -2955,7 +2955,7 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .how-itemcart1 {
-  width: 60px;
+  width: 80px;
   position: relative;
   margin-right: 20px;
   cursor: pointer;
@@ -2966,7 +2966,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .how-itemcart1::after {
-  content: '\e870';
+  content: 'detail';
   font-family: Linearicons-Free;
   font-size: 16px;
   display: -webkit-box;
