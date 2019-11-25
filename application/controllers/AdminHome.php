@@ -181,6 +181,13 @@ class AdminHome extends CI_Controller{
 
     public function FormEditProduct()
 	{
+        // $data['type']  = $this->AdminHome_model->getType();
+        
+        // $data = array(
+        //     'button' => 'Create',
+        //     'type' => $this->AdminHome_model->getType(),
+        //     'type_selected' => $this->input->post('type') ? $this->input->post('type') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+        // );
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
@@ -398,20 +405,20 @@ class AdminHome extends CI_Controller{
             $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
             $data['itemtype']  = $this->AdminHome_model->getItemType();
             $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-            $this->load->view('pages/FormEditProduct.php', $data);
+            $this->load->view('pages/FormEditProduct.php?id='.$_GET['id'], $data);
         }
         else{
-            $ItemID = $this->input->post('itemid');
-            $ItemName = $this->input->post('itemname');
-            $ItemType = $this->input->post('type');
-            $ItemColor = $this->input->post('itemcolor');
-            $Weight = $this->input->post('weight');
-            $Sellingprice = $this->input->post('sellingprice');
-            $Buyingprice = $this->input->post('buyingprice');
-            $Description = $this->input->post('description');
-            $Careinstruction = $this->input->post('careinstruction');
+            // $ItemID = $this->input->post('itemid');
+            // $ItemName = $this->input->post('itemname');
+            // $ItemType = $this->input->post('type');
+            // $ItemColor = $this->input->post('itemcolor');
+            // $Weight = $this->input->post('weight');
+            // $Sellingprice = $this->input->post('sellingprice');
+            // $Buyingprice = $this->input->post('buyingprice');
+            // $Description = $this->input->post('description');
+            // $Careinstruction = $this->input->post('careinstruction');
             
-            $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
+            // $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
             redirect('AdminHome');   
 		}
     }
