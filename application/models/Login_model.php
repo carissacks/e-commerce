@@ -20,6 +20,11 @@
 			$query= $this->db->get();
 			return $query->result_array();
 		}
+
+		public function getpriv($email){
+			$query = $this->db->query("SELECT priv FROM ms_users where email_user = '$email'");
+			return $query->result();
+		}
 	}
 
 ?>
