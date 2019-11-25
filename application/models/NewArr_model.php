@@ -36,7 +36,9 @@ class NewArr_model extends CI_Model{
 	function get_totalCartData($email){
 		$this->db->select_sum('quantity');
 		$query= $this->db->get_where('shopping_cart',array('email_user'=>$email));
-		return $query->row()->quantity;
+		if($query->row()->quantity)
+			return $query->row()->quantity;
+		else return 0;
 	}
 }
 ?>
