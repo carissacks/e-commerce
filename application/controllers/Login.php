@@ -36,16 +36,23 @@ class Login extends CI_Controller{
 
 				// var_dump($valid);
 				if($valid){
-					echo"ok";
+					// echo"ok";
 					$data_session= array(
 						'email' => $email,
 						'login' => true,
 						'priv' => $valid[0]['priv']
 					); 
+					
 					$this->session->set_userdata($data_session);
 
 				}
+				// $priv = $this->login_model->getpriv($email);
+				// echo $priv['priv'];
+				// if($priv = 1){
+				// 	redirect(base_url('index.php/AdminHome'));
+				// }else 
 				redirect(base_url());
+				
 			}else{
 				$this->index('Email or password is incorrect');
 			}

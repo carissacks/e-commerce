@@ -6,6 +6,7 @@ class NewArr_model extends CI_Model{
 		JOIN photos AS p ON p.id_item_colored= ic.id_item_colored
 		JOIN item_stock AS ist ON ist.id_item_colored= ic.id_item_colored
 		JOIN type AS t ON t.id_type= i.id_type
+		WHERE ic.show = 1
 		GROUP BY ic.id_item_colored
 		ORDER BY ic.id_item_colored DESC
 		LIMIT 4;");
