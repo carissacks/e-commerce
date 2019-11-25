@@ -20,6 +20,13 @@ class Products extends CI_Controller{
 		$data['links']= $this->pagination->create_links();
 		// endof pagination
 
+		if($this->session->has_userdata('email')):
+			$email= $this->session->email;
+			$data['cart_items']= $this->product_model->get_itemInCart($email);
+		else:
+			$data['cart_items']='';
+		endif;
+
 		$this->load->view('pages/header.php',$this->head_class());
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['types']= $this->product_model->get_types();
@@ -27,14 +34,21 @@ class Products extends CI_Controller{
 		$this->load->view('pages/productview.php',$data);
 	}
 
-	public function showDetail($id){
+	public function showDetail($id, $modal=FALSE){
 		$this->load->view('pages/header.php',$this->head_class());
+		if($this->session->has_userdata('email')):
+			$email= $this->session->email;
+			$data['cart_items']= $this->product_model->get_itemInCart($email);
+		else:
+			$data['cart_items']='';
+		endif;
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['items']= $this->product_model->get_item($id);
 		$data['photos']= $this->product_model->get_photo($id);
 		$data['stocks']= $this->product_model->get_stock($id);
 		$data['related']= $this->product_model->get_related($id);
 		$data['color']= $this->product_model->get_other_color($id);
+		$data['modal']= $modal;
 		$this->load->view('pages/productDetailview.php',$data);
 	}
 
@@ -50,11 +64,35 @@ class Products extends CI_Controller{
 		$data['links']= $this->pagination->create_links();
 
 		$this->load->view('pages/header.php',$this->head_class());
+		if($this->session->has_userdata('email')):
+			$email= $this->session->email;
+			$data['cart_items']= $this->product_model->get_itemInCart($email);
+		else:
+			$data['cart_items']='';
+		endif;
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['types']= $this->product_model->get_types();
 		$data['selected_type']=$type;
 		$this->load->view('pages/productview.php',$data);
 
+	}
+
+	public function add_to_cart(){
+		$email= $this->session->email;
+		$post= $this->input->post();
+		// var_dump($post);
+		$id= $post['idColor'];
+		$size= $post['size'];
+		$qty= $post['qty'];
+
+		$item_exist= $this->product_model->is_item_in_cart($id,$email,$size);
+		if($item_exist){
+			$qty= $item_exist->quantity+$qty;
+			$this->product_model->update_shopping_cart($id,$email,$size,$qty);
+		}
+		else
+			$this->product_model->add_shopping_cart($id,$email,$size,$qty);
+		$this->showDetail($id,TRUE);
 	}
 
 	private function pagination_config($uri=3){

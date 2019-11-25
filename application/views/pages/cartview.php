@@ -78,9 +78,9 @@
 											</span>
 										</a>
 									</td>
-									<?=form_hidden('idColor',$id_item_col);?>
-									<?=form_hidden('size',$item_size);?>
-									<?=form_hidden('old_qty',$item_qty);?>
+									<?=form_hidden('idColor['.$index.']',$id_item_col);?>
+									<?=form_hidden('size['.$index.']',$item_size);?>
+									<?=form_hidden('old_qty['.$index.']',$item_qty);?>
 								</tr>
 							<?php
 								$index++;

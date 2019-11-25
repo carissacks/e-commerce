@@ -17,6 +17,9 @@ class NewArrivals extends CI_Controller{
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['items']= $this->newArr_model->get_items();
 		$data['types']= $this->newArr_model->get_types();
+		$thanks= $this->input->post();
+		if($thanks) $data['thanks']= TRUE;
+		else $data['thanks']= FALSE;
 		if($this->session->has_userdata('email')):
 			$email= $this->session->email;
 			$data['cart_items']= $this->newArr_model->get_itemInCart($email);

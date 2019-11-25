@@ -48,8 +48,13 @@ class Cart_model extends CI_Model{
 
 	function updateItem($id, $qty, $size, $email){
 		$data= array(
-			
-		)
+			'id_item_colored'=> $id,
+			'quantity' =>$qty,
+			'item_size' => $size,
+			'email_user' => $email
+		);
+
+		$this->db->replace('shopping_cart',$data);
 	}
 }
 ?>

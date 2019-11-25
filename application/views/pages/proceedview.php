@@ -1,5 +1,5 @@
 
-	<form class="bg0 p-t-75 p-b-85">
+	<div class="bg0 p-t-75 p-b-85">
 		<div class="container bg0 p-t-75 p-b-85">
 			<div class="row">
 				<div class="col-sm-12 col-lg-10 m-lr-auto m-b-50">
@@ -111,15 +111,14 @@
 									Back
 								</div>
 							</a>
-							<!-- <a href="<?=base_url('index.php/Cart/paid')?>"> -->
-								<div class="flex-c-m stext-101 cl0 size-119 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 js-thanks">
-									Pay
-								</div>
-							<!-- </a> -->
+							<form action="<?=base_url('')?>" method="post">
+								<?= form_hidden('paid', true);?>
+								<input type="submit" value="Pay" class="flex-c-m stext-101 cl0 size-119 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 js-thanks">
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 <?=$footer?>

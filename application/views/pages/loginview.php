@@ -30,8 +30,8 @@
 									if($error !='') echo "<div class='alert alert-danger mx-3'>".$error."</div>";
 									echo "<div class='form-group pl-3'>";
 									echo form_submit('','Login',$submit_attr);
-									echo '	<a href="'.base_url('index.php/NewArrivals').'" style="margin-right: 15px;" class="btn btn-secondary"> 
-										Sign Up
+									echo '	<a href="'.base_url('index.php/NewArrivals').'" style="margin-right: 15px;" class="btn btn-secondary bg7 bor13 hov-btn3"> 
+										Sign up
 										</a>';
 									echo "</div>";
 
