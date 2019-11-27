@@ -35,6 +35,21 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 
+	function get_specific_item_detail($itemID)
+	{
+		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color 
+									FROM items as it
+									JOIN item_colored as ic on ic.id_item = it.id_item 
+									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
+									WHERE it.id_item = '$itemID'");
+		return $query->result_array();
+		// $this->db->select('*');
+		// $this->db->where('id_item', $itemID);
+		// $hasil = $this->db->get('item_colored');
+		// // print_r($hasil);
+		// return $hasil;
+	}
+
 	function countProductHide(){
 		$this->db->select('COUNT(id_item_colored) as totalproduct');
 		$this->db->where('show = 0');  
@@ -58,14 +73,32 @@ class AdminHome_model extends CI_Model{
 		$this->db->update('items', $item);
 	}
 
-	function EditProductDetail($id_item_colored, $item_size, $item_stock){
+	function DeleteProductStock($id_item_colored, $item_size){
+		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->where('item_size', $item_size);
+		$this->db->delete('item_stock');
+	}
+
+	function EditProductDetail($id_item_colored, $item_size, $item_stock, $item_size_before){
 		$item = array(
 			'id_item_colored' => $id_item_colored,
 			'item_size' => $item_size,
 			'stock' => $item_stock
 		);
 		$this->db->where('id_item_colored', $id_item_colored);
-		$this->db->update('item_colored', $item);
+		$this->db->where('item_size', $item_size_before);
+		$this->db->update('item_stock', $item);
+		
+	}
+
+	function get_all_size_and_stock($id_item_colored, $size)
+	{
+		$query = $this->db->query("SELECT * FROM item_stock WHERE id_item_colored = '$id_item_colored' and item_size = '$size'");
+		return $query->result_array();
+		// $this->db->select('*');
+		// $this->db->where('id_item_colored', $id_item_colored);  
+		// $hasil = $this->db->get('item_stock');
+		// return $hasil;
 	}
 
 	function EditProductPhoto($id_item_colored, $ItemPicture){
