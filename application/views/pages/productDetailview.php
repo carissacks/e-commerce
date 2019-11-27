@@ -1,5 +1,6 @@
 <!-- Cart -->
-<div class="wrap-header-cart js-panel-cart">
+	<div cl
+	 ass="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -12,7 +13,7 @@
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
+			<?php if($total_cart_items !=0):?>
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<?php 
@@ -27,16 +28,20 @@
 							$cart_qty= $cart_row['quantity'];
 							$cart_size= $cart_row['item_size'];
 							$total+= $cart_qty*$cart_price;
-						?>
+					?>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="<?=base_url('asset/images/'.$cart_type.'/'.$cart_photo)?>" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="header-cart-item-name m-b-5 hov-cl1 trans-04">
 								<?=$cart_name?>
 							</a>
+
+							<span class="header-cart-item-info">
+								<?=$cart_size?>
+							</span>
 
 							<span class="header-cart-item-info">
 								<?=$cart_qty?> x IDR <?=$cart_price?>
@@ -62,9 +67,13 @@
 					</div>
 				</div>
 			</div>
+			<?php else:?>
+			<div class="col-12">
+				<p>Your shopping cart is empty.</p>
+			</div>
+			<?php endif;?>
 		</div>
 	</div>
-
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -79,6 +88,7 @@
 			$type_item= $items->type_desc;
 			$weight_item= $items->weight;
 			$care_ins= $items->care_ins;
+			$available= true;
 		?>
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-100 p-lr-0-lg">
 			<a href="<?=base_url('index.php/Products')?>" class="stext-109 cl8 hov-cl1 trans-04">
@@ -137,9 +147,17 @@
 						</span>
 
 						<p class="cl2 p-t-5">
-							<a href="#" class="fs-20 cl3 hov-cl1 trans-04 lh-10p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+							<?php if ($login):?>
+								<form action="<?base_url('index.php/Product/add_wishlist')?>" method="post">
+									<button type="submit" class="fs-20 cl3 hov-cl1 trans-04 lh-10p-tb-2 js-addwish-detail">
+										Wishlist <i class='zmdi zmdi-favorite'></i>
+									</button>
+								</form>
+							<?php else:?>
+							<a href="<?=base_url('index.php/Login')?>" class="fs-20 cl3 hov-cl1 trans-04 lh-10p-tb-2">
 								Wishlist <i class="zmdi zmdi-favorite"></i>
 							</a>
+							<?php endif;?>
 						</p>
 
 						<p class="stext-102 cl3 p-t-23">
@@ -160,15 +178,25 @@
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="size">
+										<select class="js-select2" id="size" name="size" required>
+										<option value="">Choose your size</option>
 											<?php foreach ($stocks as $stock):?>
-											<option value="<?=$stock['item_size']?>">Size <?=$stock['item_size']?></option>
+											<option value="<?=$stock['item_size']?>" data-stock="<?=$stock['stock']?>" 
+												<?php if($stock['stock']==0): 
+													//echo 'disabled'?> >
+													<?=$stock['item_size']?>
+													<small>- out of stock</small>
+												<?php else:?>
+													<?='>'.$stock['item_size']?>
+												<?php endif;?>
+											</option>
 											<?php endforeach;?>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
 							</div>
+							<?php //var_dump($stocks);?>
 
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
@@ -196,7 +224,7 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty" value="1" readonly>
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
@@ -204,11 +232,9 @@
 									</div>
 
 								<?php if ($login):?>
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</button>
+									<input type="submit" value="Add to cart" id="addtocart" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 								<?php else:?>
-									<a href="<?=base_url('index.php/Login')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<a href="<?=base_url('index.php/Login')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 										Add to cart
 									</a>
 								<?php endif;?>
@@ -269,6 +295,9 @@
 												<?= $care_ins?>
 											</span>
 										</li>
+
+										<p><?=$available?></p>
+
 
 										<li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
@@ -358,12 +387,21 @@
 								</span>
 							</div>
 
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+							<!-- <div class="block2-txt-child2 flex-r p-t-3">
+							<?php if ($login):?>
+								<form action="<?base_url('index.php/Product/add_wishlist')?>" method="post">
+								<span class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
+								</span>
+								</form>
+							<?php else:?>
+								<a href="<?=base_url('index.php/Login')?>" class="btn-addwish-b2 dis-block pos-relative">
 									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
 								</a>
-							</div>
+							<?php endif;?>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -381,13 +419,37 @@
 	</div>
 
 <?=$footer?>
-<?php if ($modal):?>
 <script>
+var stock=0;
+	<?php if ($modal):?>
 	$('.js-addcart-detail').each(function () {
 		var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 		$(this).ready(function () {
 			swal(nameProduct, "is added to cart !", "success");
 		});
 	});
+	<?php endif;?>
+
+	$('.btn-num-product-up').on('click', function(){
+        var numProduct = Number($(this).prev().val());
+        if(numProduct<stock) $(this).prev().val(numProduct + 1);
+		// console.log(stock);
+    });
+
+	$('#size').change(function(){
+		var selected = $(this).find('option:selected');
+		stock = selected.data('stock');
+		// console.log(stock); 
+		if(stock<=0){
+			$('#addtocart').attr('disabled',true);
+			$('#addtocart').removeClass('bg1');
+			$('#addtocart').removeClass('hov-btn1');
+		}else{
+			$('#addtocart').attr('disabled',false);
+			$('#addtocart').addClass('bg1');
+			$('#addtocart').addClass('hov-btn1');
+		}
+    });
 </script>
-<?php endif;?>
+
+

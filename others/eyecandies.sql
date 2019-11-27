@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2019 at 09:08 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Nov 26, 2019 at 08:51 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,26 +37,25 @@ CREATE TABLE `items` (
   `buying_price` int(11) NOT NULL,
   `care_ins` text NOT NULL,
   `id_type` int(3) NOT NULL,
-  `disc` int(11) DEFAULT '0',
-  `show` int(11) NOT NULL
+  `disc` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id_item`, `item_name`, `item_desc`, `weight`, `selling_price`, `buying_price`, `care_ins`, `id_type`, `disc`, `show`) VALUES
-('T001', 'Lyocell-blend Flounced Dress', 'Short, off-the-shoulder flounced dress woven in a textured Tencel® lyocell blend with narrow adjustable shoulder straps and short sleeves with elastication at the top. Lined.', 200, 799900, 500000, 'Machine wash at 30°', 1, 0, 1),
-('T002', 'Pleated Maxi Dress', 'Maxi dress in soft jersey with a V-neck at the front and low-cut neckline at the back. Wide shoulder straps that cross at the back, an elasticated seam at the waist and a long, pleated, heavily draping skirt. Lined.', 500, 899900, 600000, 'Machine wash at 40°', 1, 0, 1),
-('T003', 'Sleeveless Jersey Dress', 'Short, sleeveless dress in sturdy jersey with a low-cut back, seam at the waist and flared skirt. The polyester content of the dress is partly recycled.', 200, 149900, 50000, 'Machine wash at 30°\r\n', 1, 0, 1),
-('T004', 'Tie-belt Dress', 'Straight-cut, calf-length dress in woven fabric with a grandad collar and covered buttons at the top. Detachable tie belt at the waist and long, slightly wider sleeves with covered buttons at the narrow cuffs. Unlined.', 400, 449900, 300000, 'Machine wash at 30°', 1, 0, 1),
-('T005', 'Fine-knit Dress', 'Calf-length dress in a soft, fine-knit viscose blend a round neckline, short sleeves and flared skirt. Unlined.', 100, 399900, 150000, 'Machine wash at 30°', 1, 0, 1),
-('T006', 'Patterned Long Dress', 'Long, sleeveless dress in patterned satin with a gathered, elasticated neckline, short, double shoulder straps and a seam at the waist with a detachable tie belt. Lined.', 300, 599900, 302000, 'Machine wash at 30°', 1, 0, 1),
-('T007', 'V-neck Jersey Dress', 'Short dress in patterned jersey with a draped V-neck and sewn-in wrapover at the top. Long sleeves, cuffs with metal buttons, an elasticated seam at the waist and a gently flared skirt. Unlined.', 250, 399900, 20000, 'Machine wash at 40°', 1, 0, 1),
-('T008', 'Cotton Twill Boiler Suit', 'Long-sleeved boiler suit in cotton twill with notch lapels, a V-neck and buttons down the front. Flap chest pockets, patch front pockets, a detachable tie belt at the waist and straight, ankle-length legs with elasticated hems.', 500, 499900, 350000, 'Machine wash at 40°', 2, 0, 1),
-('T009', 'Sleeveless Jumpsuit', 'Sleeveless jumpsuit in woven fabric with notch lapels and a wrapover front with a concealed button. Seam and detachable tie belt at the waist, side pockets, fake back pockets, and tapered, ankle-length leg with slits at the hems.', 400, 799900, 400000, 'Machine wash at 40°', 2, 0, 1),
-('T010', 'Ankle-length Lyocell Jumpsuit', 'Ankle-length jumpsuit woven in a Tencel® lyocell blend with a V-neck at the back, and twisted rope shoulder straps that cross and tie at the back. Seam at the waist with covered elastication at the back, a low crotch and side pockets. Pleats at the waist and straight, softly draping legs. Lined.', 400, 799900, 590000, 'Machine wash at 30°', 2, 0, 1),
-('T011', 'Cotton Boiler Suit', 'Ankle-length boiler suit in an airy cotton weave with a resort collar, chest pockets and an elasticated waist. Buttons down the front and half-length sleeves with sewn-in turn ups.', 600, 499900, 200000, 'Machine wash at 40°', 2, 0, 1);
+INSERT INTO `items` (`id_item`, `item_name`, `item_desc`, `weight`, `selling_price`, `buying_price`, `care_ins`, `id_type`, `disc`) VALUES
+('T001', 'Lyocell-blend Flounced Dress', 'Short, off-the-shoulder flounced dress woven in a textured Tencel® lyocell blend with narrow adjustable shoulder straps and short sleeves with elastication at the top. Lined.', 200, 799900, 500000, 'Machine wash at 30°', 1, 0),
+('T002', 'Pleated Maxi Dress', 'Maxi dress in soft jersey with a V-neck at the front and low-cut neckline at the back. Wide shoulder straps that cross at the back, an elasticated seam at the waist and a long, pleated, heavily draping skirt. Lined.', 500, 899900, 600000, 'Machine wash at 40°', 1, 0),
+('T003', 'Sleeveless Jersey Dress', 'Short, sleeveless dress in sturdy jersey with a low-cut back, seam at the waist and flared skirt. The polyester content of the dress is partly recycled.', 200, 149900, 50000, 'Machine wash at 30°\r\n', 1, 0),
+('T004', 'Tie-belt Dress', 'Straight-cut, calf-length dress in woven fabric with a grandad collar and covered buttons at the top. Detachable tie belt at the waist and long, slightly wider sleeves with covered buttons at the narrow cuffs. Unlined.', 400, 449900, 300000, 'Machine wash at 30°', 1, 0),
+('T005', 'Fine-knit Dress', 'Calf-length dress in a soft, fine-knit viscose blend a round neckline, short sleeves and flared skirt. Unlined.', 100, 399900, 150000, 'Machine wash at 30°', 1, 0),
+('T006', 'Patterned Long Dress', 'Long, sleeveless dress in patterned satin with a gathered, elasticated neckline, short, double shoulder straps and a seam at the waist with a detachable tie belt. Lined.', 300, 599900, 302000, 'Machine wash at 30°', 1, 0),
+('T007', 'V-neck Jersey Dress', 'Short dress in patterned jersey with a draped V-neck and sewn-in wrapover at the top. Long sleeves, cuffs with metal buttons, an elasticated seam at the waist and a gently flared skirt. Unlined.', 250, 399900, 20000, 'Machine wash at 40°', 1, 0),
+('T008', 'Cotton Twill Boiler Suit', 'Long-sleeved boiler suit in cotton twill with notch lapels, a V-neck and buttons down the front. Flap chest pockets, patch front pockets, a detachable tie belt at the waist and straight, ankle-length legs with elasticated hems.', 500, 499900, 350000, 'Machine wash at 40°', 2, 0),
+('T009', 'Sleeveless Jumpsuit', 'Sleeveless jumpsuit in woven fabric with notch lapels and a wrapover front with a concealed button. Seam and detachable tie belt at the waist, side pockets, fake back pockets, and tapered, ankle-length leg with slits at the hems.', 400, 799900, 400000, 'Machine wash at 40°', 2, 0),
+('T010', 'Ankle-length Lyocell Jumpsuit', 'Ankle-length jumpsuit woven in a Tencel® lyocell blend with a V-neck at the back, and twisted rope shoulder straps that cross and tie at the back. Seam at the waist with covered elastication at the back, a low crotch and side pockets. Pleats at the waist and straight, softly draping legs. Lined.', 400, 799900, 590000, 'Machine wash at 30°', 2, 0),
+('T011', 'Cotton Boiler Suit', 'Ankle-length boiler suit in an airy cotton weave with a resort collar, chest pockets and an elasticated waist. Buttons down the front and half-length sleeves with sewn-in turn ups.', 600, 499900, 200000, 'Machine wash at 40°', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -67,35 +66,36 @@ INSERT INTO `items` (`id_item`, `item_name`, `item_desc`, `weight`, `selling_pri
 CREATE TABLE `item_colored` (
   `id_item_colored` int(11) NOT NULL,
   `id_item` varchar(10) NOT NULL,
-  `item_color` varchar(15) NOT NULL
+  `item_color` varchar(15) NOT NULL,
+  `show` int(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `item_colored`
 --
 
-INSERT INTO `item_colored` (`id_item_colored`, `id_item`, `item_color`) VALUES
-(1, 'T001', 'Yellow'),
-(2, 'T001', 'Lemon'),
-(3, 'T002', 'Turquoise'),
-(4, 'T002', 'Rose'),
-(5, 'T003', 'White'),
-(6, 'T003', 'White-Blue'),
-(7, 'T003', 'Red'),
-(8, 'T003', 'Floral'),
-(9, 'T004', 'Brown'),
-(10, 'T004', 'Patterned'),
-(11, 'T004', 'Green'),
-(12, 'T004', 'Floral'),
-(13, 'T005', 'Black'),
-(14, 'T006', 'Red'),
-(15, 'T007', 'Black'),
-(16, 'T007', 'Beige'),
-(17, 'T008', 'Khaki'),
-(18, 'T009', 'Black'),
-(19, 'T010', 'Cream'),
-(20, 'T011', 'Brown'),
-(21, 'T011', 'Blue');
+INSERT INTO `item_colored` (`id_item_colored`, `id_item`, `item_color`, `show`) VALUES
+(1, 'T001', 'Yellow', 1),
+(2, 'T001', 'Lemon', 1),
+(3, 'T002', 'Turquoise', 1),
+(4, 'T002', 'Rose', 1),
+(5, 'T003', 'Black', 1),
+(6, 'T003', 'White-Blue', 1),
+(7, 'T003', 'Red', 1),
+(8, 'T003', 'Floral', 1),
+(9, 'T004', 'Brown', 1),
+(10, 'T004', 'Patterned', 1),
+(11, 'T004', 'Green', 1),
+(12, 'T004', 'Floral', 1),
+(13, 'T005', 'Black', 1),
+(14, 'T006', 'Red', 1),
+(15, 'T007', 'Black', 1),
+(16, 'T007', 'Beige', 1),
+(17, 'T008', 'Khaki', 1),
+(18, 'T009', 'Black', 1),
+(19, 'T010', 'Cream', 1),
+(20, 'T011', 'Brown', 1),
+(21, 'T011', 'Blue', 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `item_stock` (
 --
 
 INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
-(1, 'L', 10),
+(1, 'L', 0),
 (1, 'M', 10),
 (1, 'S', 10),
 (1, 'XL', 10),
@@ -264,15 +264,15 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T002-Turquoise-2.jpg', 3),
 ('T002-Turquoise-3.jpg', 3),
 ('T002-Turquoise-4.jpg', 3),
+('T003-Black-1.jpg', 5),
+('T003-Black-2.jpg', 5),
+('T003-Black-3.jpg', 5),
 ('T003-Floral-1.jpg', 8),
 ('T003-Floral-2.jpg', 8),
 ('T003-Floral-3.jpg', 8),
 ('T003-Red-1.jpg', 7),
 ('T003-Red-2.jpg', 7),
 ('T003-Red-3.jpg', 7),
-('T003-White-1.jpg', 5),
-('T003-White-2.jpg', 5),
-('T003-White-3.jpg', 5),
 ('T003-White-Blue-1.jpg', 6),
 ('T003-White-Blue-2.jpg', 6),
 ('T003-White-Blue-3.jpg', 6),
@@ -362,6 +362,13 @@ CREATE TABLE `shopping_cart` (
   `item_size` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `shopping_cart`
+--
+
+INSERT INTO `shopping_cart` (`id_item_colored`, `email_user`, `quantity`, `item_size`) VALUES
+(3, 'andy@gmail.com', 1, 'L');
+
 -- --------------------------------------------------------
 
 --
@@ -435,24 +442,25 @@ CREATE TABLE `transaction_detail` (
   `email_user` varchar(50) NOT NULL,
   `stats` varchar(10) NOT NULL,
   `trans_date` date NOT NULL,
-  `totalpayment` int(11) NOT NULL
+  `shipping_fee` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction_detail`
 --
 
-INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date`, `totalpayment`) VALUES
-('1', 'andre@gmail.com', '1', '2019-11-01', 799900),
-('10', 'ariel@gmail.com', '6', '2019-11-03', 899900),
-('2', 'linata@gmail.com', '3', '2019-10-17', 2149700),
-('3', 'caca@gmail.com', '2', '2019-10-30', 499900),
-('4', 'andre@gmail.com', '4', '2019-10-31', 1249800),
-('5', 'aldo@gmail.com', '5', '2019-09-20', 1199800),
-('6', 'billy@gmail.com', '6', '2019-09-01', 1199800),
-('7', 'wahyudi@gmail.com', '2', '2019-11-03', 799800),
-('8', 'linata@gmail.com', '1', '2019-11-11', 1599700),
-('9', 'andy@gmail.com', '5', '2019-11-06', 949800);
+INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date`, `shipping_fee`) VALUES
+('11', 'andy@gmail.com', '1', '2019-11-26', 0),
+('1', 'andre@gmail.com', '1', '2019-11-01', 0),
+('10', 'ariel@gmail.com', '6', '2019-11-03', 0),
+('2', 'linata@gmail.com', '3', '2019-10-17', 0),
+('3', 'caca@gmail.com', '2', '2019-10-30', 10000),
+('4', 'andre@gmail.com', '4', '2019-10-31', 0),
+('5', 'aldo@gmail.com', '5', '2019-09-20', 0),
+('6', 'billy@gmail.com', '6', '2019-09-01', 0),
+('7', 'wahyudi@gmail.com', '2', '2019-11-03', 0),
+('8', 'linata@gmail.com', '1', '2019-11-11', 0),
+('9', 'andy@gmail.com', '5', '2019-11-06', 0);
 
 -- --------------------------------------------------------
 
@@ -487,8 +495,7 @@ INSERT INTO `type` (`id_type`, `type_desc`) VALUES
 
 CREATE TABLE `wishlist` (
   `id_item_colored` varchar(10) NOT NULL,
-  `email_user` varchar(50) NOT NULL,
-  `item_size` varchar(5) NOT NULL
+  `email_user` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -572,7 +579,7 @@ ALTER TABLE `type`
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`id_item_colored`,`email_user`,`item_size`),
+  ADD PRIMARY KEY (`id_item_colored`,`email_user`),
   ADD KEY `email_user` (`email_user`);
 
 --
@@ -583,7 +590,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `item_colored`
 --
 ALTER TABLE `item_colored`
-  MODIFY `id_item_colored` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `id_item_colored` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -596,6 +603,9 @@ ALTER TABLE `status`
 --
 ALTER TABLE `type`
   MODIFY `id_type` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+  ALTER TABLE `transaction_detail`
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

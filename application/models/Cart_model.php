@@ -17,15 +17,15 @@ class Cart_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->where('email_user',$email);
-		$this->db->group_by('shopping_cart.id_item_colored');
+		$this->db->group_by('shopping_cart.id_item_colored , shopping_cart.item_size');
 
 		$query= $this->db->get();
 		return $query;
 		// return $query->result_array();
 	}
 
-	function remove_item($id, $email){
-		$this->db->delete('shopping_cart', array('id_item_colored' => $id, 'email_user' => $email));
+	function remove_item($id, $email, $size){
+		$this->db->delete('shopping_cart', array('id_item_colored' => $id, 'email_user' => $email, 'item_size' => $size));
 	}
 
 	function get_totalCartData($email){
@@ -57,6 +57,87 @@ class Cart_model extends CI_Model{
 		);
 
 		$this->db->replace('shopping_cart',$data);
+	}
+
+	function insert_transactionDetail($email, $shipment){
+		$data= array(
+			'email_user' => $email,
+			'stats' => 1,
+			'trans_date' => date('Y-m-d'),
+			'shipping_fee' => $shipment
+		);
+		$this->db->insert('transaction_detail',$data);
+	}
+
+	function get_idTrans($email){
+		$this->db->where('email_user',$email);
+		$this->db->order_by('id_trans', 'DESC');
+		$query= $this->db->get('transaction_detail');
+		return $query->row()->id_trans;
+	}
+
+	function insert_transaction($id, $id_item, $qty, $price, $size){
+		$data= array(
+			'id_trans' => $id,
+			'id_item_colored' => $id_item,
+			'quantity' => $qty,
+			'UnitPrice' => $price,
+			'item_size' => $size
+		);
+		$this->db->insert('transactions',$data);
+	}
+
+	function minStock($id, $size, $qty){
+		$data= array(
+			'id_item_colored' => $id,
+			'item_size' => $size
+		);
+		// $this->db->replace('item_stock', $data);
+		$this->db->where($data);
+		$this->db->set('stock', 'stock-'.$qty, FALSE);
+		$this->db->update('item_stock');
+	}
+
+	function delete_cart($email){
+		$this->db->delete('shopping_cart', array('email_user'=> $email));
+	}
+
+	function get_transactionHistory($email){
+		$this->db->select('SUM(transactions.quantity) AS total, transaction_detail.id_trans, status.status_desc, transaction_detail.stats, transaction_detail.trans_date, transaction_detail.shipping_fee');
+		$this->db->from('transaction_detail');
+		$this->db->join('status', 'transaction_detail.stats = status.id_status');
+		$this->db->join('transactions', 'transaction_detail.id_trans = transactions.id_trans');
+		$this->db->where('email_user',$email);
+		$this->db->group_by('transaction_detail.id_trans');
+		$this->db->order_by('transaction_detail.id_trans','DESC');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_transactionDetail($id){
+		$this->db->select('*');
+		$this->db->from('transactions');
+		$this->db->join('item_colored', 'item_colored.id_item_colored = transactions.id_item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('id_trans',$id);
+		$this->db->group_by('transactions.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+
+		// $this->db->select('SUM(transactions.quantity) AS total, transaction_detail.id_trans, status.status_desc, transaction_detail.stats, transaction_detail.trans_date, transaction_detail.shipping_fee');
+		// $this->db->from('transaction_detail');
+		// $this->db->join('status', 'transaction_detail.stats = status.id_status');
+		// $this->db->join('transactions', 'transaction_detail.id_trans = transactions.id_trans');
+		// $this->db->where('email_user',$email);
+		// $this->db->group_by('transaction_detail.id_trans');
+		// $this->db->order_by('transaction_detail.id_trans','DESC');
+
+		// $query= $this->db->get();
+		// return $query->result_array();
 	}
 }
 ?>

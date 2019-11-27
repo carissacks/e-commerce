@@ -169,15 +169,6 @@
 
     /*==================================================================
     [ Filter / Search product ]*/
-    $('.js-show-filter').on('click',function(){
-        $(this).toggleClass('show-filter');
-        $('.panel-filter').slideToggle(400);
-
-        if($('.js-show-search').hasClass('show-search')) {
-            $('.js-show-search').removeClass('show-search');
-            $('.panel-search').slideUp(400);
-        }    
-    });
 
     $('.js-show-search').on('click',function(){
         $(this).toggleClass('show-search');
@@ -188,9 +179,6 @@
             $('.panel-filter').slideUp(400);
         }    
     });
-
-
-
 
     /*==================================================================
     [ Cart ]*/
@@ -219,10 +207,10 @@
         if(numProduct > 1) $(this).next().val(numProduct - 1);
     });
 
-    $('.btn-num-product-up').on('click', function(){
-        var numProduct = Number($(this).prev().val());
-        $(this).prev().val(numProduct + 1);
-    });
+    // $('.btn-num-product-up').on('click', function(){
+    //     var numProduct = Number($(this).prev().val());
+    //     $(this).prev().val(numProduct + 1);
+    // });
 
     /*==================================================================
     [ Rating ]*/

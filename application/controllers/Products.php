@@ -17,6 +17,7 @@ class Products extends CI_Controller{
 
 		$page= ($this->uri->segment(3))? $this->uri->segment(3):0;
 		$data['items']= $this->product_model->get_items_pagination($config['per_page'],$page);
+		$data['total_data']= sizeof($data['items']);
 		$data['links']= $this->pagination->create_links();
 		// endof pagination
 
@@ -63,6 +64,7 @@ class Products extends CI_Controller{
 
 		$page= ($this->uri->segment(4))? $this->uri->segment(4):0;
 		$data['items']= $this->product_model->get_item_type_pagination($type,$config['per_page'],$page);
+		$data['total_data']= sizeof($data['items']);
 		$data['links']= $this->pagination->create_links();
 
 		$this->load->view('pages/header.php',$this->head_class());
@@ -94,7 +96,8 @@ class Products extends CI_Controller{
 		}
 		else
 			$this->product_model->add_shopping_cart($id,$email,$size,$qty);
-		$this->showDetail($id,TRUE);
+		redirect(base_url('index.php/Products/showDetail/'.$id.'/'.TRUE));
+		// $this->showDetail($id,TRUE);
 	}
 
 	private function pagination_config($uri=3){
