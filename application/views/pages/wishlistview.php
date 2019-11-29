@@ -7,33 +7,20 @@
 			</a>
 
 			<span class="stext-109 cl4">
-				Transaction History
+				Wishlist
 			</span>
 		</div>
 	</div>
 	
 	<!-- Shoping Cart -->
-	<div class="bg0 p-t-50 p-b-85">
+	<form class="bg0 p-t-75 p-b-85" action="<?=base_url('index.php/Cart/proceed')?>" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 m-lr-auto m-b-50">
-					<h1 class="col-12 ltext-109 mb-3">Transaction</h1>
-					<div class="m-l-25 m-r-38 m-lr-0-xl row justify-content-between">
-						<div class="col-4">
-							<p class="mtext-106">Transactions ID #<?=$trans->id_trans?></p>
-							<p class="mtext-106"><?=date_format(date_create($trans->trans_date),"d  M  Y")?></p>
-						</div>
-						<div class="col-4">
-							<p class="mtext-106 text-bold text-uppercase <?php if($trans->stats>3): echo"cl13"; else: echo"cl11"; endif;?>">Status <?=$trans->status_desc?></p>
-							<p class="mtext-106">Shipping Fee <?php if($trans->shipping_fee==0):?>FREE<?php else:?>IDR <?=$trans->shipping_fee?><?php endif;?></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 m-lr-auto m-b-50">
-					<div class="m-l-25 m-r-38 m-lr-0-xl">
+					<?php if($total !=0):?>	
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
+						
 							<table class="table-shopping-cart">
 								<tr class="table_head">
 									<th class="column-1">Product</th>
@@ -41,8 +28,8 @@
 									<th class="column-3">Color</th>
 									<th class="column-3">Size</th>
 									<th class="column-4 text-center">Quantity</th>
-									<th class="column-4 text-center">Price</th>
-									<th class="column-5">Total Price</th>
+									<th class="column-4">Price @</th>
+									<th class="column-5"></th>
 								</tr>
 
 							<?php 
@@ -70,26 +57,51 @@
 									</td>
 									<td class="column-3"><?=$item_color?></td>
 									<td class="column-3"><?=$item_size?></td>
-									<td class="column-4 text-center"><?=$item_qty?></td>
-									<td class="column-4 text-center">IDR <?=$item_price?></td>
-									<td class="column-1 pr-4">IDR <?=$item_qty*$item_price?></td>
+									<td class="column-4">
+										<div class="wrap-num-product flex-w m-l-auto m-r-0">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</div>
+
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty[<?=$index?>]" value="<?=$item_qty?>" readonly>
+
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</div>
+										</div>
+									</td>
+									<td class="column-4">IDR <?=$item_price?></td>
+									<td class="column-1 pr-4">
+										<a href="<?=base_url('index.php/Cart/remove/'.$id_item_col.'/'.$item_size)?>">
+											<span class="flex-c-m stext-101 cl0 size-105 bg3 bor14 hov-btn3 p-lr-2 trans-04 pointer">
+												Add to cart
+											</span>
+										</a>
+									</td>
+									<?=form_hidden('idColor['.$index.']',$id_item_col);?>
+									<?=form_hidden('size['.$index.']',$item_size);?>
 								</tr>
 							<?php
 								$index++;
 								endforeach;?>
 							</table>
+							<?=form_hidden('index',$index);?>
 
 						</div>
-						<div class="col-2 text-center pt-4">
-							<a href="<?=base_url('index.php/Cart/history/')?>">
-								<span class="stext-101 cl2 size-118 bg8 bor14 hov-btn3 px-5 py-2 trans-04 pointer">
-									Back
-								</span>
-							</a>
+
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm justify-content-end">	
+							<!-- <a href="<?=base_url('index.php/Cart/proceed')?>"> -->
+								<input type="submit" value="Proceed" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+							<!-- </a> -->
 						</div>
 					</div>
+					<?php else:?>
+					<div class="m-l-25 m-r--38 m-lr-0-xl text-center">
+						<h2>Your shopping cart is empty. Start shopping now!</h2>
+					</div>
+					<?php endif;?>
 				</div>
 			</div>
 		</div>
-	</d>
+	</form>
 <?=$footer?>

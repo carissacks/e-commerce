@@ -115,6 +115,12 @@ class Cart_model extends CI_Model{
 		return $query->result_array();
 	}
 
+	function get_transaction($id){
+		$this->db->join('status', 'transaction_detail.stats = status.id_status');
+		$query= $this->db->get_where('transaction_detail',array('id_trans'=>$id));
+		return $query->row();
+	}
+
 	function get_transactionDetail($id){
 		$this->db->select('*');
 		$this->db->from('transactions');
