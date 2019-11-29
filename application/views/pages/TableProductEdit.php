@@ -15,20 +15,14 @@
         <?php echo $datatabel; ?>
     </div>
     <div class="container-fluid flex-grow-1 container-p-y">
-<<<<<<< HEAD
     <?php foreach ($data as $row):
 			$id = $row['id_item_colored'];
 	?>
     <?php endforeach;?>
-    <button class="btn btn-secondary finish"> <a href="<?=base_url("index.php/AdminHome/FormEditPhoto?id=$id")?>"> Finish </a></button>
-=======
-
     
     <!-- Form add more stock and size -->
-    
-
-    
         <?php
+            $id = $_GET['itemid'];
             echo "<h2>---- Add More Color ----</h2>";
             echo form_open_multipart('AdminHome/AddMoreSizeAndStock');
             $style = array(
@@ -81,8 +75,9 @@
             echo form_close();
         ?>
     <!-- end form  -->
-    <br><br><br><button class="btn btn-secondary finish"> <a href="http://localhost/uaspemweb/index.php/AdminHome/"> Finish Updating</a></button>
->>>>>>> ad78d2ffb32ecec1aaff1a265557632a04326bbb
+    <br>
+    <button class="btn btn-secondary finish"> <a href="<?=base_url("index.php/AdminHome/FormEditPhoto?id=$id")?>">Go to Update Photo</a></button>
+    <!-- <br><br><br><button class="btn btn-secondary finish"> <a href="http://localhost/uaspemweb/index.php/AdminHome/"> Finish Updating</a></button> -->
     </div>
     <?php echo $footer; ?>
 </body>

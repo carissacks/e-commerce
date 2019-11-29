@@ -337,13 +337,22 @@ class AdminHome_model extends CI_Model{
 		}
 	}
 
-	function get_photo($id){
-		$this->db->select('*');
-		$this->db->from('photos');
-		$this->db->where('id_item_colored',$id);
-
-		$query= $this->db->get();
+	function get_photo($iditem){
+		$query = $this->db->query("SELECT i.item_name, ic.id_item_colored, ic.id_item, t.type_desc, ic.item_color, p.item_photo 
+									FROM items as i
+									JOIN item_colored as ic on i.id_item = ic.id_item
+									JOIN type as t on t.id_type = i.id_type
+									JOIN photos as p on ic.id_item_colored = p.id_item_colored
+									WHERE i.id_item = '$iditem'");
 		return $query->result_array();
+		
+		// $this->db->select('ic.id_item_colored', 'ic.id_item', 'ic.item_color');
+		// $this->db->from('item_colored as ic');
+		// $this->db->join('photos as p', 'p.id_item_colored = ic.id_item_colored');
+		// $this->db->where('ic.id_item',$iditem);
+
+		// $query= $this->db->get();
+		// return $query->result_array();
 	}
 
 	function get_jumpsuit(){
@@ -513,6 +522,16 @@ class AdminHome_model extends CI_Model{
 
 	function get_item_colored_detail($id){
 		$query = $this->db->query("SELECT id_item_colored, item_color FROM item_colored where id_item = '$id'");
+		return $query->result_array();
+	}
+
+	function get_specific_color($item_id_colored, $id_item){
+		$this->db->select('item_color');
+		$this->db->from('item_colored');
+		$this->db->where('id_item_colored',$item_id_colored);
+		$this->db->where('id_item', $id_item);
+
+		$query= $this->db->get();
 		return $query->result_array();
 	}
 
