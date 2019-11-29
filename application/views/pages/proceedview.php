@@ -1,4 +1,3 @@
-
 	<div class="bg0 p-t-75 p-b-85">
 		<div class="container bg0 p-t-75 p-b-85">
 			<div class="row">
@@ -96,7 +95,7 @@
 								<p class="pt-3 mtext-110">BCA		Eyecandy		6450785698</p>
 							</div>
 						</div>
-						<!-- <div class="row">
+						<div class="row">
 							<div class="flex-c-m stext-101 cl0 size-116">
 								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
 									
@@ -104,17 +103,19 @@
 									Apply coupon
 								</div>
 							</div>
-						</div> -->
+						</div>
 						<div class="row justify-content-between">
 							<a href="<?=base_url('index.php/Cart')?>">
 								<div class="flex-c-m stext-101 cl0 size-119 bg3 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 									Back
 								</div>
 							</a>
-							<form action="<?=base_url('')?>" method="post">
-								<?= form_hidden('paid', true);?>
+							<form action="<?=base_url('index.php/Cart/paid')?>" method="post">
+								<?= form_hidden('shipment', $shipping_fee);?>
 								<input type="submit" value="Pay" class="flex-c-m stext-101 cl0 size-119 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 js-thanks">
 							</form>
+							
+							<!-- <a href="<?=base_url('index.php/Cart/paid')?>" class="flex-c-m stext-101 cl0 size-119 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 js-thanks">Pay</a> -->
 						</div>
 					</div>
 				</div>

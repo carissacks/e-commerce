@@ -105,9 +105,9 @@
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 
-						<a href="<?=base_url('index.php/')?>" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
+						<a href="<?=base_url('index.php/Cart/history')?>" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
 							data-notify="">
-							<i class="zmdi zmdi-account"></i>
+							<i class="zmdi zmdi-file-text"></i>
 						</a>
 
 						<a href="<?=base_url('index.php/Login/logging_out')?>" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"

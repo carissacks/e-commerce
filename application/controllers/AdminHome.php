@@ -53,6 +53,16 @@ class AdminHome extends CI_Controller{
         $this->load->view('pages/DetailTabel.php',$data);
 	}
 
+    public function AddMoreSizeAndStock(){
+        $ItemID = $this->input->post('id_item');
+        $id_item_colored = $this->input->post('color');
+        $item_size = $this->input->post('size');
+        $item_stock = $this->input->post('stock');
+
+        $this->AdminHome_model->AddMoreSizeAndStock($id_item_colored, $item_size, $item_stock);
+        redirect('AdminHome/FormEditProductDetail?itemid='.$ItemID);
+    }
+
     public function AllProduct()
 	{
         $data['items']= $this->AdminHome_model->get_items();
@@ -447,11 +457,19 @@ class AdminHome extends CI_Controller{
     
     public function FormEditProductDetail()
     {
+        $data['color']  = $this->AdminHome_model->get_color_form($_GET['itemid']);
+        // $data['size']  = $this->AdminHome_model->getSize();
+        $data = array(
+            'button' => 'Create',
+            'color' => $this->AdminHome_model->get_color_form($_GET['itemid']),
+            'color_selected' => $this->input->post('color') ? $this->input->post('color') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+        );
         $data['data'] = $this->AdminHome_model->get_specific_item_detail($_GET['itemid']);
+        // $data['color'] = $this->AdminHome_model->get_color_form($_GET['itemid']);
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-        $data['poster_attr']= $this->form_attr('item_photo');
+        // $data['poster_attr']= $this->form_attr('item_photo');
         $data['datatabel'] = $this->load->view('include/TableDetailEdit', $data, TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
 

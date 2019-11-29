@@ -7,6 +7,7 @@ class Product_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where("show",1);
 		$this->db->group_by('item_colored.id_item_colored');
 
 		$query= $this->db->get();
@@ -51,6 +52,7 @@ class Product_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->where("items.id_type = ($where_clause)");
+		$this->db->where("show",1);
 		$this->db->group_by('item_colored.id_item_colored');
 
 		$this->db->limit(4);
@@ -67,7 +69,7 @@ class Product_model extends CI_Model{
 
 		$this->db->select('*');
 		$this->db->from('item_colored');
-		$this->db->where("id_item = ($where_clause) AND id_item_colored != $id ");
+		$this->db->where("id_item = ($where_clause) AND id_item_colored != $id AND show = 1");
 
 		$query= $this->db->get();
 		return $query->result_array();
@@ -80,6 +82,7 @@ class Product_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where("show",1);
 		$this->db->group_by('item_colored.id_item_colored');
 		$this->db->limit($limit, $start);
 		$query= $this->db->get();
@@ -106,7 +109,6 @@ class Product_model extends CI_Model{
 		$this->db->from('items');
 		$this->db->join('item_colored', 'item_colored.id_item = items.id_item');
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
-		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->where('item_colored.id_item_colored',$id);
 		$this->db->group_by('item_colored.id_item_colored');
@@ -139,6 +141,7 @@ class Product_model extends CI_Model{
 
 		// $this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->where('type.type_desc', $type);
+		$this->db->where("show",1);
 		$this->db->group_by('item_colored.id_item_colored');
 
 		$query= $this->db->get();
@@ -154,6 +157,7 @@ class Product_model extends CI_Model{
 
 		// $this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->where('type.type_desc', $type);
+		$this->db->where("show",1);
 		$this->db->group_by('item_colored.id_item_colored');
 
 		$this->db->limit($limit, $start);
@@ -177,7 +181,7 @@ class Product_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->where('email_user',$email);
-		$this->db->group_by('shopping_cart.id_item_colored');
+		$this->db->group_by('shopping_cart.id_item_colored , shopping_cart.item_size');
 
 		$query= $this->db->get();
 		// return $query;
