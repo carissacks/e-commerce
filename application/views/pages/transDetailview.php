@@ -25,7 +25,7 @@
 						</div>
 						<div class="col-4">
 							<p class="mtext-106 text-bold text-uppercase <?php if($trans->stats>3): echo"cl13"; else: echo"cl11"; endif;?>">Status <?=$trans->status_desc?></p>
-							<p class="mtext-106">Shipping Fee <?php if($trans->shipping_fee==0):?>FREE<?php else:?>IDR <?=$trans->shipping_fee?><?php endif;?></p>
+							<p class="mtext-106">Shipping Fee <?php if($trans->shipping_fee==0):?>FREE<?php else:?>IDR <?=number_format($trans->shipping_fee,0,",",".")?><?php endif;?></p>
 						</div>
 					</div>
 				</div>
@@ -71,8 +71,8 @@
 									<td class="column-3"><?=$item_color?></td>
 									<td class="column-3"><?=$item_size?></td>
 									<td class="column-4 text-center"><?=$item_qty?></td>
-									<td class="column-4 text-center">IDR <?=$item_price?></td>
-									<td class="column-1 pr-4">IDR <?=$item_qty*$item_price?></td>
+									<td class="column-4 text-center">IDR <?=number_format($item_price,0,",",".")?></td>
+									<td class="column-1 pr-4">IDR <?=number_format($item_qty*$item_price,0,",",".")?></td>
 								</tr>
 							<?php
 								$index++;

@@ -141,7 +141,7 @@
 						</h4>
 						
 						<span class="mtext-106 cl2">
-							IDR <?= $price_item?>
+							IDR <?=number_format($price_item,0,",",".")?>
 						</span>
 
 						<p class="cl2 p-t-5">

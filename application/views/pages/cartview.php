@@ -70,7 +70,7 @@
 											</div>
 										</div>
 									</td>
-									<td class="column-4">IDR <?=$item_price?></td>
+									<td class="column-4">IDR <?=number_format($item_price,0,",",".")?></td>
 									<td class="column-1 pr-4">
 										<a href="<?=base_url('index.php/Cart/remove/'.$id_item_col.'/'.$item_size)?>">
 											<span class="flex-c-m stext-101 cl0 size-105 bg3 bor14 hov-btn3 p-lr-2 trans-04 pointer">
