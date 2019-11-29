@@ -355,9 +355,13 @@ class AdminHome extends CI_Controller{
         $ItemIDColored = $this->input->post('id_item_colored');
         $ItemID = $this->input->post('item_id');
         $color = $this->input->post('color');
-        // $filename = pathinfo($_FILES['item_photo']['name'], PATHINFO_FILENAME); // get photo name
-        $filename = $ItemID."-".$color."-".mt_rand(1,1000);
-        $config['upload_path']      = './asset/images';
+
+        $type_desc = $this->AdminHome_model->get_photo($ItemID);
+        $type = $type_desc[0]['type_desc'];
+        
+        $ext = pathinfo($_FILES["item_photo"]["name"], PATHINFO_EXTENSION);
+        $filename = $ItemID."-".$namecolor."-".mt_rand(1,1000).".". $ext;
+        $config['upload_path']      = './asset/images/' . $type . "/";
         $config['allowed_types']    = 'jpeg|jpg|png';
         $config['max_size']         = '4960';
         $config['overwrite']        = false;
@@ -490,7 +494,7 @@ class AdminHome extends CI_Controller{
         // $data['size']  = $this->AdminHome_model->getSize();
         $data = array(
             'button' => 'Create',
-            'color' => $this->AdminHome_model->get_color_form($_GET['itemid']),
+            'color' => $this->AdminHome_model->get_data_color($_GET['itemid']),
             'color_selected' => $this->input->post('color') ? $this->input->post('color') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
         );
         $data['data'] = $this->AdminHome_model->get_specific_item_detail($_GET['itemid']);
@@ -548,15 +552,17 @@ class AdminHome extends CI_Controller{
     public function EditProductPhoto(){
         $id_item_colored = $this->input->post('id_item_colored');
         $ItemID = $this->input->post('itemid');
-        $color = $this->AdminHome_model->get_specific_color($id_item_colored, $ItemID);
 
+        $color = $this->AdminHome_model->get_specific_color($id_item_colored, $ItemID);
+        $type_desc = $this->AdminHome_model->get_photo($ItemID);
+        $type = $type_desc[0]['type_desc'];
         $oldphoto = $this->input->post('oldphoto');
         $colorname = $color[0]['item_color'];       
 
         $ext = pathinfo($_FILES["item_photo"]["name"], PATHINFO_EXTENSION);
         $filename = $ItemID."-".$colorname."-".mt_rand(1,1000).".". $ext;
 
-        $config['upload_path']          = './asset/images';
+        $config['upload_path']          = './asset/images/'. $type. "/";
         $config['allowed_types']        = 'jpeg|jpg|png';
         $config['max_size']             = '4960';
         $config['overwrite']			= false;
@@ -576,8 +582,20 @@ class AdminHome extends CI_Controller{
         }
         else {
             $this->AdminHome_model->EditProductPhoto($id_item_colored, $filename, $oldphoto);
-            redirect('AdminHome/FormEditPhoto?iditem='.$ItemID);
+            redirect('AdminHome/FormEditPhoto?id='.$ItemID);
         }
+    }
+
+    public function AddNewColor(){
+        $ItemId = $this->input->post('itemid');
+        $show = $this->input->post('show');
+        $color = $this->input->post('color');
+
+        echo $ItemId;
+        echo $show;
+        echo $color;
+        $this->AdminHome_model->AddNewColor($ItemId, $show, $color);
+        redirect('AdminHome/FormEditProductDetail?itemid='.$ItemId);
     }
 
     public function DeleteProductPhoto()
@@ -594,7 +612,7 @@ class AdminHome extends CI_Controller{
 
         // $this->AdminHome_model->get_id_item($id);
         $this->AdminHome_model->DeleteProductPhoto($item_photo);
-        redirect('AdminHome/FormEditPhoto?iditem='.$iditem);
+        redirect('AdminHome/FormEditPhoto?id='.$iditem);
     }
 
     public function EditProduct()

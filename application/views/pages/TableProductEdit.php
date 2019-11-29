@@ -20,10 +20,53 @@
 	?>
     <?php endforeach;?>
     
+    <!-- form add color  -->
+    <?php
+        echo form_open_multipart('AdminHome/AddNewColor');
+        $coloring = array(
+            'name' => 'color',
+            'type' => 'text'
+        );
+        $show = array(
+            'name' => 'show',
+            'type' => 'hidden',
+            'value' => '1'
+        );
+        $id_item = array(
+            'name' => 'itemid',
+            'type' => 'hidden',
+            'value' => $_GET['itemid']
+        );
+        $style = array(
+            'class' => 'form-control'
+        );
+        $buttonadd = array(
+            'class' => 'btn btn-primary',
+            'style' => 'width: 30%;'
+        );
+        $attribute_label = array(
+            'class' => 'form-label'
+        );
+        echo "<div class='form-row'>";
+            echo "<div class='form-group row col-md-4'>";
+                echo form_label('Insert New Color :',' ',$attribute_label);
+                echo form_input($coloring, '', $style);
+                echo form_input($id_item, '', $style);
+                echo form_input($show, '', $style);
+                echo "<br>";
+                echo "<br>";
+                echo form_submit('Submit', 'Add Color', $buttonadd);
+                echo form_close();
+            echo "</div>";
+        echo "</div><br>"; 
+    ?>
+    <!-- end form -->
+
+
     <!-- Form add more stock and size -->
         <?php
             $id = $_GET['itemid'];
-            echo "<h2>---- Add More Color ----</h2>";
+            echo "<h2>---- Add More Size and Stock ----</h2>";
             echo form_open_multipart('AdminHome/AddMoreSizeAndStock');
             $style = array(
                 'class' => 'form-control'

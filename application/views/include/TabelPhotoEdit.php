@@ -50,7 +50,6 @@
 		    ?>
         </tbody>
     </table>
-    <br><br><br><button class="btn btn-secondary finish"> <a href="<?=base_url("index.php/AdminHome/EditProductPhoto")?>"> Finish </a></button>
     
 
     
