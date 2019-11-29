@@ -12,7 +12,7 @@
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
+			<?php if($total_cart_items !=0):?>
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<?php 
@@ -27,16 +27,20 @@
 							$cart_qty= $cart_row['quantity'];
 							$cart_size= $cart_row['item_size'];
 							$total+= $cart_qty*$cart_price;
-						?>
+					?>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="<?=base_url('asset/images/'.$cart_type.'/'.$cart_photo)?>" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="header-cart-item-name m-b-5 hov-cl1 trans-04">
 								<?=$cart_name?>
 							</a>
+
+							<span class="header-cart-item-info">
+								<?=$cart_size?>
+							</span>
 
 							<span class="header-cart-item-info">
 								<?=$cart_qty?> x IDR <?=$cart_price?>
@@ -62,6 +66,11 @@
 					</div>
 				</div>
 			</div>
+			<?php else:?>
+			<div class="col-12">
+				<p>Your shopping cart is empty.</p>
+			</div>
+			<?php endif;?>
 		</div>
 	</div>
 	<!----------------------------------------------- END OF CART ----------------------------------------------->
@@ -300,13 +309,13 @@
 									IDR <?=$price_item?>
 								</span>
 							</div>
-
+<!-- 
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
 								</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

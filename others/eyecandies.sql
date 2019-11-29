@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2019 at 04:46 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Nov 26, 2019 at 08:51 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -67,7 +67,7 @@ CREATE TABLE `item_colored` (
   `id_item_colored` int(11) NOT NULL,
   `id_item` varchar(10) NOT NULL,
   `item_color` varchar(15) NOT NULL,
-  `show` int(11) NOT NULL
+  `show` int(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -75,11 +75,11 @@ CREATE TABLE `item_colored` (
 --
 
 INSERT INTO `item_colored` (`id_item_colored`, `id_item`, `item_color`, `show`) VALUES
-(1, 'T001', 'Yellow', 0),
-(2, 'T001', 'Lemon', 0),
-(3, 'T002', 'Turquoise', 0),
+(1, 'T001', 'Yellow', 1),
+(2, 'T001', 'Lemon', 1),
+(3, 'T002', 'Turquoise', 1),
 (4, 'T002', 'Rose', 1),
-(5, 'T003', 'White', 1),
+(5, 'T003', 'Black', 1),
 (6, 'T003', 'White-Blue', 1),
 (7, 'T003', 'Red', 1),
 (8, 'T003', 'Floral', 1),
@@ -114,7 +114,7 @@ CREATE TABLE `item_stock` (
 --
 
 INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
-(1, 'L', 10),
+(1, 'L', 0),
 (1, 'M', 10),
 (1, 'S', 10),
 (1, 'XL', 10),
@@ -264,15 +264,15 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T002-Turquoise-2.jpg', 3),
 ('T002-Turquoise-3.jpg', 3),
 ('T002-Turquoise-4.jpg', 3),
+('T003-Black-1.jpg', 5),
+('T003-Black-2.jpg', 5),
+('T003-Black-3.jpg', 5),
 ('T003-Floral-1.jpg', 8),
 ('T003-Floral-2.jpg', 8),
 ('T003-Floral-3.jpg', 8),
 ('T003-Red-1.jpg', 7),
 ('T003-Red-2.jpg', 7),
 ('T003-Red-3.jpg', 7),
-('T003-White-1.jpg', 5),
-('T003-White-2.jpg', 5),
-('T003-White-3.jpg', 5),
 ('T003-White-Blue-1.jpg', 6),
 ('T003-White-Blue-2.jpg', 6),
 ('T003-White-Blue-3.jpg', 6),
@@ -367,8 +367,7 @@ CREATE TABLE `shopping_cart` (
 --
 
 INSERT INTO `shopping_cart` (`id_item_colored`, `email_user`, `quantity`, `item_size`) VALUES
-(19, 'andy@gmail.com', 2, 'L'),
-(20, 'andy@gmail.com', 1, 'L');
+(3, 'andy@gmail.com', 1, 'L');
 
 -- --------------------------------------------------------
 
@@ -443,24 +442,25 @@ CREATE TABLE `transaction_detail` (
   `email_user` varchar(50) NOT NULL,
   `stats` varchar(10) NOT NULL,
   `trans_date` date NOT NULL,
-  `totalpayment` int(11) NOT NULL
+  `shipping_fee` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction_detail`
 --
 
-INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date`, `totalpayment`) VALUES
-('1', 'andre@gmail.com', '1', '2019-11-01', 799900),
-('10', 'ariel@gmail.com', '6', '2019-11-03', 899900),
-('2', 'linata@gmail.com', '3', '2019-10-17', 2149700),
-('3', 'caca@gmail.com', '2', '2019-10-30', 499900),
-('4', 'andre@gmail.com', '4', '2019-10-31', 1249800),
-('5', 'aldo@gmail.com', '5', '2019-09-20', 1199800),
-('6', 'billy@gmail.com', '6', '2019-09-01', 1199800),
-('7', 'wahyudi@gmail.com', '2', '2019-11-03', 799800),
-('8', 'linata@gmail.com', '1', '2019-11-11', 1599700),
-('9', 'andy@gmail.com', '5', '2019-11-06', 949800);
+INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date`, `shipping_fee`) VALUES
+('11', 'andy@gmail.com', '1', '2019-11-26', 0),
+('1', 'andre@gmail.com', '1', '2019-11-01', 0),
+('10', 'ariel@gmail.com', '6', '2019-11-03', 0),
+('2', 'linata@gmail.com', '3', '2019-10-17', 0),
+('3', 'caca@gmail.com', '2', '2019-10-30', 10000),
+('4', 'andre@gmail.com', '4', '2019-10-31', 0),
+('5', 'aldo@gmail.com', '5', '2019-09-20', 0),
+('6', 'billy@gmail.com', '6', '2019-09-01', 0),
+('7', 'wahyudi@gmail.com', '2', '2019-11-03', 0),
+('8', 'linata@gmail.com', '1', '2019-11-11', 0),
+('9', 'andy@gmail.com', '5', '2019-11-06', 0);
 
 -- --------------------------------------------------------
 
@@ -495,8 +495,7 @@ INSERT INTO `type` (`id_type`, `type_desc`) VALUES
 
 CREATE TABLE `wishlist` (
   `id_item_colored` varchar(10) NOT NULL,
-  `email_user` varchar(50) NOT NULL,
-  `item_size` varchar(5) NOT NULL
+  `email_user` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -580,7 +579,7 @@ ALTER TABLE `type`
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`id_item_colored`,`email_user`,`item_size`),
+  ADD PRIMARY KEY (`id_item_colored`,`email_user`),
   ADD KEY `email_user` (`email_user`);
 
 --
@@ -604,6 +603,9 @@ ALTER TABLE `status`
 --
 ALTER TABLE `type`
   MODIFY `id_type` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+  ALTER TABLE `transaction_detail`
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
