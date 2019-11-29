@@ -354,9 +354,11 @@ class AdminHome extends CI_Controller{
     {
         $ItemIDColored = $this->input->post('id_item_colored');
         $ItemID = $this->input->post('item_id');
-        $color = $this->input->post('color');
 
-        $type_desc = $this->AdminHome_model->get_photo($ItemID);
+        $color = $this->AdminHome_model->get_specific_color($ItemIDColored, $ItemID);
+        $namecolor = $color[0]['item_color'];
+
+        $type_desc = $this->AdminHome_model->get_specific_type($ItemID);
         $type = $type_desc[0]['type_desc'];
         
         $ext = pathinfo($_FILES["item_photo"]["name"], PATHINFO_EXTENSION);

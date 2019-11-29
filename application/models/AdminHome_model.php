@@ -35,6 +35,22 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 
+	function get_specific_type($itemID){
+
+		$query = $this->db->query("SELECT i.id_type, t.type_desc
+									FROM items as i
+									JOIN type as t on t.id_type = t.id_type 
+									WHERE i.id_item = '$itemID' AND i.id_type = t.id_type");
+		return $query->result_array();
+
+		// $this->db->select('i.id_type, t.type_desc');
+		// $this->db->from('items as i');
+		// $this->db->join('type as t', 't.id_type = i.id_type');
+		// $this->db->where('i.id_item', $itemID);
+		// $result = $this->db->get();
+		// return $result;
+	}
+
 	function get_specific_item_detail($itemID)
 	{
 		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color, it.id_item 
