@@ -1,6 +1,5 @@
 <!-- Cart -->
-	<div cl
-	 ass="wrap-header-cart js-panel-cart">
+<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -88,7 +87,6 @@
 			$type_item= $items->type_desc;
 			$weight_item= $items->weight;
 			$care_ins= $items->care_ins;
-			$available= true;
 		?>
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-100 p-lr-0-lg">
 			<a href="<?=base_url('index.php/Products')?>" class="stext-109 cl8 hov-cl1 trans-04">
@@ -143,13 +141,13 @@
 						</h4>
 						
 						<span class="mtext-106 cl2">
-							IDR <?= $price_item?>
+							IDR <?=number_format($price_item,0,",",".")?>
 						</span>
 
 						<p class="cl2 p-t-5">
 							<?php if ($login):?>
 								<form action="<?base_url('index.php/Product/add_wishlist')?>" method="post">
-									<button type="submit" class="fs-20 cl3 hov-cl1 trans-04 lh-10p-tb-2 js-addwish-detail">
+									<button type="submit" class="fs-20 stext-101 cl3 hov-cl1 trans-04 lh-10p-tb-2 js-addwish-detail">
 										Wishlist <i class='zmdi zmdi-favorite'></i>
 									</button>
 								</form>
@@ -296,9 +294,6 @@
 											</span>
 										</li>
 
-										<p><?=$available?></p>
-
-
 										<li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
 												Color
@@ -433,13 +428,11 @@ var stock=0;
 	$('.btn-num-product-up').on('click', function(){
         var numProduct = Number($(this).prev().val());
         if(numProduct<stock) $(this).prev().val(numProduct + 1);
-		// console.log(stock);
     });
 
 	$('#size').change(function(){
 		var selected = $(this).find('option:selected');
 		stock = selected.data('stock');
-		// console.log(stock); 
 		if(stock<=0){
 			$('#addtocart').attr('disabled',true);
 			$('#addtocart').removeClass('bg1');

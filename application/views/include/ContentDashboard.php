@@ -222,7 +222,7 @@
                                             <?php foreach($latestsales->result_array() as $row){ ?>
                                                 <tr>
                                                     <td class="align-middle">
-                                                        <a href="javascript:" class="text-dark"><?php echo $row['name'];?></a>
+                                                        <a href="javascript:" class="text-dark"><?php echo $row['name']."-".$row['color'];?></a>
                                                     </td>
                                                     <td class="align-middle"><?php echo $row['quantity'];?></td>
                                                     <td class="align-middle"><?php echo $row['totalpembelian'];?></td>

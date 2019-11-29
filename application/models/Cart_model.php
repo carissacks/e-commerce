@@ -62,7 +62,7 @@ class Cart_model extends CI_Model{
 	function insert_transactionDetail($email, $shipment){
 		$data= array(
 			'email_user' => $email,
-			'stats' => 1,
+			'stats' => 2,
 			'trans_date' => date('Y-m-d'),
 			'shipping_fee' => $shipment
 		);
@@ -113,6 +113,12 @@ class Cart_model extends CI_Model{
 
 		$query= $this->db->get();
 		return $query->result_array();
+	}
+
+	function get_transaction($id){
+		$this->db->join('status', 'transaction_detail.stats = status.id_status');
+		$query= $this->db->get_where('transaction_detail',array('id_trans'=>$id));
+		return $query->row();
 	}
 
 	function get_transactionDetail($id){

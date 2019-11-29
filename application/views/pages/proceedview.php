@@ -30,7 +30,7 @@
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									IDR <?=$total_price?>
+									IDR <?=number_format($total_price,0,",",".")?>
 								</span>
 							</div>
 						</div>
@@ -62,7 +62,7 @@
 										<?php 
 											if($total_price<300000):
 												$shipping_fee= 10000;
-												echo 'IDR '.$shipping_fee;
+												echo 'IDR '.number_format($shipping_fee,0,",",".");
 											else:
 												$shipping_fee= 0;
 												echo 'FREE';
@@ -83,7 +83,7 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									IDR <?=$total_price+$shipping_fee?>
+									IDR <?=number_format($total_price+$shipping_fee,0,",",".")?>
 								</span>
 							</div>
 

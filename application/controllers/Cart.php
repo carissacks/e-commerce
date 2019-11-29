@@ -85,6 +85,7 @@ class Cart extends CI_Controller{
 		$email= $this->session->email;
 		$this->load->view('pages/header.php',$this->head_class());
 		$data['items']= $this->cart_model->get_transactionDetail($id);
+		$data['trans']= $this->cart_model->get_transaction($id);
 		// $data['total']= sizeof($data['trans']);
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['cart_items']= $this->cart_model->get_itemInCart($email)->result_array();

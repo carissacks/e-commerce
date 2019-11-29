@@ -43,7 +43,7 @@
 							</span>
 
 							<span class="header-cart-item-info">
-								<?=$cart_qty?> x IDR <?=$cart_price?>
+								<?=$cart_qty?> x IDR <?=number_format($cart_price,0,",",".")?>
 							</span>
 						</div>
 					</li>
@@ -52,7 +52,7 @@
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total   IDR <?=$total?>
+						Total   IDR <?=number_format($total,0,",",".")?>
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
@@ -101,6 +101,7 @@
 								$trans_date= date_create($row['trans_date']);
 								$shipping= $row['shipping_fee'];
 								if ($shipping==0) $shipping= "FREE";
+								else $shipping="IDR ".number_format($shipping,0,",",".");
 								$trans_stat= $row['status_desc'];
 								$total_item= $row['total'];
 								$id_stat= $row['stats'];
