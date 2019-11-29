@@ -190,21 +190,24 @@ class AdminHome_model extends CI_Model{
 	}
 	
 	function latestsales(){
-		$this->db->select('item_name as name, quantity as quantity, transaction_detail.totalpayment as totalpembelian');
+		$this->db->select('item_name as name, quantity as quantity, (quantity * UnitPrice) as totalpembelian, item_colored.item_color as color');
 		$this->db->from('transactions');
 		$this->db->join('transaction_detail', 'transactions.id_trans = transaction_detail.id_trans');
 		$this->db->join('item_colored', 'transactions.id_item_colored = item_colored.id_item_colored');
 		$this->db->join('items', 'items.id_item = item_colored.id_item');
 		$this->db->order_by("transactions.id_trans", "desc");
+		// $this->db->limit(5);
 
 		$hasil= $this->db->get();
 		return $hasil;
 	}
 	
 	function monthlyearning(){
-		$this->db->select('sum(totalpayment) as totalmonthlyearning'); 
+		$this->db->select('sum(quantity * UnitPrice) as totalmonthlyearning'); 
+		$this->db->from('transactions');
+		$this->db->join('transaction_detail', 'transactions.id_trans = transaction_detail.id_trans');
 		$this->db->where('extract(month from trans_date) = extract(month from current_date)'); 
-		$hasil = $this->db->get('transaction_detail');
+		$hasil= $this->db->get();
 		return $hasil;
 	}
 
@@ -563,8 +566,8 @@ class AdminHome_model extends CI_Model{
 	}
 
 	function get_totalpayment($id){
-		$this->db->select('sum(transaction_detail.totalpayment) as total');
-		$this->db->from('transaction_detail');
+		$this->db->select('sum(quantity * UnitPrice) as total');
+		$this->db->from('transactions');
 		$this->db->where('id_trans',$id);
 
 		$query= $this->db->get();
