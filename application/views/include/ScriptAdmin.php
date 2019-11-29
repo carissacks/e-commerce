@@ -22,7 +22,7 @@
 <script src="<?= base_url('asset/libs/chart-am4/animated.js')?>"></script>
 
 <!-- Demo -->
-<script src="<?= base_url('asset/js/demo.js"></script><script src="asset/js/analytics.js')?>"></script>
+<script src="<?= base_url('asset/js/demo.js')?>"></script><script src="<?= base_url('asset/js/analytics.js')?>"></script>
 <script src="<?= base_url('asset/js/pages/dashboards_index.js')?>"></script>
 
 <!-- Data Tables-->

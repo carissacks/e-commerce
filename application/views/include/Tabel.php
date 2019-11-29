@@ -1,3 +1,4 @@
+
     <table id="datatables" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead class="thead-light">
             <tr>
@@ -35,6 +36,7 @@
 		    ?>
         </tbody>
     </table>
+
 
     
     

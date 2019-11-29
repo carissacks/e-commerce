@@ -15,7 +15,11 @@
         <?php echo $datatabel; ?>
     </div>
     <div class="container-fluid flex-grow-1 container-p-y">
-    <button class="btn btn-secondary finish"> <a href="http://localhost/uaspemweb/index.php/AdminHome/"> Finish </a></button>
+    <?php foreach ($data as $row):
+			$id = $row['id_item_colored'];
+	?>
+    <?php endforeach;?>
+    <button class="btn btn-secondary finish"> <a href="<?=base_url("index.php/AdminHome/FormEditPhoto?id=$id")?>"> Finish </a></button>
     </div>
     <?php echo $footer; ?>
 </body>

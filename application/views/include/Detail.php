@@ -74,7 +74,7 @@
                                             <dd>
 												<?php foreach ($size_stock as $row):?>
 												<p>Size <?=$item_size= $row['item_size'];?></p>
-												<p>Stock <?=$stock= $row['stock'];;?></p>
+												<p>Stock <?=$stock= $row['stock'];?></p>
 												<?php endforeach;?>
 											</dd>
                                             <dt>Color</dt>
@@ -102,6 +102,9 @@
 				</a>
 				<a href="<?=base_url("index.php/AdminHome/FormEditProduct?id=$id&id_item=$id_item&type=$id_type")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 					Edit
+				</a>
+				<a href="<?=base_url("index.php/AdminHome/Restore?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+					Restore
 				</a>
 				<!-- <a href="<?=base_url("index.php/AdminHome/DeleteWishlist?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 					Delete Wishlist
