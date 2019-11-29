@@ -43,11 +43,47 @@ class AdminHome_model extends CI_Model{
 									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
 									WHERE it.id_item = '$itemID'");
 		return $query->result_array();
-		// $this->db->select('*');
-		// $this->db->where('id_item', $itemID);
-		// $hasil = $this->db->get('item_colored');
-		// // print_r($hasil);
-		// return $hasil;
+	}
+
+	function get_color_form($itemID){
+		$this->db->select('ist.id_item_colored, ic.item_color');
+		$this->db->from('items as it');
+		$this->db->join('item_colored as ic', 'ic.id_item = it.id_item');
+		$this->db->join('item_stock as ist', 'ist.id_item_colored = ic.id_item_colored');
+		$this->db->where('it.id_item', $itemID);
+		$this->db->group_by('1');
+		$this->db->order_by('ic.item_color', 'asc');
+		$result = $this->db->get();
+
+		$dd[''] = 'Please Select';
+        if ($result->num_rows() > 0) {
+            foreach ($result->result() as $row) {
+                $dd[$row->id_item_colored] = $row->item_color;
+            }
+		}
+        return $dd;
+	}
+
+	function AddMoreSizeAndStock($id_item_colored, $item_size, $item_stock)
+	{
+		$this->db->trans_start();
+
+		$item = array(
+			'id_item_colored' => $id_item_colored,
+			'item_size' => $item_size,
+			'stock' => $item_stock
+		);
+
+		$this->db->insert('item_stock', $item);
+
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else
+		{
+			$this->db->trans_commit();
+		}
 	}
 
 	function countProductHide(){
@@ -416,7 +452,6 @@ class AdminHome_model extends CI_Model{
 		$this->db->select('item_color');
 		$this->db->from('item_colored');
 		$this->db->where('id_item_colored',$id);
-
 
 		$query= $this->db->get();
 		return $query->result_array();
