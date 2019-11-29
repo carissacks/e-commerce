@@ -19,8 +19,10 @@
 			$id = $row['id_item'];
 	?>
     <?php endforeach;?>
+    
     <!-- Form add more stock and size -->
         <?php
+            $id = $_GET['itemid'];
             echo "<h2>---- Add More Color ----</h2>";
             echo form_open_multipart('AdminHome/AddMoreSizeAndStock');
             $style = array(
@@ -73,8 +75,9 @@
             echo form_close();
         ?>
     <!-- end form  -->
-    <br><br><br><button class="btn btn-secondary finish"> <a href="<?=base_url("index.php/AdminHome/FormEditPhoto?iditem=$id")?>"> Finish </a></button>
-
+    <br>
+    <button class="btn btn-secondary finish"> <a href="<?=base_url("index.php/AdminHome/FormEditPhoto?id=$id")?>">Go to Update Photo</a></button>
+    <!-- <br><br><br><button class="btn btn-secondary finish"> <a href="http://localhost/uaspemweb/index.php/AdminHome/"> Finish Updating</a></button> -->
     </div>
     <?php echo $footer; ?>
 </body>

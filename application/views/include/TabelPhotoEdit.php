@@ -2,6 +2,8 @@
         <thead class="thead-light">
             <tr>
                 <th>No.</th>
+                <th>Item Name</th>
+                <th>Item Color</th>
                 <th>Item Photo</th>
                 <th>Edit Photo</th>
                 <th>Delete Photo</th>
@@ -16,11 +18,14 @@
 
                 $counter = 1;
                 foreach ($photo as $row) {
+                    // $type = $row['type_desc'];
                     $iditem = $row['id_item'];
                     $id = $row['item_photo'];
                     echo "<tr>";
                     echo "<td>" . $counter++ . "</td>";
-                    echo "<td>" . $row['item_photo'] . "</td>";
+                    echo "<td>" . $row['item_name'] . "</td>";
+                    echo "<td>" . $row['item_color'] . "</td>";
+                    echo '<td><img src="' . base_url('/asset/images/' . $row['type_desc'] . "/" . $row['item_photo']) . '" width="180" height="auto"/></td>';
                     echo "<td>";
 
                     echo form_open_multipart('AdminHome/EditProductPhoto');

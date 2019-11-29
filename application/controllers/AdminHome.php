@@ -321,6 +321,35 @@ class AdminHome extends CI_Controller{
             redirect('AdminHome/showProductColor?id='.$ItemID);   
     }
 
+    public function AddMorePhoto(){
+        $ItemIDColored = $this->input->post('color');
+        $ItemID = $this->input->post('id_item');
+        $color = $this->AdminHome_model->get_specific_color($ItemIDColored, $ItemID);
+        $namecolor = $color[0]['item_color'];
+        
+        $type = $this->input->post('type_desc');
+
+        $ext = pathinfo($_FILES["item_photo"]["name"], PATHINFO_EXTENSION);
+        $filename = $ItemID."-".$namecolor."-".mt_rand(1,1000).".". $ext;
+        $config['upload_path']      = './asset/images/' . $type . "/";
+        $config['allowed_types']    = 'jpeg|jpg|png';
+        $config['max_size']         = '4960';
+        $config['overwrite']        = false;
+        $config['file_name']        = $filename;
+
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('upload', $config);
+
+        $success = $this->upload->do_upload('item_photo');
+        if(!$success){
+            print_r($this->upload->display_errors());
+        }
+        else {
+            $this->AdminHome_model->AddPhoto($ItemIDColored, $filename);
+            redirect('AdminHome/FormEditPhoto?id='.$ItemID); 
+        }
+    }
+
     public function AddPhoto()
     {
         $ItemIDColored = $this->input->post('id_item_colored');
@@ -496,7 +525,16 @@ class AdminHome extends CI_Controller{
     }
 
     public function FormEditPhoto(){
-        $data['photo']= $this->AdminHome_model->get_photo($_GET['iditem']);
+        $data['color']  = $this->AdminHome_model->get_color_form($_GET['id']);
+        // $data['size']  = $this->AdminHome_model->getSize();
+        $data = array(
+            'button' => 'Create',
+            'color' => $this->AdminHome_model->get_color_form($_GET['id']),
+            'color_selected' => $this->input->post('color') ? $this->input->post('color') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+        );
+        $data['poster_attr']= $this->form_attr('item_photo');
+        $data['photo']= $this->AdminHome_model->get_photo($_GET['id']);
+        // $data['photo']= $this->AdminHome_model->get_photo($_GET['iditem']);
         $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
         $data['poster_attr']= $this->form_attr('item_photo');

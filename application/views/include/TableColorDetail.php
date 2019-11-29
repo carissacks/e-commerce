@@ -20,7 +20,7 @@
                     base_url("index.php/AdminHome/FormAddProductDetail?id=" . $row['id_item_colored'] . '&color=' . $row['item_color']) . '&itemid=' . $_GET['id'] ."'
                     style='margin-right:10px;color:rgb(0,200,255);'><button>+size and stock</button></a>" . "</td>";
                     echo "<td>";
-                    echo form_open_multipart('AdminHome/AddPhoto');
+                    echo form_open_multipart('AdminHome/AddMorePhoto');
                     echo '<input type="hidden" name="color" value="'.$row['item_color'].'">';
                     echo '<input type="hidden" name="id_item_colored" value="'.$row['id_item_colored'].'">';
                     echo '<input type="hidden" name="item_id" value="'.$_GET['id'].'">';
