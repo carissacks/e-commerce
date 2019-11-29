@@ -37,25 +37,75 @@ class AdminHome_model extends CI_Model{
 
 	function get_specific_item_detail($itemID)
 	{
-		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color 
+		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color, it.id_item 
 									FROM items as it
 									JOIN item_colored as ic on ic.id_item = it.id_item 
 									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
 									WHERE it.id_item = '$itemID'");
 		return $query->result_array();
-		// $this->db->select('*');
-		// $this->db->where('id_item', $itemID);
-		// $hasil = $this->db->get('item_colored');
-		// // print_r($hasil);
-		// return $hasil;
+	}
+
+	function get_color_form($itemID){
+		$this->db->select('ist.id_item_colored, ic.item_color');
+		$this->db->from('items as it');
+		$this->db->join('item_colored as ic', 'ic.id_item = it.id_item');
+		$this->db->join('item_stock as ist', 'ist.id_item_colored = ic.id_item_colored');
+		$this->db->where('it.id_item', $itemID);
+		$this->db->group_by('1');
+		$this->db->order_by('ic.item_color', 'asc');
+		$result = $this->db->get();
+
+		$dd[''] = 'Please Select';
+        if ($result->num_rows() > 0) {
+            foreach ($result->result() as $row) {
+                $dd[$row->id_item_colored] = $row->item_color;
+            }
+		}
+        return $dd;
+	}
+
+	function AddMoreSizeAndStock($id_item_colored, $item_size, $item_stock)
+	{
+		$this->db->trans_start();
+
+		$item = array(
+			'id_item_colored' => $id_item_colored,
+			'item_size' => $item_size,
+			'stock' => $item_stock
+		);
+
+		$this->db->insert('item_stock', $item);
+
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else
+		{
+			$this->db->trans_commit();
+		}
 	}
 
 	function countProductHide(){
-		$this->db->select('COUNT(id_item_colored) as totalproduct');
-		$this->db->where('show = 0');  
-		$hasil = $this->db->get('item_colored');
+		$this->db->select('DISTINCT COUNT(item_colored.id_item_colored) as totalproduct');
+		$this->db->from('item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->where('item_colored.show = 0');  
+		$this->db->where('item_stock.stock > 0');
+		// $this->db->group_by('item_colored.id_item_colored, ');
+		$hasil= $this->db->get();
 		return $hasil;
 	}
+
+	// $this->db->select('name as nama, item_name as item_name, ms_users.email_user as email, wishlist.item_size as size');
+	// 	$this->db->from('wishlist');
+	// 	$this->db->join('item_colored', 'wishlist.id_item_colored = item_colored.id_item_colored');
+	// 	$this->db->join('items', 'item_colored.id_item = items.id_item');
+	// 	$this->db->join('ms_users', 'ms_users.email_user = wishlist.email_user');
+	// 	// $this->db->where('count(wishlist.id_item_colored) > 5');
+	// 	$this->db->group_by('wishlist.id_item_colored'); 
+	// 	$hasil= $this->db->get();
+	// 	return $hasil;
 	
 	function EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction){
 		$item = array(
@@ -101,12 +151,12 @@ class AdminHome_model extends CI_Model{
 		// return $hasil;
 	}
 
-	function EditProductPhoto($id_item_colored, $ItemPicture){
+	function EditProductPhoto($id_item_colored, $ItemPicture, $oldphoto){
 		$item = array(
 			'id_item_colored' => $id_item_colored,
 			'item_photo' => $ItemPicture
 		);
-		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->where('item_photo', $oldphoto);
 		$this->db->update('photos', $item);
 	}
 
@@ -117,28 +167,37 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 	
-	function reviews(){
-		$this->db->select('name as nama, description as description_review, reviews.email_user as email, reviews.star as rating');
-		$this->db->from('reviews');
-		$this->db->join('ms_users', 'ms_users.email_user = reviews.email_user');
+	function wishlist(){
+		$this->db->select('name as nama, item_name as item_name, ms_users.email_user as email, wishlist.item_size as size');
+		$this->db->from('wishlist');
+		$this->db->join('item_colored', 'wishlist.id_item_colored = item_colored.id_item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('ms_users', 'ms_users.email_user = wishlist.email_user');
+		// $this->db->where('count(wishlist.id_item_colored) > 5');
+		$this->db->group_by('wishlist.id_item_colored'); 
 		$hasil= $this->db->get();
 		return $hasil;
 	}
 	
 	function latestsales(){
-		$this->db->select('item_name as name, quantity as quantity, transaction_detail.totalpayment as totalpembelian');
+		$this->db->select('item_name as name, quantity as quantity, (quantity * UnitPrice) as totalpembelian, item_colored.item_color as color');
 		$this->db->from('transactions');
 		$this->db->join('transaction_detail', 'transactions.id_trans = transaction_detail.id_trans');
 		$this->db->join('item_colored', 'transactions.id_item_colored = item_colored.id_item_colored');
 		$this->db->join('items', 'items.id_item = item_colored.id_item');
+		$this->db->order_by("transactions.id_trans", "desc");
+		// $this->db->limit(5);
+
 		$hasil= $this->db->get();
 		return $hasil;
 	}
 	
 	function monthlyearning(){
-		$this->db->select('sum(totalpayment) as totalmonthlyearning'); 
+		$this->db->select('sum(quantity * UnitPrice) as totalmonthlyearning'); 
+		$this->db->from('transactions');
+		$this->db->join('transaction_detail', 'transactions.id_trans = transaction_detail.id_trans');
 		$this->db->where('extract(month from trans_date) = extract(month from current_date)'); 
-		$hasil = $this->db->get('transaction_detail');
+		$hasil= $this->db->get();
 		return $hasil;
 	}
 
@@ -156,10 +215,13 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 
-	function avgrating(){
-		$this->db->select('round(avg(star),2) as avgrating'); 
-		$hasil = $this->db->get('reviews');
-		return $hasil;
+	function countoutstock(){
+		$this->db->select('count(item_stock.id_item_colored) as countoutstock');
+		$this->db->from('item_stock');
+		$this->db->where('item_stock.stock = 0');
+
+		$query= $this->db->get();
+		return $query->result_array();
 	}
 
 	function get_items_hide(){
@@ -171,6 +233,20 @@ class AdminHome_model extends CI_Model{
 		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->where('show = 0');
 		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_out_stock(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('item_stock.stock < 1');
+		$this->db->group_by('item_stock.item_size');
 
 		$query= $this->db->get();
 		return $query->result_array();
@@ -188,18 +264,6 @@ class AdminHome_model extends CI_Model{
 		}
         return $dd;
 	}
-
-	// function getSize(){
-	// 	$query = $this->db->get('item_stock');
-	// 	return $query->result_array();
-	// }
-
-	// function getItemColored(){
-	// 	$this->db->select('id_item_colored'); 
-	// 	$this->db->where('item_photo');
-	// 	$query = $this->db->get('item_colored');
-	// 	return $query->result_array();
-	// }
 
 	public function getIDItemColored($ItemID){
 		$query = $this->db->query("SELECT id_item_colored FROM item_colored where id_item = '$ItemID'");
@@ -244,41 +308,7 @@ class AdminHome_model extends CI_Model{
 
 			//AUTO GENERATE id_item_colored
 			$id_item_colored = $this->db->insert_id();
-			
-			// $result = array();
-            //     foreach($type AS $key => $val){
-            //          $result[] = array(
-            //           'id_type'   => $package_id,
-            //           'type_desc'   => $_POST['halo'][$key]
-            //          );
-			// 	} 
-			
-			// $this->db->insert_batch('items', $result);
-			// $data = array();
-			// $index = 0; // Set index array awal dengan 0
-			// foreach($id_item_colored as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
-			// 	array_push($data, array(
-			// 		'id_item_colored'=>$datacolors,
-			// 		'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
-			// 		'item_color'=>$color[$index], // Ambil dan set data alamat sesuai index array dari $index
-			// 	));
-			// $index++;
-			// }
-
-			// $sql = $this->SiswaModel->save_batch($data);
-
-			// var_dump($data);
-			// var_dump($id_item_colored);
-
 			$this->db->insert_batch('item_colored', $data);
-	
-			// $photo = array(
-			// 	'item_photo'   => $ItemPicture,
-			// 	'id_item_colored'   => $id_item_colored
-			// );
-
-			// $this->db->insert('photos', $photo);
-		
 		if($this->db->trans_status() === FALSE)
 		{
 			$this->db->trans_rollback();
@@ -308,6 +338,33 @@ class AdminHome_model extends CI_Model{
 		{
 			$this->db->trans_commit();
 		}
+	}
+
+	// function get_photo($id){
+	// 	$this->db->select('*');
+	// 	$this->db->from('photos');
+	// 	$this->db->where('id_item_colored',$id);
+
+	// 	$query= $this->db->get();
+	// 	return $query->result_array();
+	// }
+
+	function get_photo($iditem){
+		$query = $this->db->query("SELECT i.item_name, ic.id_item_colored, ic.id_item, t.type_desc, ic.item_color, p.item_photo 
+									FROM items as i
+									JOIN item_colored as ic on i.id_item = ic.id_item
+									JOIN type as t on t.id_type = i.id_type
+									JOIN photos as p on ic.id_item_colored = p.id_item_colored
+									WHERE i.id_item = '$iditem'");
+		return $query->result_array();
+		
+		// $this->db->select('ic.id_item_colored', 'ic.id_item', 'ic.item_color');
+		// $this->db->from('item_colored as ic');
+		// $this->db->join('photos as p', 'p.id_item_colored = ic.id_item_colored');
+		// $this->db->where('ic.id_item',$iditem);
+
+		// $query= $this->db->get();
+		// return $query->result_array();
 	}
 
 	function get_jumpsuit(){
@@ -340,21 +397,96 @@ class AdminHome_model extends CI_Model{
 		return $query->result_array();
 	}
 
-	// function get_items($id){
-	// 	$this->db->select('*');
-	// 	$this->db->from('items');
-	// 	$this->db->join('item_colored', 'item_colored.id_item = items.id_item');
-	// 	$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
-	// 	$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
-	// 	$this->db->join('type', 'items.id_type = type.id_type');
-	// 	$this->db->where('items.id_type = array("id_item_colored" => $id)');
-	// 	$this->db->where('show = 1');
-	// 	// $this->db->group_by('item_colored.id_item_colored');
+	function get_blouse(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('items.id_type = 3');
+		$this->db->where('show = 1');
+		$this->db->group_by('item_colored.id_item_colored');
 
-	// 	$query= $this->db->get();
-	// 	return $query->result_array();
-	// }
-	
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_shirt(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('items.id_type = 4');
+		$this->db->where('show = 1');
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_tees(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('items.id_type = 5');
+		$this->db->where('show = 1');
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_skirt(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('items.id_type = 6');
+		$this->db->where('show = 1');
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_jeans(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('items.id_type = 7');
+		$this->db->where('show = 1');
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_shorts(){
+		$this->db->select('*');
+		$this->db->from('item_colored');
+		$this->db->join('items', 'item_colored.id_item = items.id_item');
+		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
+		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
+		$this->db->join('type', 'items.id_type = type.id_type');
+		$this->db->where('items.id_type = 8');
+		$this->db->where('show = 1');
+		$this->db->group_by('item_colored.id_item_colored');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
 	function get_items(){
 		$this->db->select('*');
 		$this->db->from('item_colored');
@@ -362,7 +494,8 @@ class AdminHome_model extends CI_Model{
 		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->join('type', 'items.id_type = type.id_type');
-		$this->db->where('show = 1');
+		$this->db->where('item_colored.show = 1');
+		$this->db->where('item_stock.stock > 0');
 		$this->db->group_by('item_colored.id_item_colored');
 
 		$query= $this->db->get();
@@ -382,7 +515,6 @@ class AdminHome_model extends CI_Model{
 									FROM items as i 
 									JOIN item_colored as ic on i.id_item = ic.id_item 
 									JOIN photos as p on ic.id_item_colored = p.id_item_colored 
-									-- JOIN item_stock as ist on ic.id_item_colored = ist.id_item_colored 
 									JOIN type as t on i.id_type = t.id_type 
 									WHERE (ic.id_item_colored = '$id')
 									GROUP BY i.id_item");
@@ -403,20 +535,23 @@ class AdminHome_model extends CI_Model{
 	function get_item_colored_detail($id){
 		$query = $this->db->query("SELECT id_item_colored, item_color FROM item_colored where id_item = '$id'");
 		return $query->result_array();
+	}
 
-		// $this->db->select('id_item_colored, item_color');
-		// $this->db->from('item_colored');
-		// $this->db->where('id_item',$id);
+	function get_specific_color($item_id_colored, $id_item)
+	{
+		$this->db->select('item_color');
+		$this->db->from('item_colored');
+		$this->db->where('id_item_colored',$item_id_colored);
+		$this->db->where('id_item', $id_item);
 
-		// $query= $this->db->get();
-		// return $query->result_array();
+		$query= $this->db->get();
+		return $query->result_array();
 	}
 
 	function get_color($id){
 		$this->db->select('item_color');
 		$this->db->from('item_colored');
 		$this->db->where('id_item_colored',$id);
-
 
 		$query= $this->db->get();
 		return $query->result_array();
@@ -440,15 +575,13 @@ class AdminHome_model extends CI_Model{
 	}
 
 	function get_totalpayment($id){
-		$this->db->select('sum(transaction_detail.totalpayment) as total');
-		$this->db->from('transaction_detail');
+		$this->db->select('sum(quantity * UnitPrice) as total');
+		$this->db->from('transactions');
 		$this->db->where('id_trans',$id);
 
 		$query= $this->db->get();
 		return $query->result_array();
 	}
-
-	// select ( sum(transaction_detail.totalpayment) from transaction_detail where id_trans = $id) as total
 
 	function get_photo_detail($id){
 		$query= $this->db->get_where('photos', array('id_item_colored' => $id));
@@ -472,10 +605,6 @@ class AdminHome_model extends CI_Model{
 	
 	function DeleteProduct($id){
 		$this->db->trans_begin();
-		// kalo delete biasa, tp ga bs delete kalo udh ada transaksi
-		// $this->db->delete('item_stock', array('id_item_colored' => $id));
-		// $this->db->delete('photos', array('id_item_colored' => $id));		
-		// $this->db->delete('item_colored', array('id_item_colored' => $id));
 
 		//kalo pake update show status
 		$this->db->set('show', 0);
@@ -494,18 +623,28 @@ class AdminHome_model extends CI_Model{
 			$this->db->trans_commit();
 		}
 	}
-	
-	// function DeleteWishlist($id){
-	// 	$this->db->trans_begin();	
-	// 	$this->db->delete('wishlist', array('id_item_colored' => $id));
 
-	// 	if($this->db->trans_status() === FALSE)
-	// 	{
-	// 		$this->db->trans_rollback();
-	// 		return FALSE;
-	// 	}else{
-	// 		$this->db->trans_commit();
-	// 	}
-    // }
+	function DeleteProductPhoto($id){
+		$this->db->trans_begin();
+
+		$this->db->delete('photos', array('item_photo' => $id));
+
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else{
+			$this->db->trans_commit();
+		}
+	}
+
+	function restore($id){
+		$query = $this->db->query("UPDATE item_colored
+									JOIN item_stock on item_colored.id_item_colored = item_stock.id_item_colored
+									SET item_colored.show = 1
+									WHERE (item_colored.id_item_colored = $id) AND (item_stock.stock > 0)");
+	}
+	
+
 }
 ?>

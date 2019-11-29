@@ -10,7 +10,7 @@
 <body>
     <?php echo $header; ?>
     <div class="container-fluid flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-0">All Product</h4>
+        <h4 class="font-weight-bold py-3 mb-0">Products</h4>
         <?php echo $datatables; ?>
     </div>
     <?php echo $footer; ?>

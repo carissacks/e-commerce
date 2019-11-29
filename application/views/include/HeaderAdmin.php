@@ -1,15 +1,6 @@
-    <!-- [ Preloader ] Start -->
-    <div class="page-loader">
-        <div class="bg-primary"></div>
-    </div>
-    <!-- [ Preloader ] End -->
-
-    <!-- [ Layout wrapper ] Start -->
-    <div class="layout-wrapper layout-2">
+<div class="layout-wrapper layout-2">
         <div class="layout-inner">
-            <!-- [ Layout sidenav ] Start -->
             <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-dark">
-                <!-- Brand demo (see assets/css/demo/demo.css) -->
                 <div class="app-brand demo">
                     <a href="<?=base_url()?>" class="app-brand-text demo sidenav-text font-weight-bold ml-2">EyeCandy</a>
                     <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
@@ -18,19 +9,14 @@
                 </div>
                 <div class="sidenav-divider mt-0"></div>
 
-                <!-- Links -->
                 <ul class="sidenav-inner py-1">
-
-                    <!-- Dashboards -->
                     <li class="sidenav-header small font-weight-semibold">Home</li>
                     <li class="sidenav-item">
-                        <a href="<?=base_url()?>" class="sidenav-link">
+                        <a href="<?=base_url('index.php/AdminHome')?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-home"></i>
                             <div>Dashboards</div>
                         </a>
                     </li>
-                    
-                    <!-- UI elements -->
                     <li class="sidenav-item">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon feather icon-box"></i>
@@ -53,38 +39,33 @@
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_button.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/BlouseProduct')?>" class="sidenav-link">
                                     <div>Blouse</div>
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="charts_morrisjs.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/ShirtProduct')?>" class="sidenav-link">
                                     <div>Shirt</div>
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_dropdowns.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/TeesProduct')?>" class="sidenav-link">
                                     <div>Tees</div>
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_pagination.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/SkirtProduct')?>" class="sidenav-link">
                                     <div>Skirt</div>
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_progress.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/JeansProduct')?>" class="sidenav-link">
                                     <div>Jeans</div>
                                 </a>
                             </li>
                             <li class="sidenav-item">
-                                <a href="bui_progress.html" class="sidenav-link">
+                                <a href="<?=base_url('index.php/AdminHome/ShortsProduct')?>" class="sidenav-link">
                                     <div>Shorts</div>
-                                </a>
-                            </li>
-                            <li class="sidenav-item">
-                                <a href="<?=base_url('index.php/AdminHome/HideProduct')?>" class="sidenav-link">
-                                    <div>Products Hide</div>
                                 </a>
                             </li>
                         </ul>
@@ -115,15 +96,22 @@
                             <div>Add Product</div>
                         </a>
                     </li>
-                    <li class="sidenav-item">
-                        <a href="<?php echo base_url('index.php/AdminHome/FormEditProduct') ?>" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-grid"></i>
-                            <div>Edit Product</div>
-                        </a>
-                    </li>
+
+                    <!-- Product -->
+                    <li class="sidenav-divider mb-1"></li>
+                    <li class="sidenav-header small font-weight-semibold">See More</li>
+                        <li class="sidenav-item">
+                            <a href="<?=base_url('index.php/AdminHome/HideProduct')?>" class="sidenav-link">
+                                <div>Products Hide</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="<?=base_url('index.php/AdminHome/OutStock')?>" class="sidenav-link">
+                                <div>Out of Stock</div>
+                            </a>
+                        </li>
                 </ul>
             </div>
-            <!-- [ Layout sidenav ] End -->
             
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
@@ -153,16 +141,6 @@
                         <!-- Divider -->
                         <hr class="d-lg-none w-100 my-2">
 
-                        <div class="navbar-nav align-items-lg-center">
-                            <!-- Search -->
-                            <label class="nav-item navbar-text navbar-search-box p-0 active">
-                                <i class="feather icon-search navbar-icon align-middle"></i>
-                                <span class="navbar-search-input pl-2">
-                                    <!-- <input type="text" class="form-control navbar-text mx-2" placeholder="Search..."> -->
-                                </span>
-                            </label>
-                        </div>
-
                         <div class="navbar-nav align-items-lg-center ml-auto">
 
                             <!-- Divider -->
@@ -188,5 +166,3 @@
                         </div>
                     </div>
                 </nav>
-                
-                <!-- [ Layout navbar ( Header ) ] End -->
