@@ -16,7 +16,7 @@
     </div>
     <div class="container-fluid flex-grow-1 container-p-y">
     <?php foreach ($data as $row):
-			$id = $row['id_item_colored'];
+			$id = $row['id_item'];
 	?>
     <?php endforeach;?>
     

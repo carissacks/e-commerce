@@ -534,8 +534,10 @@ class AdminHome extends CI_Controller{
         );
         $data['poster_attr']= $this->form_attr('item_photo');
         $data['photo']= $this->AdminHome_model->get_photo($_GET['id']);
+        // $data['photo']= $this->AdminHome_model->get_photo($_GET['iditem']);
         $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['poster_attr']= $this->form_attr('item_photo');
         $data['datatabel'] = $this->load->view('include/TabelPhotoEdit', $data, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
@@ -545,12 +547,25 @@ class AdminHome extends CI_Controller{
 
     public function EditProductPhoto(){
         $id_item_colored = $this->input->post('id_item_colored');
-        $filename = $ItemID."-".$color."-".mt_rand(1,1000);
-        // $filename = pathinfo($_FILES['item_photo']['name'], PATHINFO_FILENAME); // get photo name
+        $ItemID = $this->input->post('itemid');
+        $color = $this->AdminHome_model->get_specific_color($id_item_colored, $ItemID);
+
+        $oldphoto = $this->input->post('oldphoto');
+        $colorname = $color[0]['item_color'];       
+
+        $ext = pathinfo($_FILES["item_photo"]["name"], PATHINFO_EXTENSION);
+        $filename = $ItemID."-".$colorname."-".mt_rand(1,1000).".". $ext;
+
         $config['upload_path']          = './asset/images';
         $config['allowed_types']        = 'jpeg|jpg|png';
-        $config['max_size'] = '4960';
+        $config['max_size']             = '4960';
         $config['overwrite']			= false;
+        $config['file_name']        = $filename;
+
+        // echo $id_item_colored;
+        // echo $ItemID;
+        // echo $colorname;
+        // echo $filename;
 
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload', $config);
@@ -560,7 +575,8 @@ class AdminHome extends CI_Controller{
             print_r($this->upload->display_errors());
         }
         else {
-            $this->AdminHome_model->EditProductPhoto($id_item_colored, $filename);
+            $this->AdminHome_model->EditProductPhoto($id_item_colored, $filename, $oldphoto);
+            redirect('AdminHome/FormEditPhoto?iditem='.$ItemID);
         }
     }
 
@@ -574,11 +590,11 @@ class AdminHome extends CI_Controller{
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
         
         $item_photo = $_GET['id'];
-        $id = $_GET['id_item_colored'];
+        $iditem = $_GET['iditem'];
 
         // $this->AdminHome_model->get_id_item($id);
         $this->AdminHome_model->DeleteProductPhoto($item_photo);
-        redirect('AdminHome/FormEditPhoto?id='.$id);
+        redirect('AdminHome/FormEditPhoto?iditem='.$iditem);
     }
 
     public function EditProduct()
