@@ -51,6 +51,18 @@ class AdminHome_model extends CI_Model{
 		// return $result;
 	}
 
+	function get_specific_photo($itemID, $item_photo){
+		$query = $this->db->query("SELECT ist.id_item_colored, p.item_photo, it.id_item, t.type_desc 
+									FROM items as it
+									JOIN item_colored as ic on ic.id_item = it.id_item
+									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
+									
+									JOIN photos as p on p.id_item_colored = ist.id_item_colored
+									JOIN type as t on t.id_type = it.id_type
+									WHERE it.id_item = '$itemID' AND p.item_photo = '$item_photo'");
+		return $query->result_array();
+	}
+
 	function get_specific_item_detail($itemID)
 	{
 		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color, it.id_item 

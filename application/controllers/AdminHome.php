@@ -515,6 +515,7 @@ class AdminHome extends CI_Controller{
         $ItemID = $_GET['itemID'];
         $id_item_colored = $_GET['id'];
         $item_size = $_GET['size'];
+
         $this->AdminHome_model->DeleteProductStock($id_item_colored, $item_size);
         redirect('AdminHome/FormEditProductDetail?itemid='.$ItemID);
     }
@@ -561,6 +562,9 @@ class AdminHome extends CI_Controller{
         $oldphoto = $this->input->post('oldphoto');
         $colorname = $color[0]['item_color'];       
 
+        $path = './asset/images/' . $type . "/" . $oldphoto;
+        unlink($path);
+
         $ext = pathinfo($_FILES["item_photo"]["name"], PATHINFO_EXTENSION);
         $filename = $ItemID."-".$colorname."-".mt_rand(1,1000).".". $ext;
 
@@ -602,17 +606,16 @@ class AdminHome extends CI_Controller{
 
     public function DeleteProductPhoto()
 	{
-        $data['photo']= $this->AdminHome_model->get_photo($_GET['id']);
-        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-        $data['datatabel'] = $this->load->view('include/TabelPhotoEdit', $data, TRUE);
-        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-        
-        $item_photo = $_GET['id'];
-        $iditem = $_GET['iditem'];
+        $item_photo = $_GET['id']; //nama item photo yg baru
+        $iditem = $_GET['iditem']; //id item
 
-        // $this->AdminHome_model->get_id_item($id);
+        $data = $this->AdminHome_model->get_specific_photo($iditem, $item_photo);
+        
+        $id_item_colored = $data[0]['id_item_colored'];
+        $type_desc = $data[0]['type_desc'];
+
+        $path = './asset/images/' . $type_desc . "/" . $item_photo;
+        unlink($path);
         $this->AdminHome_model->DeleteProductPhoto($item_photo);
         redirect('AdminHome/FormEditPhoto?id='.$iditem);
     }
