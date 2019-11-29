@@ -35,9 +35,19 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 
+	function get_specific_color($item_id_colored, $id_item){
+		$this->db->select('item_color');
+		$this->db->from('item_colored');
+		$this->db->where('id_item_colored',$item_id_colored);
+		$this->db->where('id_item', $id_item);
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
 	function get_specific_item_detail($itemID)
 	{
-		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color 
+		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color, it.id_item 
 									FROM items as it
 									JOIN item_colored as ic on ic.id_item = it.id_item 
 									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
@@ -151,12 +161,12 @@ class AdminHome_model extends CI_Model{
 		// return $hasil;
 	}
 
-	function EditProductPhoto($id_item_colored, $ItemPicture){
+	function EditProductPhoto($id_item_colored, $ItemPicture, $oldphoto){
 		$item = array(
 			'id_item_colored' => $id_item_colored,
 			'item_photo' => $ItemPicture
 		);
-		$this->db->where('id_item_colored', $id_item_colored);
+		$this->db->where('item_photo', $oldphoto);
 		$this->db->update('photos', $item);
 	}
 
@@ -337,12 +347,22 @@ class AdminHome_model extends CI_Model{
 		}
 	}
 
-	function get_photo($id){
-		$this->db->select('*');
-		$this->db->from('photos');
-		$this->db->where('id_item_colored',$id);
+	// function get_photo($id){
+	// 	$this->db->select('*');
+	// 	$this->db->from('photos');
+	// 	$this->db->where('id_item_colored',$id);
 
-		$query= $this->db->get();
+	// 	$query= $this->db->get();
+	// 	return $query->result_array();
+	// }
+
+	function get_photo($iditem){
+		$query = $this->db->query("SELECT i.item_name, ic.id_item_colored, ic.id_item, t.type_desc, ic.item_color, p.item_photo 
+									FROM items as i
+									JOIN item_colored as ic on i.id_item = ic.id_item
+									JOIN type as t on t.id_type = i.id_type
+									JOIN photos as p on ic.id_item_colored = p.id_item_colored
+									WHERE i.id_item = '$iditem'");
 		return $query->result_array();
 	}
 
