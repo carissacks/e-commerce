@@ -17,6 +17,16 @@ class AdminHome_model extends CI_Model{
         return $query->result();
 	}
 
+	function get_photo_array($id_item){
+		$query = $this->db->query(
+			"SELECT p.item_photo
+			FROM items as i 
+			JOIN item_colored as ic on i.id_item = ic.id_item
+			JOIN photos as p on p.id_item_colored = ic.id_item_colored
+			WHERE i.id_item = '$id_item'");
+		return $query->result_array();
+	}
+
 	public function ShowDataToday()
 	{
 		$query = $this->db->query("SELECT t.id_trans, t.quantity, t.UnitPrice, i.item_name 
@@ -33,6 +43,11 @@ class AdminHome_model extends CI_Model{
 		$this->db->where('show = 1');  
 		$hasil = $this->db->get('item_colored');
 		return $hasil;
+	}
+
+	function get_type_desc($id_type){
+		$query = $this->db->query("SELECT * FROM `type` WHERE id_type = $id_type");
+		return $query->result_array();
 	}
 
 	function get_specific_type($itemID){

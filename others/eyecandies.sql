@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2019 at 08:51 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Nov 29, 2019 at 10:47 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -438,7 +438,7 @@ INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `UnitPric
 --
 
 CREATE TABLE `transaction_detail` (
-  `id_trans` varchar(10) NOT NULL,
+  `id_trans` int(11) NOT NULL,
   `email_user` varchar(50) NOT NULL,
   `stats` varchar(10) NOT NULL,
   `trans_date` date NOT NULL,
@@ -450,17 +450,17 @@ CREATE TABLE `transaction_detail` (
 --
 
 INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date`, `shipping_fee`) VALUES
-('11', 'andy@gmail.com', '1', '2019-11-26', 0),
-('1', 'andre@gmail.com', '1', '2019-11-01', 0),
-('10', 'ariel@gmail.com', '6', '2019-11-03', 0),
-('2', 'linata@gmail.com', '3', '2019-10-17', 0),
-('3', 'caca@gmail.com', '2', '2019-10-30', 10000),
-('4', 'andre@gmail.com', '4', '2019-10-31', 0),
-('5', 'aldo@gmail.com', '5', '2019-09-20', 0),
-('6', 'billy@gmail.com', '6', '2019-09-01', 0),
-('7', 'wahyudi@gmail.com', '2', '2019-11-03', 0),
-('8', 'linata@gmail.com', '1', '2019-11-11', 0),
-('9', 'andy@gmail.com', '5', '2019-11-06', 0);
+(1, 'andre@gmail.com', '1', '2019-11-01', 0),
+(2, 'linata@gmail.com', '3', '2019-10-17', 0),
+(3, 'caca@gmail.com', '2', '2019-10-30', 10000),
+(4, 'andre@gmail.com', '4', '2019-10-31', 0),
+(5, 'aldo@gmail.com', '5', '2019-09-20', 0),
+(6, 'billy@gmail.com', '6', '2019-09-01', 0),
+(7, 'wahyudi@gmail.com', '2', '2019-11-03', 0),
+(8, 'linata@gmail.com', '1', '2019-11-11', 0),
+(9, 'andy@gmail.com', '5', '2019-11-06', 0),
+(10, 'ariel@gmail.com', '6', '2019-11-03', 0),
+(11, 'andy@gmail.com', '1', '2019-11-26', 0);
 
 -- --------------------------------------------------------
 
@@ -495,7 +495,8 @@ INSERT INTO `type` (`id_type`, `type_desc`) VALUES
 
 CREATE TABLE `wishlist` (
   `id_item_colored` varchar(10) NOT NULL,
-  `email_user` varchar(50) NOT NULL
+  `email_user` varchar(50) NOT NULL,
+  `item_size` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -599,13 +600,16 @@ ALTER TABLE `status`
   MODIFY `id_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `transaction_detail`
+--
+ALTER TABLE `transaction_detail`
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
   MODIFY `id_type` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
-  ALTER TABLE `transaction_detail`
-  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

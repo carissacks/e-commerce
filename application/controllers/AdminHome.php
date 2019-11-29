@@ -291,6 +291,7 @@ class AdminHome extends CI_Controller{
             'type' => $this->AdminHome_model->getType(),
             'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type, // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
         );
+        $data['typebefore'] = $this->AdminHome_model->get_specific_type($_GET['id_item']);
         $data['details']= $this->AdminHome_model->get_specific_data($_GET['id_item']);
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
@@ -430,22 +431,7 @@ class AdminHome extends CI_Controller{
             $Description = $this->input->post('description');
             $Careinstruction = $this->input->post('careinstruction');
 
-            // $config['upload_path'] = './asset/itempicture';
-		    // $config['allowed_types'] = 'jpg|png|jpeg';
-            // $config['file_name'] = $ItemName;
-            
-            // $this->load->library('upload', $config);
-            // $this->upload->do_upload('itempicture');
-            
-            // $ItemPicture='asset/itempicture/' . $this->upload->data('file_name');
-
             $data = array();
-            // $index = 0; // Set index array awal dengan 0
-            // $totalcolors = $this->AdminHome_model->countidcolor($ItemID); 
-
-            // var_dump($totalcolors);
-
-            // $select_id_type_color = $this->AdminHome_model->select_id_type_color(); 
 
             foreach($ItemColor as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
 				array_push($data, array(
@@ -455,36 +441,6 @@ class AdminHome extends CI_Controller{
 			    // $index++;
             }
             $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data);
-            
-            // $idItemColored = $this->AdminHome_model->getIdItemColored($ItemID);
-            
-            // var_dump($idItemColored);
-            // var_dump($idItemColored[0]);
-
-            // $this->AdminHome_model->AddStock($idItemColored);
-
-            // var_dump();
-            // foreach($ItemSize as $datasizes){
-            //     array_push($size, array(
-			// 		'id_item_colored' => $idItemColored,  // Ambil dan set data nama sesuai index array dari $index
-            //         'item_size'=>$datasizes,
-            //         'item_stock'=>$itemStock // Ambil dan set data alamat sesuai index array dari $index
-            //     ));
-            // }
-
-
-            // $data = array();
-			// $index = 0; // Set index array awal dengan 0
-			// foreach($id_item_colored as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
-			// 	array_push($data, array(
-			// 		'id_item_colored'=>$datacolors,
-			// 		'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
-			// 		'item_color'=>$color[$index], // Ambil dan set data alamat sesuai index array dari $index
-			// 	));
-			// $index++;
-			// }
-
-            // $sql = $this->AdminHome_model->AddProduct($data);
             
             redirect('AdminHome/showProductColor?id='.$ItemID);   
 		// }
@@ -574,11 +530,6 @@ class AdminHome extends CI_Controller{
         $config['overwrite']			= false;
         $config['file_name']        = $filename;
 
-        // echo $id_item_colored;
-        // echo $ItemID;
-        // echo $colorname;
-        // echo $filename;
-
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload', $config);
 
@@ -648,6 +599,7 @@ class AdminHome extends CI_Controller{
         //     $this->load->view('pages/FormEditProduct.php', $data);
         // }
         // else{
+            $typebefore = $this->input->post('typebefore');
             $ItemID = $this->input->post('itemid');
             $ItemName = $this->input->post('itemname');
             $ItemType = $this->input->post('type');
@@ -658,6 +610,25 @@ class AdminHome extends CI_Controller{
             $Description = $this->input->post('description');
             $Careinstruction = $this->input->post('careinstruction');
             
+            if($typebefore != $ItemType)
+            {
+                $type_desc = $this->AdminHome_model->get_type_desc($ItemType);
+                $type = $type_desc[0]['type_desc'];
+
+                $old_path = './asset/images/' . $typebefore . "/"; 
+                $path = './asset/images/' . $type . "/";
+
+                $photos = $this->AdminHome_model->get_photo_array($ItemID);
+
+                foreach($photos as $row){
+                    $newPath = $path . $row['item_photo'];
+                    $oldPath = $old_path . $row['item_photo'];
+                    if(copy($oldPath, $newPath)){
+                        // echo "sukses";
+                        unlink($oldPath);
+                    }
+                }
+            }
             $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
             redirect('AdminHome/FormEditProductDetail?itemid='.$ItemID);
 		// }
