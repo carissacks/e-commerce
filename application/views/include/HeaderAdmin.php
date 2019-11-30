@@ -81,9 +81,9 @@
                         </a>
                     </li>
                     <li class="sidenav-item">
-                        <a href="<?php echo base_url('index.php/AdminHome/MonthlyView') ?>" class="sidenav-link">
+                        <a href="<?php echo base_url('index.php/AdminHome/AllTrasactionsView') ?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-grid"></i>
-                            <div>Monthly Order</div>
+                            <div>All Transactions</div>
                         </a>
                     </li>
 
@@ -102,11 +102,13 @@
                     <li class="sidenav-header small font-weight-semibold">See More</li>
                         <li class="sidenav-item">
                             <a href="<?=base_url('index.php/AdminHome/HideProduct')?>" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-box"></i>
                                 <div>Products Hide</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
                             <a href="<?=base_url('index.php/AdminHome/OutStock')?>" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-box"></i>
                                 <div>Out of Stock</div>
                             </a>
                         </li>

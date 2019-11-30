@@ -10,8 +10,8 @@
 <body>
     <?php echo $header; ?>
     <div class="container-fluid flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-0">Jumpsuit Product</h4>
-        <?php echo $card; ?>
+        <h4 class="font-weight-bold py-3 mb-0">All Transactions</h4>
+        <?php echo $datatabel; ?>
     </div>
     <?php echo $footer; ?>
 </body>

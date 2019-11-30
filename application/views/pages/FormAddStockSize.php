@@ -19,21 +19,17 @@
                         $style = array(
                             'class' => 'form-control'
                         );
-
-                        // $picture = array(
-                        //     'name' => 'poster',
-                        //     'type' => 'file',
-                        //     'class' => 'form-label w-100'
-                        // );
  
                         $size = array(
                             'name' => 'size',
-                            'type' => 'text'
+                            'type' => 'text',
                         );
 
                         $stock = array(
                             'name' => 'stock',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'min'=> "1",
+                            'max'=> "999"
                         );
 
                         $buttonadd = array(
@@ -48,6 +44,12 @@
                         $attribute_selectlabel = array(
                             'class' => 'custom-select'
                         );
+
+                        $color_value = array(
+                            'name' => 'value',
+                            'type' => 'hidden',
+                            'value' => $_GET['color']
+                        );
                         
                         echo "<div class='form-group row'>";
                             echo '<input type="hidden" name="id_item_colored" value="'.$_GET['id'].'"><br>';
@@ -55,11 +57,14 @@
                             echo '<input type="text" name="color" value="'.$_GET['id'].' - '.$_GET['color'].'" disabled><br>';
                         echo "</div>";
 
+                        echo form_input($color_value, '', $style);
+
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-4'>";
                                 echo form_label('Item Size :',' ',$attribute_label) . form_input('itemsize[]', '', $style);
+                                echo form_error('itemsize[]','<small class="text-danger">','</small>') . "<br>";
                                 echo form_label('Item Stock :',' ',$attribute_label) . form_input('itemstock[]', '', $style);
-                                // echo form_error('itemsizeandstock','<small class="text-danger">','</small>') . "<br>";
+                                echo form_error('itemstock[]','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>"; 
 
@@ -72,23 +77,8 @@
                                 echo '<input type="hidden" id="jumlah-form" value="1">';
                             echo "</div>";
                         echo "</div>";
-                        
-                        // echo "<div class='form-group row'>";
-                        // echo form_label('Picture   :',' ',$attribute_label) . form_upload($picture, 'picture[]', '', $style) . "<br><br>";
-                        // echo "</div>";
-
-                        // echo '<div id="insert-form2"></div>';
-
-                        // echo "<div class='form-row'>";
-                        //     echo "<div class='form-group row col-md-3'>";
-                        //         echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-tambah-form2"> + Photo </button>';
-                        //         echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-reset-forms2">Reset</button>';
-                        //         echo '<input type="hidden" id="jumlah-form2" value="1">';
-                        //     echo "</div>";
-                        // echo "</div>";
 
                         echo form_submit('Submit', 'Add Product Detail', $buttonadd);
-                        // echo '	<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>
@@ -121,6 +111,5 @@
             });
         });
   </script>
-
 </body>
 </html>

@@ -38,27 +38,23 @@
 
                         $weight = array(
                             'name' => 'weight',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'min'=> "10",
+                            'max'=> "999"
                         );
-                        
-                        // $size = array(
-                        //     'name' => 'size',
-                        //     'type' => 'text'
-                        // );
-
-                        // $stock = array(
-                        //     'name' => 'stock',
-                        //     'type' => 'number'
-                        // );
-
+                    
                         $sellingprice = array(
                             'name' => 'sellingprice',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'min'=> "10000",
+                            'max'=> "9999999"
                         );
 
                         $buyingprice = array(
                             'name' => 'buyingprice',
-                            'type' => 'number'
+                            'type' => 'number',
+                            'min'=> "10000",
+                            'max'=> "9999999"
                         );
 
                         $buttonadd = array(
@@ -97,14 +93,14 @@
                                 echo form_label('Item Type  :', ' ',$attribute_label);
                                 $types = 'class="form-control select2"';
                                 echo form_dropdown('type', $type, $type_selected, $types);
-                                echo form_error('itemtype','<small class="text-danger">','</small>');
+                                echo form_error('type','<small class="text-danger">','</small>');
                             echo "</div>";
                         echo "</div>";
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-4'>";
                                 echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor[]', '', $style);
-                                echo form_error('itemcolor','<small class="text-danger">','</small>') . "<br>";
+                                echo form_error('itemcolor[]','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>";
 
@@ -150,12 +146,8 @@
                         echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
-                        // echo "<div class='form-group row'>";
-                        // echo form_label('Picture   :',' ',$attribute_label) . form_upload($picture, 'picture', '', $style) . "<br><br>";
-                        // echo "</div>";
-
                         echo form_submit('Submit', 'Add Product', $buttonadd);
-                        echo '<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                        echo '<a href="'.base_url('index.php/AdminHome').'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>

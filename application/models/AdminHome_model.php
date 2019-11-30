@@ -138,20 +138,9 @@ class AdminHome_model extends CI_Model{
 		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
 		$this->db->where('item_colored.show = 0');  
 		$this->db->where('item_stock.stock > 0');
-		// $this->db->group_by('item_colored.id_item_colored, ');
 		$hasil= $this->db->get();
 		return $hasil;
 	}
-
-	// $this->db->select('name as nama, item_name as item_name, ms_users.email_user as email, wishlist.item_size as size');
-	// 	$this->db->from('wishlist');
-	// 	$this->db->join('item_colored', 'wishlist.id_item_colored = item_colored.id_item_colored');
-	// 	$this->db->join('items', 'item_colored.id_item = items.id_item');
-	// 	$this->db->join('ms_users', 'ms_users.email_user = wishlist.email_user');
-	// 	// $this->db->where('count(wishlist.id_item_colored) > 5');
-	// 	$this->db->group_by('wishlist.id_item_colored'); 
-	// 	$hasil= $this->db->get();
-	// 	return $hasil;
 	
 	function EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction){
 		$item = array(
@@ -191,10 +180,6 @@ class AdminHome_model extends CI_Model{
 	{
 		$query = $this->db->query("SELECT * FROM item_stock WHERE id_item_colored = '$id_item_colored' and item_size = '$size'");
 		return $query->result_array();
-		// $this->db->select('*');
-		// $this->db->where('id_item_colored', $id_item_colored);  
-		// $hasil = $this->db->get('item_stock');
-		// return $hasil;
 	}
 
 	function EditProductPhoto($id_item_colored, $ItemPicture, $oldphoto){
@@ -219,7 +204,6 @@ class AdminHome_model extends CI_Model{
 		$this->db->join('item_colored', 'wishlist.id_item_colored = item_colored.id_item_colored');
 		$this->db->join('items', 'item_colored.id_item = items.id_item');
 		$this->db->join('ms_users', 'ms_users.email_user = wishlist.email_user');
-		// $this->db->where('count(wishlist.id_item_colored) > 5');
 		$this->db->group_by('wishlist.id_item_colored'); 
 		$hasil= $this->db->get();
 		return $hasil;
@@ -232,7 +216,6 @@ class AdminHome_model extends CI_Model{
 		$this->db->join('item_colored', 'transactions.id_item_colored = item_colored.id_item_colored');
 		$this->db->join('items', 'items.id_item = item_colored.id_item');
 		$this->db->order_by("transactions.id_trans", "desc");
-		// $this->db->limit(5);
 
 		$hasil= $this->db->get();
 		return $hasil;

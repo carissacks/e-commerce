@@ -1,3 +1,4 @@
+
 <div class="container col-12">
 		<?php foreach ($details as $row):
 			$id_item= $row['id_item'];
@@ -26,6 +27,7 @@
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
+
 								<?php foreach ($photos as $photo):?>
 								<div class="item-slick3" data-thumb="<?= base_url('asset/images/'.$type_item.'/'.$photo['item_photo'])?>">
 									<div class="wrap-pic-w pos-relative">
@@ -49,79 +51,50 @@
 						</h4>
 
 						<span class="mtext-106 cl2">
-							Selling Price : IDR <?= number_format($price_item,2,',','.');?>
+							IDR <?= $price_item?>
+							IDR <?= $buying_item?>
 						</span>
-						<br>
-						<span class="mtext-106 cl2">
-							Buying Price : IDR <?= number_format($buying_item,2,',','.');?>
-						</span>
-						<hr>
-						<p class="stext-102 cl3">
+
+						<p class="stext-102 cl3 p-t-23">
 							<?php echo $desc_item; ?>
 						</p>
-						<br>
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<div class="card">
-								<div class="card-header">
-									<h6 class="card-header-title mb-0">Details</h6>
-								</div>
-									<div class="card-body">
-										<dl>
+						
+							<div class="flex-w flex-r-m p-b-10">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h6 class="card-header-title mb-0">Details</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <dl>
 											<dt>Categories</dt>
-											<dd>
+                                            <dd>
 												<?= $type_item?>
 											</dd>
-											<dt>Size</dt>
-											<dd>
+                                            <dt>Size</dt>
+                                            <dd>
 												<?php foreach ($size_stock as $row):?>
-													<p>Size <?=$item_size= $row['item_size'];?> : <?=$stock= $row['stock'];?> pcs</p>
+												<p>Size <?=$item_size= $row['item_size'];?></p>
+												<p>Stock <?=$stock= $row['stock'];?></p>
 												<?php endforeach;?>
 											</dd>
-											<dt>Color</dt>
-											<dd>
+                                            <dt>Color</dt>
+                                            <dd>
 												<?php foreach ($color as $row):?>
 												<p><?=$item_color= $row['item_color'];?></p>
 												<?php endforeach;?>
 											</dd>
-										</dl>
-									</div>
+                                            <!-- <dt>Malesuada porta</dt>
+                                            <dd>Etiam porta sem malesuada magna mollis euismod.</dd> -->
+                                        </dl>
+                                    </div>
+                                </div>
 							</div>
-						</div>
-						<br>
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<div class="row">
-								<a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-									Delete
-								</a>
-								<a href="<?=base_url("index.php/AdminHome/FormEditProduct?id=$id&id_item=$id_item&type=$id_type")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-									Edit
-								</a>
-							</div>
-						</div>
 					</div>
 				</div>
+				<a href="<?=base_url("index.php/AdminHome/FormEditProduct?id=$id&id_item=$id_item&type=$id_type")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+					Edit
+				</a>
 			</div>
-		</div>
 		<?php endforeach;?>
 	</section>
-</div>
-
-<script src="<?= base_url('./asset/vendor/slick/slick.min.js')?>"></script>
-<script src="<?= base_url('./asset/js/slick-custom.js')?>"></script>
-<script src="<?= base_url('./asset/vendor/parallax100/parallax100.js')?>"></script>
-<script>
-	$('.parallax100').parallax100();
-</script>
-<script src="<?= base_url('./asset/vendor/MagnificPopup/jquery.magnific-popup.min.js')?>"></script>
-<script>
-	$('.gallery-lb').each(function() { // the containers for all your galleries
-		$(this).magnificPopup({
-			delegate: 'a', // the selector for gallery item
-			type: 'image',
-			gallery: {
-				enabled:true
-			},
-			mainClass: 'mfp-fade'
-		});
-	});
-</script>
+	</div>

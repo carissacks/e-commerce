@@ -109,6 +109,7 @@
                         echo "<div class='form-group row'>";
                                 echo form_input($idItemColored, '', $style);
                                 echo form_input($itemid, '', $style);
+                                echo form_error('itemid','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
                         echo "<div class='form-row'>";
@@ -121,7 +122,7 @@
                                 echo form_label('Item Type  :', ' ',$attribute_label);
                                 $types = 'class="form-control select2"';
                                 echo form_dropdown('type', $type, $type_selected, $types);
-                                echo form_error('itemtype','<small class="text-danger">','</small>');
+                                echo form_error('type','<small class="text-danger">','</small>');
                             echo "</div>";
                         echo "</div>";
                         
@@ -158,7 +159,7 @@
                         echo "</div>";
 
                         echo form_submit('Submit', 'Edit Product', $buttonadd);
-                        echo '<a href="'.base_url().'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                        echo '<a href="'.base_url('index.php/AdminHome').'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>

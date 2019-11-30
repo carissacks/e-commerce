@@ -86,8 +86,29 @@
 	<?php foreach ($totalpayment as $row):
 		$total = $row['total'];
 	?>
+	<hr>
 	<span class="mtext-106 cl2">
 		Total Payment <?= $total?>
 	</span>
 	<?php endforeach;?>
 </div>
+
+<script src="<?= base_url('./asset/vendor/slick/slick.min.js')?>"></script>
+<script src="<?= base_url('./asset/js/slick-custom.js')?>"></script>
+<script src="<?= base_url('./asset/vendor/parallax100/parallax100.js')?>"></script>
+<script>
+	$('.parallax100').parallax100();
+</script>
+<script src="<?= base_url('./asset/vendor/MagnificPopup/jquery.magnific-popup.min.js')?>"></script>
+<script>
+	$('.gallery-lb').each(function() { // the containers for all your galleries
+		$(this).magnificPopup({
+			delegate: 'a', // the selector for gallery item
+			type: 'image',
+			gallery: {
+				enabled:true
+			},
+			mainClass: 'mfp-fade'
+		});
+	});
+</script>
