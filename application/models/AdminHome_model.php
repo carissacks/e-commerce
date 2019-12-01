@@ -17,6 +17,16 @@ class AdminHome_model extends CI_Model{
         return $query->result();
 	}
 
+	function get_photo_array($id_item){
+		$query = $this->db->query(
+			"SELECT p.item_photo
+			FROM items as i 
+			JOIN item_colored as ic on i.id_item = ic.id_item
+			JOIN photos as p on p.id_item_colored = ic.id_item_colored
+			WHERE i.id_item = '$id_item'");
+		return $query->result_array();
+	}
+
 	public function ShowDataToday()
 	{
 		$query = $this->db->query("SELECT t.id_trans, t.quantity, t.UnitPrice, i.item_name 
@@ -35,6 +45,39 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 
+	function get_type_desc($id_type){
+		$query = $this->db->query("SELECT * FROM `type` WHERE id_type = $id_type");
+		return $query->result_array();
+	}
+
+	function get_specific_type($itemID){
+
+		$query = $this->db->query("SELECT i.id_type, t.type_desc
+									FROM items as i
+									JOIN type as t on t.id_type = t.id_type 
+									WHERE i.id_item = '$itemID' AND i.id_type = t.id_type");
+		return $query->result_array();
+
+		// $this->db->select('i.id_type, t.type_desc');
+		// $this->db->from('items as i');
+		// $this->db->join('type as t', 't.id_type = i.id_type');
+		// $this->db->where('i.id_item', $itemID);
+		// $result = $this->db->get();
+		// return $result;
+	}
+
+	function get_specific_photo($itemID, $item_photo){
+		$query = $this->db->query("SELECT ist.id_item_colored, p.item_photo, it.id_item, t.type_desc 
+									FROM items as it
+									JOIN item_colored as ic on ic.id_item = it.id_item
+									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
+									
+									JOIN photos as p on p.id_item_colored = ist.id_item_colored
+									JOIN type as t on t.id_type = it.id_type
+									WHERE it.id_item = '$itemID' AND p.item_photo = '$item_photo'");
+		return $query->result_array();
+	}
+
 	function get_specific_item_detail($itemID)
 	{
 		$query = $this->db->query("SELECT ist.id_item_colored, ist.item_size, ist.stock, ic.item_color, it.id_item 
@@ -43,6 +86,24 @@ class AdminHome_model extends CI_Model{
 									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
 									WHERE it.id_item = '$itemID'");
 		return $query->result_array();
+	}
+
+	function get_data_color($itemID){
+		$this->db->select('ic.id_item_colored, ic.item_color');
+		$this->db->from('items as it');
+		$this->db->join('item_colored as ic', 'ic.id_item = it.id_item');
+		$this->db->where('it.id_item', $itemID);
+		$this->db->group_by('1');
+		$this->db->order_by('ic.item_color', 'asc');
+		$result = $this->db->get();
+
+		$dd[''] = 'Please Select';
+        if ($result->num_rows() > 0) {
+            foreach ($result->result() as $row) {
+                $dd[$row->id_item_colored] = $row->item_color;
+            }
+		}
+        return $dd;
 	}
 
 	function get_color_form($itemID){
@@ -340,15 +401,6 @@ class AdminHome_model extends CI_Model{
 		}
 	}
 
-	// function get_photo($id){
-	// 	$this->db->select('*');
-	// 	$this->db->from('photos');
-	// 	$this->db->where('id_item_colored',$id);
-
-	// 	$query= $this->db->get();
-	// 	return $query->result_array();
-	// }
-
 	function get_photo($iditem){
 		$query = $this->db->query("SELECT i.item_name, ic.id_item_colored, ic.id_item, t.type_desc, ic.item_color, p.item_photo 
 									FROM items as i
@@ -357,14 +409,6 @@ class AdminHome_model extends CI_Model{
 									JOIN photos as p on ic.id_item_colored = p.id_item_colored
 									WHERE i.id_item = '$iditem'");
 		return $query->result_array();
-		
-		// $this->db->select('ic.id_item_colored', 'ic.id_item', 'ic.item_color');
-		// $this->db->from('item_colored as ic');
-		// $this->db->join('photos as p', 'p.id_item_colored = ic.id_item_colored');
-		// $this->db->where('ic.id_item',$iditem);
-
-		// $query= $this->db->get();
-		// return $query->result_array();
 	}
 
 	function get_jumpsuit(){
@@ -614,6 +658,26 @@ class AdminHome_model extends CI_Model{
 		$this->db->delete('wishlist', array('id_item_colored' => $id));
 
 		$this->db->delete('shopping_cart', array('id_item_colored' => $id));
+
+		if($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return FALSE;
+		}else{
+			$this->db->trans_commit();
+		}
+	}
+
+	function AddNewColor($ItemID, $show, $color){
+		$this->db->trans_begin();
+
+		$color = array(
+			'id_item' => $ItemID,
+			'show' => $show,
+			'item_color' => $color
+		);
+
+		$this->db->insert('item_colored', $color);
 
 		if($this->db->trans_status() === FALSE)
 		{

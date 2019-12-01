@@ -29,14 +29,19 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <?php
-                        // echo $details;
+                        $type_before = array(
+                            'name' => 'typebefore',
+                            'type' => 'hidden',
+                            'value' => $typebefore[0]['type_desc']
+                        );
+
                         $id_item = $_GET['id_item'];
                         $id_item_colored = $_GET['id'];
                         echo form_open_multipart('AdminHome/EditProduct');
                         $style = array(
                             'class' => 'form-control'
                         );
-
+                        
                         $idItemColored = array(
                             'name' => 'itemidcolored',
                             'type' => 'hidden',
@@ -113,6 +118,7 @@
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-5'>";
+                                echo form_input($type_before, '', $style);
                                 echo form_label('Item Name :',' ',$attribute_label) . form_input($itemname, '', $style);
                                 echo form_error('itemname','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
