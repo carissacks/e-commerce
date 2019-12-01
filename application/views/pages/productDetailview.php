@@ -43,7 +43,7 @@
 							</span>
 
 							<span class="header-cart-item-info">
-								<?=$cart_qty?> x IDR <?=$cart_price?>
+								<?=$cart_qty?> x IDR <?=number_format($cart_price,0,",",".")?>
 							</span>
 						</div>
 					</li>
@@ -52,7 +52,7 @@
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total   IDR <?=$total?>
+						Total   IDR <?=number_format($total,0,",",".")?>
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
@@ -87,6 +87,7 @@
 			$type_item= $items->type_desc;
 			$weight_item= $items->weight;
 			$care_ins= $items->care_ins;
+			$size='L';
 		?>
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-100 p-lr-0-lg">
 			<a href="<?=base_url('index.php/Products')?>" class="stext-109 cl8 hov-cl1 trans-04">
@@ -146,13 +147,22 @@
 
 						<p class="cl2 p-t-5">
 							<?php if ($login):?>
-								<form action="<?base_url('index.php/Product/add_wishlist')?>" method="post">
-									<button type="submit" class="fs-20 stext-101 cl3 hov-cl1 trans-04 lh-10p-tb-2 js-addwish-detail">
+								<form action="<?=base_url('index.php/Cart/add_item')?>" method="post" class="p-t-10">
+								<!-- <form action="<?base_url('index.php/Wishlist/add_wishlist')?>" method="post"> -->
+									<!-- <button type="submit" value="wishlist" class="fs-20 stext-101 cl3 hov-cl1 trans-04 lh-10p-tb-2 js-addwish-detail"> -->
+									<?php if($wishlist):?>
+									<a href="<?=base_url('index.php/Wishlist/removeItem/'.$id_item_col)?>" class="fs-20 stext-101 cl1 hov-cl1 lh-10p-tb-2">
+										Wishlist <i class='zmdi zmdi-favorite'></i>
+									</a>
+									<?php else:?>
+									<button type="submit" value="wishlist" name="addwishlist" class="fs-20 stext-101 cl3 hov-cl1 trans-04 lh-10p-tb-2">
 										Wishlist <i class='zmdi zmdi-favorite'></i>
 									</button>
-								</form>
+									<?php endif;?>
+									
+								<!-- </form> -->
 							<?php else:?>
-							<a href="<?=base_url('index.php/Login')?>" class="fs-20 cl3 hov-cl1 trans-04 lh-10p-tb-2">
+							<a href="<?=base_url('index.php/Login')?>" class="fs-20 stext-101 cl3 hov-cl1 trans-04 lh-10p-tb-2">
 								Wishlist <i class="zmdi zmdi-favorite"></i>
 							</a>
 							<?php endif;?>
@@ -163,11 +173,12 @@
 						</p>
 						
 						<!--  -->
-					<?php if($login):?>
-						<form action="<?=base_url('index.php/Products/add_to_cart')?>" method="post" class="p-t-33">
+					<!-- <?php if($login):?>
+						<form action="<?=base_url('index.php/Cart/add_to_cart')?>" method="post" class="p-t-33">
 					<?php else:?>
 						<div class="p-t-33">
-					<?php endif;?>
+					<?php endif;?> -->
+						<div class="p-t-33">
 							<?=form_hidden('idColor', $id_item_col)?>
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
@@ -230,7 +241,7 @@
 									</div>
 
 								<?php if ($login):?>
-									<input type="submit" value="Add to cart" id="addtocart" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<input type="submit" value="Add to cart" id="addtocart" name="addtocart" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 								<?php else:?>
 									<a href="<?=base_url('index.php/Login')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 										Add to cart
@@ -378,25 +389,9 @@
 								</a>
 
 								<span class="stext-105 cl3">
-									IDR <?=$price_item?>
+									IDR <?=number_format($price_item,0,",",".")?>
 								</span>
 							</div>
-
-							<!-- <div class="block2-txt-child2 flex-r p-t-3">
-							<?php if ($login):?>
-								<form action="<?base_url('index.php/Product/add_wishlist')?>" method="post">
-								<span class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
-								</span>
-								</form>
-							<?php else:?>
-								<a href="<?=base_url('index.php/Login')?>" class="btn-addwish-b2 dis-block pos-relative">
-									<img class="icon-heart1 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-01.png')?>" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
-								</a>
-							<?php endif;?>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -416,17 +411,31 @@
 <?=$footer?>
 <script>
 var stock=0;
-	<?php if ($modal):?>
+	<?php if ($modal=="cart"):?>
 	$('.js-addcart-detail').each(function () {
-		var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+		var nameProduct = $('.js-name-detail').html();
 		$(this).ready(function () {
 			swal(nameProduct, "is added to cart !", "success");
 		});
 	});
+
+	<?php elseif ($modal=="wishlist"):?>
+	$('.js-addcart-detail').each(function () {
+		var nameProduct = $('.js-name-detail').html();
+		$(this).ready(function () {
+			swal(nameProduct, "is added to wishlist !", "success");
+		});
+	});
+
+	<?php elseif ($modal=="remove"):?>
+		var nameProduct = $('.js-name-detail').html();
+		$(this).ready(function () {
+			swal(nameProduct, "is removed from wishlist !", "success");
+		});	
 	<?php endif;?>
 
 	$('.btn-num-product-up').on('click', function(){
-        var numProduct = Number($(this).prev().val());
+		var numProduct = Number($(this).prev().val());
         if(numProduct<stock) $(this).prev().val(numProduct + 1);
     });
 

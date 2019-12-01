@@ -43,6 +43,7 @@
 									$item_type= $item['type_desc'];
 									$item_qty= $item['quantity'];
 									$item_size= $item['item_size'];
+									$stock= $item['stock'];
 								?>
 								<tr class="table_row">
 									<td class="column-1">
@@ -58,7 +59,7 @@
 									<td class="column-3"><?=$item_color?></td>
 									<td class="column-3"><?=$item_size?></td>
 									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
+										<div class="wrap-num-product flex-w m-l-auto m-r-0" data-stock="<?=$stock?>">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
@@ -106,3 +107,10 @@
 		</div>
 	</form>
 <?=$footer?>
+<script>
+	$('.btn-num-product-up').on('click', function(){
+	var numProduct = Number($(this).prev().val());
+	var stock= $(this).parent().data('stock');
+	if(numProduct<stock) $(this).prev().val(numProduct + 1);
+});
+</script>

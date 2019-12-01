@@ -1,5 +1,5 @@
 <!----------------------------------------------- CART ----------------------------------------------->
-<div class="wrap-header-cart js-panel-cart">
+	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -100,8 +100,8 @@
 								$trans_id= $row['id_trans'];
 								$trans_date= date_create($row['trans_date']);
 								$shipping= $row['shipping_fee'];
-								if ($shipping==0) $shipping= "FREE";
-								else $shipping="IDR ".number_format($shipping,0,",",".");
+								if ($shipping==0) $shipping= "FREE Shipping";
+								else $shipping="Shipping fee IDR ".number_format($shipping,0,",",".");
 								$trans_stat= $row['status_desc'];
 								$total_item= $row['total'];
 								$id_stat= $row['stats'];
@@ -116,7 +116,7 @@
 										<p class="card-text stext-101">Total item(s): <?=$total_item?></p>
 									</div>
 									<div class="col-6 col-md-4 pl-md-5">
-										<p class="card-text stext-101">Shipping: <?=$shipping?></p>
+										<p class="card-text stext-101"><?=$shipping?></p>
 										<p class="card-text stext-101">
 											<span class="<?php if($id_stat>3): echo"cl13"; else: echo"cl11"; endif;?>"> <?=$trans_stat?></span>
 										</p>

@@ -48,7 +48,7 @@
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
-					<a href="#" class="logo">
+					<a href="<?=base_url()?>" class="logo">
 						<img src="<?=base_url('asset/images/icons/logo-01.png')?>" alt="IMG-LOGO">
 					</a>
 
@@ -99,9 +99,9 @@
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#"
+						<a href="<?=base_url('index.php/Wishlist')?>"
 							class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-							data-notify="0">
+							data-notify="<?=$total_wishlist_items?>">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 
@@ -130,7 +130,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.html"><img src="<?=base_url('asset/images/icons/logo-01.png')?>" alt="IMG-LOGO"></a>
+				<a href="<?=base_url()?>"><img src="<?=base_url('asset/images/icons/logo-01.png')?>" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -140,19 +140,19 @@
 				</div> -->
 			<?php if($login):?>
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-				data-notify="2">
+				data-notify="<?=$total_cart_items?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#"
+				<a href="<?=base_url('index.php/Wishlist')?>"
 					class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-					data-notify="0">
+					data-notify="<?=$total_wishlist_items?>">
 					<i class="zmdi zmdi-favorite-outline"></i>
 				</a>
 
-				<a href="<?=base_url('index.php/')?>" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
+				<a href="<?=base_url('index.php/Cart/history')?>" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
 					data-notify="">
-					<i class="zmdi zmdi-account"></i>
+					<i class="zmdi zmdi-file-text"></i>
 				</a>
 
 				<a href="<?=base_url('index.php/Login/logging_out')?>" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
@@ -182,21 +182,21 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Free shipping for standard order over IDR 500000
+						Free shipping for standard order over IDR 500.000
 					</div>
 				</li>
 
-				<li>
+				<!-- <li>
 					<div class="right-top-bar flex-w h-full">
-						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQs
-						</a> -->
+						</a>
 
-						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							My Account
-						</a> -->
+						</a>
 					</div>
-				</li>
+				</li> -->
 			</ul>
 
 			<ul class="main-menu-m">
@@ -223,20 +223,4 @@
 				</li>
 			</ul>
 		</div>
-
-		<!-- Modal Search -->
-		<!-- <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-			<div class="container-search-header">
-				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-					<img src="<?=base_url('asset/images/icons/icon-close2.png')?>" alt="CLOSE">
-				</button>
-
-				<form class="wrap-search-header flex-w p-l-15">
-					<button class="flex-c-m trans-04">
-						<i class="zmdi zmdi-search"></i>
-					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
-				</form>
-			</div>
-		</div> -->
 	</header>

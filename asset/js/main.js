@@ -108,24 +108,6 @@
         }
     });
 
-
-    /*==================================================================
-    [ Show / hide modal search ]*/
-    $('.js-show-modal-search').on('click', function(){
-        $('.modal-search-header').addClass('show-modal-search');
-        $(this).css('opacity','0');
-    });
-
-    $('.js-hide-modal-search').on('click', function(){
-        $('.modal-search-header').removeClass('show-modal-search');
-        $('.js-show-modal-search').css('opacity','1');
-    });
-
-    $('.container-search-header').on('click', function(e){
-        e.stopPropagation();
-    });
-
-
     /*==================================================================
     [ Isotope ]*/
     var $topeContainer = $('.isotope-grid');
@@ -165,19 +147,6 @@
 
             $(this).addClass('how-active1');
         });
-    });
-
-    /*==================================================================
-    [ Filter / Search product ]*/
-
-    $('.js-show-search').on('click',function(){
-        $(this).toggleClass('show-search');
-        $('.panel-search').slideToggle(400);
-
-        if($('.js-show-filter').hasClass('show-filter')) {
-            $('.js-show-filter').removeClass('show-filter');
-            $('.panel-filter').slideUp(400);
-        }    
     });
 
     /*==================================================================
