@@ -24,8 +24,8 @@
 							<p class="mtext-106"><?=date_format(date_create($trans->trans_date),"d  M  Y")?></p>
 						</div>
 						<div class="col-4">
-							<p class="mtext-106 text-bold text-uppercase <?php if($trans->stats>3): echo"cl13"; else: echo"cl11"; endif;?>">Status <?=$trans->status_desc?></p>
-							<p class="mtext-106">Shipping Fee <?php if($trans->shipping_fee==0):?>FREE<?php else:?>IDR <?=number_format($trans->shipping_fee,0,",",".")?><?php endif;?></p>
+							<p class="mtext-106 text-bold text-uppercase <?php if($trans->stats>3): echo"cl13"; else: echo"cl11"; endif;?>"><?=$trans->status_desc?></p>
+							<p class="mtext-106"><?php if($trans->shipping_fee==0):?>FREE Shipping<?php else:?>Shipping fee IDR <?=number_format($trans->shipping_fee,0,",",".")?><?php endif;?></p>
 						</div>
 					</div>
 				</div>

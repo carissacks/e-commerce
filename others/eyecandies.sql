@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2019 at 10:47 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Dec 01, 2019 at 03:07 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -115,7 +115,7 @@ CREATE TABLE `item_stock` (
 
 INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (1, 'L', 0),
-(1, 'M', 10),
+(1, 'M', 0),
 (1, 'S', 10),
 (1, 'XL', 10),
 (2, 'L', 10),
@@ -124,7 +124,7 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (2, 'XL', 10),
 (3, 'L', 10),
 (3, 'M', 10),
-(3, 'S', 10),
+(3, 'S', 9),
 (3, 'XL', 10),
 (4, 'L', 10),
 (4, 'M', 10),
@@ -182,17 +182,17 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (17, 'M', 10),
 (17, 'S', 10),
 (17, 'XL', 10),
-(18, 'L', 10),
-(18, 'M', 10),
+(18, 'L', 1),
+(18, 'M', 0),
 (18, 'S', 10),
 (18, 'XL', 10),
-(19, 'L', 10),
-(19, 'M', 10),
-(19, 'S', 10),
-(19, 'XL', 10),
+(19, 'L', 0),
+(19, 'M', 0),
+(19, 'S', 2),
+(19, 'XL', 9),
 (20, 'L', 10),
 (20, 'M', 10),
-(20, 'S', 10),
+(20, 'S', 9),
 (20, 'XL', 10),
 (21, 'L', 10),
 (21, 'M', 10),
@@ -362,13 +362,6 @@ CREATE TABLE `shopping_cart` (
   `item_size` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `shopping_cart`
---
-
-INSERT INTO `shopping_cart` (`id_item_colored`, `email_user`, `quantity`, `item_size`) VALUES
-(3, 'andy@gmail.com', 1, 'L');
-
 -- --------------------------------------------------------
 
 --
@@ -389,8 +382,7 @@ INSERT INTO `status` (`id_status`, `status_desc`) VALUES
 (2, 'Processing order'),
 (3, 'Ready to send'),
 (4, 'Shipping'),
-(5, 'Received'),
-(6, 'Cancelled');
+(5, 'Received');
 
 -- --------------------------------------------------------
 
@@ -415,12 +407,31 @@ INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `UnitPric
 ('1', 8, 1, 149900, 'S'),
 ('1', 13, 1, 399900, 'S'),
 ('10', 12, 1, 449900, 'L'),
+('11', 3, 1, 899900, 'S'),
+('12', 19, 1, 799900, 'XL'),
+('13', 19, 1, 799900, 'M'),
+('14', 19, 1, 799900, 'M'),
+('15', 18, 10, 799900, 'M'),
+('16', 1, 4, 799900, 'M'),
+('17', 1, 4, 799900, 'M'),
+('18', 1, 4, 799900, 'M'),
+('19', 1, 4, 799900, 'M'),
 ('2', 14, 1, 599900, 'M'),
 ('2', 15, 2, 399900, 'S'),
 ('2', 19, 1, 799900, 'M'),
+('20', 1, 4, 799900, 'M'),
+('21', 1, 4, 799900, 'M'),
+('22', 1, 4, 799900, 'M'),
+('23', 1, 4, 799900, 'M'),
+('24', 1, 2, 799900, 'M'),
+('25', 19, 3, 799900, 'M'),
+('26', 19, 5, 799900, 'L'),
+('27', 18, 9, 799900, 'L'),
+('27', 19, 5, 799900, 'L'),
 ('3', 6, 1, 149900, 'M'),
 ('3', 8, 1, 149900, 'S'),
-('4', 5, 1, 149900, 'XL'),
+('32', 20, 1, 499900, 'S'),
+('4', 5, 10, 149900, 'XL'),
 ('5', 21, 1, 499900, 'M'),
 ('6', 10, 1, 449900, 'L'),
 ('6', 11, 1, 449900, 'L'),
@@ -450,17 +461,38 @@ CREATE TABLE `transaction_detail` (
 --
 
 INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date`, `shipping_fee`) VALUES
-(1, 'andre@gmail.com', '1', '2019-11-01', 0),
+(1, 'andre@gmail.com', '2', '2019-11-01', 0),
 (2, 'linata@gmail.com', '3', '2019-10-17', 0),
 (3, 'caca@gmail.com', '2', '2019-10-30', 10000),
-(4, 'andre@gmail.com', '4', '2019-10-31', 0),
+(4, 'andre@gmail.com', '4', '2019-10-31', 10000),
 (5, 'aldo@gmail.com', '5', '2019-09-20', 0),
 (6, 'billy@gmail.com', '6', '2019-09-01', 0),
 (7, 'wahyudi@gmail.com', '2', '2019-11-03', 0),
-(8, 'linata@gmail.com', '1', '2019-11-11', 0),
+(8, 'linata@gmail.com', '2', '2019-11-11', 0),
 (9, 'andy@gmail.com', '5', '2019-11-06', 0),
 (10, 'ariel@gmail.com', '6', '2019-11-03', 0),
-(11, 'andy@gmail.com', '1', '2019-11-26', 0);
+(11, 'andre@gmail.com', '2', '2019-11-28', 0),
+(12, 'andre@gmail.com', '2', '2019-11-29', 0),
+(13, 'andre@gmail.com', '2', '2019-11-29', 0),
+(14, 'andre@gmail.com', '2', '2019-11-29', 0),
+(15, 'andre@gmail.com', '2', '2019-11-29', 0),
+(16, 'andre@gmail.com', '2', '2019-11-29', 0),
+(17, 'andre@gmail.com', '2', '2019-11-29', 0),
+(18, 'andre@gmail.com', '2', '2019-11-29', 0),
+(19, 'andre@gmail.com', '2', '2019-11-29', 0),
+(20, 'andre@gmail.com', '2', '2019-11-29', 0),
+(21, 'andre@gmail.com', '2', '2019-11-29', 0),
+(22, 'andre@gmail.com', '2', '2019-11-29', 0),
+(23, 'andre@gmail.com', '2', '2019-11-29', 0),
+(24, 'andre@gmail.com', '2', '2019-11-29', 0),
+(25, 'andre@gmail.com', '2', '2019-11-29', 0),
+(26, 'andre@gmail.com', '2', '2019-11-29', 0),
+(27, 'andre@gmail.com', '2', '2019-11-29', 0),
+(28, 'andre@gmail.com', '2', '2019-11-29', 0),
+(29, 'andre@gmail.com', '2', '2019-11-29', 0),
+(30, 'andre@gmail.com', '2', '2019-11-29', 0),
+(31, 'andre@gmail.com', '2', '2019-11-29', 0),
+(32, 'andre@gmail.com', '2', '2019-12-01', 0);
 
 -- --------------------------------------------------------
 
@@ -496,7 +528,7 @@ INSERT INTO `type` (`id_type`, `type_desc`) VALUES
 CREATE TABLE `wishlist` (
   `id_item_colored` varchar(10) NOT NULL,
   `email_user` varchar(50) NOT NULL,
-  `item_size` varchar(10) NOT NULL
+  `item_size` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -580,7 +612,7 @@ ALTER TABLE `type`
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`id_item_colored`,`email_user`),
+  ADD PRIMARY KEY (`id_item_colored`,`email_user`,`item_size`),
   ADD KEY `email_user` (`email_user`);
 
 --
@@ -597,13 +629,13 @@ ALTER TABLE `item_colored`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaction_detail`
 --
 ALTER TABLE `transaction_detail`
-  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `type`

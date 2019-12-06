@@ -6,6 +6,8 @@ class Products extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('product_model');
+		$this->load->model('cart_model');
+		$this->load->model('wishlist_model');
 	}
 
 	public function index(){
@@ -23,7 +25,7 @@ class Products extends CI_Controller{
 
 		if($this->session->has_userdata('email')):
 			$email= $this->session->email;
-			$data['cart_items']= $this->product_model->get_itemInCart($email);
+			$data['cart_items']= $this->cart_model->get_itemInCart($email)->result_array();
 		else:
 			$data['cart_items']='';
 		endif;
@@ -35,23 +37,33 @@ class Products extends CI_Controller{
 		$this->load->view('pages/productview.php',$data);
 	}
 
-	public function showDetail($id, $modal=FALSE){
+	public function showDetail($id, $modal=NULL){
 		$this->load->view('pages/header.php',$this->head_class());
 		if($this->session->has_userdata('email')):
 			$email= $this->session->email;
-			$data['cart_items']= $this->product_model->get_itemInCart($email);
+			$item_exist= $this->wishlist_model->is_itemInWishlist($id,$email);
+			if($item_exist)
+				$data['wishlist']= TRUE;
+			else
+				$data['wishlist']= FALSE;
+			$data['cart_items']= $this->cart_model->get_itemInCart($email)->result_array();
 			$data['login']= TRUE;
 		else:
 			$data['cart_items']='';
 			$data['login']= FALSE;
 		endif;
+
+		$get= $this->input->get();
+		if(isset($get['status'])){
+			$modal=$get['status'];
+		}
+		$data['modal']= $modal;
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
-		$data['items']= $this->product_model->get_item($id);
+		$data['items']= $this->product_model->get_item_detail($id);
 		$data['photos']= $this->product_model->get_photo($id);
 		$data['stocks']= $this->product_model->get_stock($id);
 		$data['related']= $this->product_model->get_related($id);
 		$data['color']= $this->product_model->get_other_color($id);
-		$data['modal']= $modal;
 		$this->load->view('pages/productDetailview.php',$data);
 	}
 
@@ -70,7 +82,7 @@ class Products extends CI_Controller{
 		$this->load->view('pages/header.php',$this->head_class());
 		if($this->session->has_userdata('email')):
 			$email= $this->session->email;
-			$data['cart_items']= $this->product_model->get_itemInCart($email);
+			$data['cart_items']= $this->cart_model->get_itemInCart($email)->result_array();
 		else:
 			$data['cart_items']='';
 		endif;
@@ -79,25 +91,6 @@ class Products extends CI_Controller{
 		$data['selected_type']=$type;
 		$this->load->view('pages/productview.php',$data);
 
-	}
-
-	public function add_to_cart(){
-		$email= $this->session->email;
-		$post= $this->input->post();
-		// var_dump($post);
-		$id= $post['idColor'];
-		$size= $post['size'];
-		$qty= $post['qty'];
-
-		$item_exist= $this->product_model->is_item_in_cart($id,$email,$size);
-		if($item_exist){
-			$qty= $item_exist->quantity+$qty;
-			$this->product_model->update_shopping_cart($id,$email,$size,$qty);
-		}
-		else
-			$this->product_model->add_shopping_cart($id,$email,$size,$qty);
-		redirect(base_url('index.php/Products/showDetail/'.$id.'/'.TRUE));
-		// $this->showDetail($id,TRUE);
 	}
 
 	private function pagination_config($uri=3){
@@ -141,7 +134,8 @@ class Products extends CI_Controller{
 				'new_class' => '',
 				'shop_class' => 'active-menu',
 				'sale_class' => '',
-				'total_cart_items' => $this->product_model->get_totalCartData($email)
+				'total_cart_items' => $this->cart_model->get_totalCartData($email),
+				'total_wishlist_items' => $this->wishlist_model->get_totalWishlistData($email)
 			);
 		}
 		else {
