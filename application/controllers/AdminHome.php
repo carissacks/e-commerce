@@ -9,23 +9,31 @@ class AdminHome extends CI_Controller{
 	}
 
 	public function index(){
-        $data['countproductshow'] = $this->AdminHome_model->countProductShow();
-        $data['countproducthide'] = $this->AdminHome_model->countProductHide();
-        $data['countmonthlysale'] = $this->AdminHome_model->countMonthlysales();
-        $data['wishlist'] = $this->AdminHome_model->wishlist();
-        $data['latestsales'] = $this->AdminHome_model->latestsales();
-        $data['monthlyearning'] = $this->AdminHome_model->monthlyearning();
-        $data['countuser'] = $this->AdminHome_model->countuser();
-        $data['countorder'] = $this->AdminHome_model->countorder();
-        $data['countoutstock'] = $this->AdminHome_model->countoutstock();
-        // $data['namauser'] = $this->AdminHome_model->namauser();
-        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-        $data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
-        $data['content']= $this->load->view('include/ContentDashboard',$data,TRUE);
-        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        $admin= $this->session->priv;
+        // $adminname = $this->session->name;
+        if ($admin == 1){
+            
+            $data['countproductshow'] = $this->AdminHome_model->countProductShow();
+            $data['countproducthide'] = $this->AdminHome_model->countProductHide();
+            $data['countmonthlysale'] = $this->AdminHome_model->countMonthlysales();
+            $data['wishlist'] = $this->AdminHome_model->wishlist();
+            $data['latestsales'] = $this->AdminHome_model->latestsales();
+            $data['monthlyearning'] = $this->AdminHome_model->monthlyearning();
+            $data['countuser'] = $this->AdminHome_model->countuser();
+            $data['countorder'] = $this->AdminHome_model->countorder();
+            $data['countoutstock'] = $this->AdminHome_model->countoutstock();
+            // $data['namauser'] = $this->AdminHome_model->namauser();
+            $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+            $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+            $data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+            $data['content']= $this->load->view('include/ContentDashboard',$data,TRUE);
+            $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+            
+            $this->load->view('pages/Dashboard.php',$data);
+        }else {
+            redirect(base_url());
+        }
         
-        $this->load->view('pages/Dashboard.php',$data);
     }
 
     public function Detail($id){
