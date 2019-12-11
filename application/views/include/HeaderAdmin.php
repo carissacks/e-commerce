@@ -149,7 +149,7 @@
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-                                        <img src="<?= base_url('asset/img/avatars/1.png') ?>" alt class="d-block ui-w-30 rounded-circle">
+                                        <img src="<?= base_url('asset/images/icons/favicon.png') ?>" alt class="d-block ui-w-30 rounded-circle">
                                         <span class="px-1 mr-lg-2 ml-2 ml-lg-0">
                                             <?php 
                                                 echo $this->session->name; 
