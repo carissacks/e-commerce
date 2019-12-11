@@ -10,22 +10,31 @@ class AdminHome extends CI_Controller{
 
 /////////////////////////////////////////////////////////////// Dashboard
 	public function index(){
-        $data['countproductshow'] = $this->AdminHome_model->countProductShow();
-        $data['countproducthide'] = $this->AdminHome_model->countProductHide();
-        $data['countmonthlysale'] = $this->AdminHome_model->countMonthlysales();
-        $data['wishlist'] = $this->AdminHome_model->wishlist();
-        $data['latestsales'] = $this->AdminHome_model->latestsales();
-        $data['monthlyearning'] = $this->AdminHome_model->monthlyearning();
-        $data['countuser'] = $this->AdminHome_model->countuser();
-        $data['countorder'] = $this->AdminHome_model->countorder();
-        $data['countoutstock'] = $this->AdminHome_model->countoutstock();
-        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-        $data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
-        $data['content']= $this->load->view('include/ContentDashboard',$data,TRUE);
-        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        $admin= $this->session->priv;
+        // $adminname = $this->session->name;
+        if ($admin == 1){
+            
+            $data['countproductshow'] = $this->AdminHome_model->countProductShow();
+            $data['countproducthide'] = $this->AdminHome_model->countProductHide();
+            $data['countmonthlysale'] = $this->AdminHome_model->countMonthlysales();
+            $data['wishlist'] = $this->AdminHome_model->wishlist();
+            $data['latestsales'] = $this->AdminHome_model->latestsales();
+            $data['monthlyearning'] = $this->AdminHome_model->monthlyearning();
+            $data['countuser'] = $this->AdminHome_model->countuser();
+            $data['countorder'] = $this->AdminHome_model->countorder();
+            $data['countoutstock'] = $this->AdminHome_model->countoutstock();
+            // $data['namauser'] = $this->AdminHome_model->namauser();
+            $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+            $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+            $data['header']= $this->load->view('include/HeaderAdmin',$data,TRUE);
+            $data['content']= $this->load->view('include/ContentDashboard',$data,TRUE);
+            $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+            
+            $this->load->view('pages/Dashboard.php',$data);
+        }else {
+            redirect(base_url());
+        }
         
-        $this->load->view('pages/Dashboard.php',$data);
     }
 
 /////////////////////////////////////////////////////////////// 
@@ -302,6 +311,36 @@ class AdminHome extends CI_Controller{
 		$this->load->view('pages/TableProductColor.php',$data);
     }
 
+    public function FormEditProductStock()
+    {
+        $data['data'] = $this->AdminHome_model->get_all_size_and_stock($_GET['id'], $_GET['size']);
+        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        
+        $this->load->view('pages/FormEditStockSize.php',$data);
+    }
+
+    public function FormEditProduct()
+	{
+        $item_type = $_GET['type'];
+        $data['type']  = $this->AdminHome_model->getType();
+        
+        $data = array(
+            'button' => 'Create',
+            'type' => $this->AdminHome_model->getType(),
+            'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type, // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+        );
+        $data['typebefore'] = $this->AdminHome_model->get_specific_type($_GET['id_item']);
+        $data['details']= $this->AdminHome_model->get_specific_data($_GET['id_item']);
+		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+		$this->load->view('pages/FormEditProduct.php',$data);
+    }
+
     public function AddProductDetail(){
         $this->form_validation->set_rules('itemsize[]', 'itemsize', 'required|trim|min_length[1]|max_length[2]',[
             'required' => '*You must input item size!',
@@ -495,16 +534,17 @@ class AdminHome extends CI_Controller{
             $Careinstruction = $this->input->post('careinstruction');
 
             $data = array();
-            
+
             foreach($ItemColor as $datacolors){ // Kita buat perulangan berdasarkan nis sampai data terakhir
-				array_push($data, array(
-					'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
+				      array_push($data, array(
+					      'id_item' => $ItemID,  // Ambil dan set data nama sesuai index array dari $index
                     'item_color'=>$datacolors, // Ambil dan set data alamat sesuai index array dari $index
                 ));
             }
             $this->AdminHome_model->AddProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction, $data);
+
             redirect('AdminHome/showProductColor?id='.$ItemID);   
-		}
+		    }
     }
 
 /////////////////////////////////////////////////////////////// Edit Product

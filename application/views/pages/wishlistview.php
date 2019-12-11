@@ -1,3 +1,79 @@
+<!----------------------------------------------- CART ----------------------------------------------->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			<?php if($total_cart_items !=0):?>
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<?php 
+						$total=0;
+						foreach($cart_items as $cart_row):
+							$cart_name= $cart_row['item_name'];
+							$cart_price= $cart_row['selling_price'];
+							$id_item_col= $cart_row['id_item_colored'];
+							$cart_color= $cart_row['item_color'];
+							$cart_photo= $cart_row['item_photo'];
+							$cart_type= $cart_row['type_desc'];
+							$cart_qty= $cart_row['quantity'];
+							$cart_size= $cart_row['item_size'];
+							$total+= $cart_qty*$cart_price;
+					?>
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="<?=base_url('asset/images/'.$cart_type.'/'.$cart_photo)?>" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="header-cart-item-name m-b-5 hov-cl1 trans-04">
+								<?=$cart_name?>
+							</a>
+
+							<span class="header-cart-item-info">
+								<?=$cart_size?>
+							</span>
+
+							<span class="header-cart-item-info">
+								<?=$cart_qty?> x IDR <?=number_format($cart_price,0,",",".")?>
+							</span>
+						</div>
+					</li>
+					<?php endforeach;?>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total   IDR <?=number_format($total,0,",",".")?>
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="<?=base_url('index.php/Cart')?>" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="<?=base_url('index.php/Cart/proceed')?>" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+			<?php else:?>
+			<div class="col-12">
+				<p>Your shopping cart is empty.</p>
+			</div>
+			<?php endif;?>
+		</div>
+	</div>
+	<!----------------------------------------------- END OF CART ----------------------------------------------->
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-100 p-lr-0-lg">
@@ -11,97 +87,63 @@
 			</span>
 		</div>
 	</div>
-	
-	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="<?=base_url('index.php/Cart/proceed')?>" method="post">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 m-lr-auto m-b-50">
-					<?php if($total !=0):?>	
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
-						
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">Product</th>
-									<th class="column-2"></th>
-									<th class="column-3">Color</th>
-									<th class="column-3">Size</th>
-									<th class="column-4 text-center">Quantity</th>
-									<th class="column-4">Price @</th>
-									<th class="column-5"></th>
-								</tr>
+	<section class="bg0 p-t-23 p-b-140 p-l-30">
+		<div class="container p-lr-25">
 
-							<?php 
-								$index=0;
-								foreach($items as $item):
-									$item_name= $item['item_name'];
-									$item_price= $item['selling_price'];
-									$id_item_col= $item['id_item_colored'];
-									$item_color= $item['item_color'];
-									$item_photo= $item['item_photo'];
-									$item_type= $item['type_desc'];
-									$item_qty= $item['quantity'];
-									$item_size= $item['item_size'];
-								?>
-								<tr class="table_row">
-									<td class="column-1">
-										<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>">	
-											<div class="how-itemcart1">
-												<img src="<?=base_url('asset/images/'.$item_type.'/'.$item_photo)?>" alt="IMG">
-											</div>
-										</a>
-									</td>
-									<td class="column-2">
-										<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="cl8 hov-cl1 trans-04"><?=$item_name?></a>
-									</td>
-									<td class="column-3"><?=$item_color?></td>
-									<td class="column-3"><?=$item_size?></td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
+			<?php if($total_items !=0):?>	
+			<div class="row isotope-grid">
+				<?php foreach ($items as $item):
+					$item_name= $item['item_name'];
+					$item_price= $item['selling_price'];
+					$id_item_col= $item['id_item_colored'];
+					$item_color= $item['item_color'];
+					$item_photo= $item['item_photo'];
+					$item_type= $item['type_desc'];
+				?>
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?=$item_type?>">
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="<?=base_url('asset/images/'.$item_type.'/'.$item_photo)?>" alt="IMG-PRODUCT">
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty[<?=$index?>]" value="<?=$item_qty?>" readonly>
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-4">IDR <?=$item_price?></td>
-									<td class="column-1 pr-4">
-										<a href="<?=base_url('index.php/Cart/remove/'.$id_item_col.'/'.$item_size)?>">
-											<span class="flex-c-m stext-101 cl0 size-105 bg3 bor14 hov-btn3 p-lr-2 trans-04 pointer">
-												Add to cart
-											</span>
-										</a>
-									</td>
-									<?=form_hidden('idColor['.$index.']',$id_item_col);?>
-									<?=form_hidden('size['.$index.']',$item_size);?>
-								</tr>
-							<?php
-								$index++;
-								endforeach;?>
-							</table>
-							<?=form_hidden('index',$index);?>
-
+							<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								Detail
+							</a>
 						</div>
 
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm justify-content-end">	
-							<!-- <a href="<?=base_url('index.php/Cart/proceed')?>"> -->
-								<input type="submit" value="Proceed" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-							<!-- </a> -->
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="<?=base_url('index.php/Products/showDetail/'.$id_item_col)?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?=$item_name?>
+								</a>
+
+								<span class="stext-105 cl3">
+									IDR <?=number_format($item_price,0,",",".")?>
+								</span>
+							</div>
+
+							<form action="<?=base_url('index.php/Wishlist/removeItem')?>" method="post" class="block2-txt-child2 flex-r p-t-3">
+								<button class="btn-addwish-b2 dis-block pos-relative js-addedwish-b2" type="submit" value="<?=$id_item_col?>" name="remove">
+									<img class="icon-heart2 dis-block trans-04" src="<?=base_url('asset/images/icons/icon-heart-02.png')?>" alt="ICON">
+								</button>
+							</form>
 						</div>
 					</div>
-					<?php else:?>
-					<div class="m-l-25 m-r--38 m-lr-0-xl text-center">
-						<h2>Your shopping cart is empty. Start shopping now!</h2>
-					</div>
-					<?php endif;?>
 				</div>
+				<?php endforeach;?>
 			</div>
+				<?php else:?>
+			<div class="m-l-25 m-r--38 m-lr-0-xl text-center m-t-70">
+				<h2>Your wishlist is empty. Start shopping now!</h2>
+			</div>
+			<?php endif;?>
 		</div>
-	</form>
+	</section>
+	
 <?=$footer?>
+<?php if ($modal_remove):?>
+	<script>
+		$(document).ready(function () {
+			swal('Item is removed from your wishlist');		
+		});	
+	</script>
+<?php endif;?>

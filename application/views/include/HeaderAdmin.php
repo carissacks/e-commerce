@@ -145,12 +145,32 @@
 
                             <!-- Divider -->
                             <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
-                            <div class="demo-navbar-user nav-item dropdown">
+                            
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
+                                        <img src="<?= base_url('asset/img/avatars/1.png') ?>" alt class="d-block ui-w-30 rounded-circle">
+                                        <span class="px-1 mr-lg-2 ml-2 ml-lg-0">
+                                            <?php 
+                                                echo $this->session->name; 
+                                            ?>
+                                        </span>
+                                    </span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="http://localhost/uaspemweb/index.php/Login/logging_out" class="dropdown-item">
+                                    <i class="feather icon-power text-danger"></i> &nbsp; Log Out</a>
+                                </div>
+                            </div>
+                            <!-- <div class="demo-navbar-user nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="<?= base_url('index.php/AdminHome/FormEditProduct') ?>" data-toggle="dropdown">
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-                                        <img src="assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
+                                        <img src="<?= base_url('asset/img/avatars/1.png') ?>" alt class="d-block ui-w-30 rounded-circle">
                                         <span class="px-1 mr-lg-2 ml-2 ml-lg-0">
-                                            Nama blm di echo
+
+                                            <?php 
+                                                echo $this->session->name; 
+                                            ?>
                                         </span>
                                     </span>
                                 </a>
@@ -158,7 +178,7 @@
                                     <a href="javascript:" class="dropdown-item">
                                         <i class="feather icon-power text-danger"></i> &nbsp; Log Out</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </nav>

@@ -84,7 +84,7 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Women Collection 2018
+									Women Collection 2019
 								</span>
 							</div>
 								
@@ -95,7 +95,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="<?=base_url('index.php/Products')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
 							</div>
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-04.jpg')?>);">
+				<div class="item-slick1" style="background-image: url(<?=base_url('asset/images/slide-02.jpg')?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -119,7 +119,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="<?=base_url('index.php/Products/showTypes/Shorts')?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
 							</div>
@@ -165,14 +165,14 @@
 					<div class="block1 wrap-pic-w">
 						<img src="asset/images/banner-01.jpg" alt="IMG-BANNER">
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="<?=base_url('index.php/Products/showTypes/Blouse')?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Dress
+									Blouse
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-									Spring 2018
+									New Trend
 								</span>
 							</div>
 
@@ -188,16 +188,16 @@
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
-						<img src="asset/images/banner-08.jpg" alt="IMG-BANNER">
+						<img src="asset/images/banner-02.jpg" alt="IMG-BANNER">
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="<?=base_url('index.php/Products/showTypes/Skirt')?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Bags
+									Skirt
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-									Spring 2018
+									New Trend
 								</span>
 							</div>
 
@@ -215,10 +215,10 @@
 					<div class="block1 wrap-pic-w">
 						<img src="asset/images/banner-03.jpg" alt="IMG-BANNER">
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="<?=base_url('index.php/Products/showTypes/Tees')?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Accessories
+									Tees
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
@@ -339,66 +339,17 @@
 		</span>
 	</div>
 
-	<!-- Modal1 -->
-	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-		<div class="overlay-modal1 js-hide-modal1"></div>
-
-		<div class="container">
-			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="asset/images/icons/icon-close.png" alt="CLOSE">
-				</button>
-
-				<div class="row">
-					<div class="col-md-6 col-lg-7 p-b-30">
-						<div class="p-l-25 p-r-30 p-lr-0-lg">
-							<div class="wrap-slick3 flex-sb flex-w">
-								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="asset/images/product-detail-01.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="asset/images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="asset/images/product-detail-01.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="asset/images/product-detail-02.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="asset/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="asset/images/product-detail-02.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="asset/images/product-detail-03.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="asset/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="asset/images/product-detail-03.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 <?=$footer?>
-<?php if ($thanks):?>
+<?php if ($trans==='succeed'):?>
 	<script>
 		$(document).ready(function () {
 			swal('Thank you for your purchase!');		
+		});	
+	</script>
+<?php elseif($trans==='failed'):?>
+	<script>
+		$(document).ready(function () {
+			swal('Sorry for the inconvinience, your transaction is failed. Please try again.');		
 		});	
 	</script>
 <?php endif;?>

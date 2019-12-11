@@ -30,7 +30,9 @@
                             'type' => 'hidden',
                             'value' => $typebefore[0]['type_desc']
                         );
- 
+
+                        $id_item = $_GET['id_item'];
+                        $id_item_colored = $_GET['id'];
                         echo form_open_multipart('AdminHome/EditProduct');
                         $style = array(
                             'class' => 'form-control'
