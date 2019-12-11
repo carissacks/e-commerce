@@ -8,8 +8,6 @@
 -- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -589,50 +587,50 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
-('T001-Lemon-1.jpg', 2),
-('T001-Lemon-2.jpg', 2),
-('T001-Lemon-3.jpg', 2),
-('T001-Lemon-4.jpg', 2),
 ('T001-Yellow-1.jpg', 1),
 ('T001-Yellow-2.jpg', 1),
 ('T001-Yellow-3.jpg', 1),
 ('T001-Yellow-4.jpg', 1),
-('T002-Rose-1.jpg', 4),
-('T002-Rose-2.jpg', 4),
-('T002-Rose-3.jpg', 4),
-('T002-Rose-4.jpg', 4),
+('T001-Lemon-1.jpg', 2),
+('T001-Lemon-2.jpg', 2),
+('T001-Lemon-3.jpg', 2),
+('T001-Lemon-4.jpg', 2),
 ('T002-Turquoise-1.jpg', 3),
 ('T002-Turquoise-2.jpg', 3),
 ('T002-Turquoise-3.jpg', 3),
 ('T002-Turquoise-4.jpg', 3),
+('T002-Rose-1.jpg', 4),
+('T002-Rose-2.jpg', 4),
+('T002-Rose-3.jpg', 4),
+('T002-Rose-4.jpg', 4),
 ('T003-Black-1.jpg', 5),
 ('T003-Black-2.jpg', 5),
 ('T003-Black-3.jpg', 5),
-('T003-Floral-1.jpg', 8),
-('T003-Floral-2.jpg', 8),
-('T003-Floral-3.jpg', 8),
-('T003-Red-1.jpg', 7),
-('T003-Red-2.jpg', 7),
-('T003-Red-3.jpg', 7),
 ('T003-White-Blue-1.jpg', 6),
 ('T003-White-Blue-2.jpg', 6),
 ('T003-White-Blue-3.jpg', 6),
+('T003-Red-1.jpg', 7),
+('T003-Red-2.jpg', 7),
+('T003-Red-3.jpg', 7),
+('T003-Floral-1.jpg', 8),
+('T003-Floral-2.jpg', 8),
+('T003-Floral-3.jpg', 8),
 ('T004-Brown-1.jpg', 9),
 ('T004-Brown-2.jpg', 9),
 ('T004-Brown-3.jpg', 9),
 ('T004-Brown-4.jpg', 9),
-('T004-Floral-1.jpg', 12),
-('T004-Floral-2.jpg', 12),
-('T004-Floral-3.jpg', 12),
-('T004-Floral-4.jpg', 12),
-('T004-Green-1.jpg', 11),
-('T004-Green-2.jpg', 11),
-('T004-Green-3.jpg', 11),
-('T004-Green-4.jpg', 11),
 ('T004-Patterned-1.jpg', 10),
 ('T004-Patterned-2.jpg', 10),
 ('T004-Patterned-3.jpg', 10),
 ('T004-Patterned-4.jpg', 10),
+('T004-Green-1.jpg', 11),
+('T004-Green-2.jpg', 11),
+('T004-Green-3.jpg', 11),
+('T004-Green-4.jpg', 11),
+('T004-Floral-1.jpg', 12),
+('T004-Floral-2.jpg', 12),
+('T004-Floral-3.jpg', 12),
+('T004-Floral-4.jpg', 12),
 ('T005-Black-1.jpg', 13),
 ('T005-Black-2.jpg', 13),
 ('T005-Black-3.jpg', 13),
@@ -641,14 +639,14 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T006-Red-2.jpg', 14),
 ('T006-Red-3.jpg', 14),
 ('T006-Red-4.jpg', 14),
-('T007-Beige-1.jpg', 16),
-('T007-Beige-2.jpg', 16),
-('T007-Beige-3.jpg', 16),
-('T007-Beige-4.jpg', 16),
 ('T007-Black-1.jpg', 15),
 ('T007-Black-2.jpg', 15),
 ('T007-Black-3.jpg', 15),
 ('T007-Black-4.jpg', 15),
+('T007-Beige-1.jpg', 16),
+('T007-Beige-2.jpg', 16),
+('T007-Beige-3.jpg', 16),
+('T007-Beige-4.jpg', 16),
 ('T008-Khaki-1.jpg', 17),
 ('T008-Khaki-2.jpg', 17),
 ('T008-Khaki-3.jpg', 17),
@@ -661,6 +659,10 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T010-Cream-2.jpg', 19),
 ('T010-Cream-3.jpg', 19),
 ('T010-Cream-4.jpg', 19),
+('T011-Brown-1.jpg', 20),
+('T011-Brown-2.jpg', 20),
+('T011-Brown-3.jpg', 20),
+('T011-Brown-4.jpg', 20),
 ('T011-Blue-1.jpg', 21),
 ('T011-Blue-2.jpg', 21),
 ('T011-Blue-3.jpg', 21),
@@ -737,23 +739,17 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T020-Green-200.jpg', 48),
 ('T020-Green-99.jpg', 48),
 ('T020-Green-995.jpg', 48),
-('T020-Snake-Skin-169.jpg', 50),
-('T020-Snake-Skin-791.jpg', 50),
-('T020-Snake-Skin-870.jpg', 50),
 ('T020-White-505.jpg', 49),
 ('T020-White-573.jpg', 49),
 ('T020-White-580.jpg', 49),
 ('T020-White-717.jpg', 49),
+('T020-Snake-Skin-169.jpg', 50),
+('T020-Snake-Skin-791.jpg', 50),
+('T020-Snake-Skin-870.jpg', 50),
 ('T021-BlackPink-Patterned-422.jpg', 51),
 ('T021-BlackPink-Patterned-489.jpg', 51),
 ('T021-BlackPink-Patterned-542.jpg', 51),
 ('T021-BlackPink-Patterned-931.jpg', 51),
-('T022-Black-163.jpg', 53),
-('T022-Black-34.jpg', 53),
-('T022-Black-358.jpg', 53),
-('T022-Black-39.jpg', 53),
-('T022-Black-680.jpg', 53),
-('T022-Black-824.jpg', 53),
 ('T022-Cream-267.jpg', 52),
 ('T022-Cream-503.jpg', 52),
 ('T022-Cream-815.jpg', 52),
@@ -1103,13 +1099,11 @@ ALTER TABLE `wishlist`
 --
 ALTER TABLE `item_colored`
   MODIFY `id_item_colored` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
-
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `id_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `transaction_detail`
 --
@@ -1121,7 +1115,6 @@ ALTER TABLE `transaction_detail`
 --
 ALTER TABLE `type`
   MODIFY `id_type` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- Constraints for dumped tables
 --
@@ -1173,7 +1166,6 @@ ALTER TABLE `transaction_detail`
 --
 ALTER TABLE `wishlist`
   ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`email_user`) REFERENCES `ms_users` (`email_user`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
