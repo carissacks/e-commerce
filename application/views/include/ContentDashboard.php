@@ -7,9 +7,9 @@
                         <div class="card mb-4 bg-pattern-2-dark">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="lnr lnr-gift display-4 text-primary"></div>
+                                    <div class="feather icon-eye display-4 text-primary"></div>
                                     <div class="ml-3">
-                                        <div class="text-muted small">Products Show</div>
+                                        <div class="text-muted small">Shown Products</div>
                                         <div class="text-large">
                                             <?php 
                                                 foreach($countproductshow->result_array() as $row){
@@ -26,9 +26,9 @@
                         <div class="card mb-4 bg-pattern-2-dark">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="lnr lnr-gift display-4 text-primary"></div>
+                                    <div class="feather icon-eye-off display-4 text-primary"></div>
                                     <div class="ml-3">
-                                        <div class="text-muted small">Products Hide</div>
+                                        <div class="text-muted small">Hidden Products</div>
                                         <div class="text-large">
                                             <?php 
                                                 foreach($countproducthide->result_array() as $row){
@@ -45,9 +45,9 @@
                         <div class="card mb-4 bg-pattern-2 bg-primary text-white">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="lnr lnr-cart display-4"></div>
+                                    <div class="feather icon-shopping-cart display-4"></div>
                                     <div class="ml-3">
-                                        <div class="small">Monthly sales</div>
+                                        <div class="small">Monthly Sales</div>
                                         <div class="text-large">
                                             <?php 
                                                 foreach($countmonthlysale->result_array() as $row){
@@ -73,7 +73,7 @@
                             <div class="card-body">
                                 <div class="row align-items-center mb-3">
                                     <div class="col-auto">
-                                        <i class="lnr lnr-earth text-primary display-4"></i>
+                                        <i class="lnr lnr-warning text-primary display-4"></i>
                                     </div>
                                     <div class="col">
                                         <h6 class="mb-0 text-muted">Out of <span class="text-primary">Stock</span></h6>
@@ -86,7 +86,7 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <p class="mb-0 text-muted">From Last 24 Hours</p>
+                                <p class="mb-0 text-muted">From The Last 24 Hours</p>
                             </div>
                         </div>
                         <div class="d-flex col-md-6 col-lg-3 align-items-center">
@@ -126,14 +126,14 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <p class="mb-0 text-muted">From Last 6 Months</p>
+                                <p class="mb-0 text-muted">From The Last 6 Months</p>
                             </div>
                         </div>
                         <div class="d-flex col-md-6 col-lg-3 align-items-center">
                             <div class="card-body">
                                 <div class="row align-items-center mb-3">
                                     <div class="col-auto">
-                                        <i class="lnr lnr-magic-wand text-primary display-4"></i>
+                                        <i class="lnr lnr-store text-primary display-4"></i>
                                     </div>
                                     <div class="col">
                                         <h6 class="mb-0 text-muted">Monthly <span class="text-primary">Earnings</span></h6>
@@ -166,10 +166,10 @@
                             <div class="card-header-elements ml-auto p-0">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#sale-stats">Wishlist</a>
+                                        <a class="nav-link active" data-toggle="tab" href="#sale-stats"><i class="feather icon-heart-on"></i> Wishlist</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#latest-sales">Latest sales</a>
+                                        <a class="nav-link" data-toggle="tab" href="#latest-sales"><i class="feather icon-shopping-cart"></i> Latest sales</a>
                                     </li>
                                 </ul>
                             </div>

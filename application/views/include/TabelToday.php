@@ -37,8 +37,8 @@
                         echo "</a>";
                         echo "</td>";
                     echo "</tr>";
-			    }
-		    ?>
+				}
+			?>
         </tbody>
     </table>
     <br>

@@ -12,7 +12,7 @@
     <?php echo $header; ?>
         <div class="container-fluid flex-grow-1 container-p-y">
             <h4 class="font-weight-bold py-3 mb-0 card-header">Add Product</h4>
-            <div class="card mb-4">
+            <div class="card mb-4 p-4">
                 <div class="card-body">
                     <?php
                         echo form_open_multipart('AdminHome/addProduct');

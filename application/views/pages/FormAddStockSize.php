@@ -46,22 +46,27 @@
                             'value' => $_GET['color']
                         );
                         
-                        echo "<div class='form-group row'>";
+                        // echo "<div class='form-group row'>";
                             echo '<input type="hidden" name="id_item_colored" value="'.$_GET['id'].'"><br>';
                             echo '<input type="hidden" name="itemID" value="'.$_GET['itemid'].'"><br>';
-                            echo '<input type="text" name="color" value="'.$_GET['id'].' - '.$_GET['color'].'" disabled><br>';
-                        echo "</div>";
+                            // echo '<input 1type="text" name="color" value="'.$_GET['id'].' - '.$_GET['color'].'" disabled><br>';
+                        // echo "</div>";
+
+						echo '<div class="row p-3">';
+						echo '<div class="col-2 p-0 m-0 bold bg-pattern-3-dark" style="height: 2em;"><b>ID : </b> '.$_GET['id'].'</div>';
+						echo '<div class="col-2 p-0 m-0 bg-pattern-3-dark" style="height: 2em;"><b>Color : </b>'.$_GET['color'].'</div>';
+						echo '</div>';
 
                         echo form_input($color_value, '', $style);
 
-                        echo "<div class='form-row'>";
-                            echo "<div class='form-group row col-md-4'>";
-                                echo form_label('Item Size :',' ',$attribute_label) . form_input('itemsize[]', '', $style);
-                                echo form_error('itemsize[]','<small class="text-danger">','</small>') . "<br>";
-                                echo form_label('Item Stock :',' ',$attribute_label) . form_input('itemstock[]', '', $style);
-                                echo form_error('itemstock[]','<small class="text-danger">','</small>') . "<br>";
-                            echo "</div>";
-                        echo "</div>"; 
+                        // echo "<div class='form-row'>";
+						echo "<div class='form-group row col-md-4'>";
+							echo form_label('Item Size :',' ',$attribute_label) . form_input('itemsize[]', '', $style);
+							echo form_error('itemsize[]','<small class="text-danger">','</small>') . "<br>";
+							echo form_label('Item Stock :',' ',$attribute_label) . form_input('itemstock[]', '', $style);
+							echo form_error('itemstock[]','<small class="text-danger">','</small>') . "<br>";
+						echo "</div>";
+                        // echo "</div>"; 
 
                         echo '<div id="insert-forms"></div>';
                         echo '<br>';
