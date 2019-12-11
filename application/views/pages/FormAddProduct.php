@@ -57,11 +57,6 @@
                             'max'=> "9999999"
                         );
 
-                        $buttonadd = array(
-                            'class' => 'btn btn-primary',
-                            'style' => 'width: 15%;'
-                        );
-
                         $attribute_label = array(
                             'class' => 'form-label'
                         );
@@ -108,8 +103,8 @@
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-3'>";
-                                echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-tambah-form"> + Color </button>';
-                                echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-reset-forms">Reset</button>';
+                                echo '<button class="btn btn-primary" style="padding: 10px; margin: 2px;" type="button" id="btn-tambah-form"> + Color </button>';
+                                echo '<button class="btn btn-warning" style="padding: 10px; margin: 2px;" type="button" id="btn-reset-forms">Reset</button>';
                                 echo '<input type="hidden" id="jumlah-form" value="1">';
                             echo "</div>";
                         echo "</div>";
@@ -146,8 +141,14 @@
                         echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
-                        echo form_submit('Submit', 'Add Product', $buttonadd);
-                        echo '<a href="'.base_url('index.php/AdminHome').'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                        echo '<div class="row">';
+                            echo '<div class="col-1.5">';
+                                echo '<button type="submit" class="btn btn-primary">Add Product</button>';
+                            echo '</div>';
+                            echo '<div class="col-1">';
+                                echo '<a href="'.base_url('index.php/AdminHome').'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                            echo '</div>';
+                        echo '</div>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>

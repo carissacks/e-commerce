@@ -23,13 +23,7 @@
                         $style = array(
                             'class' => 'form-control'
                         );
-
-                        // $picture = array(
-                        //     'name' => 'poster',
-                        //     'type' => 'file',
-                        //     'class' => 'form-label w-100'
-                        // );
- 
+                        
                         $size = array(
                             'name' => 'size',
                             'type' => 'text',
@@ -39,12 +33,9 @@
                         $stock = array(
                             'name' => 'stock',
                             'type' => 'number',
+                            'min'=> "1",
+                            'max'=> "999",
                             'value' => $stock
-                        );
-
-                        $buttonadd = array(
-                            'class' => 'btn btn-primary',
-                            'style' => 'width: 30%;'
                         );
 
                         $attribute_label = array(
@@ -66,12 +57,19 @@
                             echo "<div class='form-group row col-md-4'>";
                                 echo form_label('Item Size :',' ',$attribute_label) . form_input($size, '', $style);
                                 echo form_label('Item Stock :',' ',$attribute_label) . form_input($stock, '', $style);
-                                // echo form_error('itemsizeandstock','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>"; 
 
-                        echo form_submit('Submit', 'Edit Product Size and Stock', $buttonadd);
-                        // echo '	<a href="'.base_url('index.php/AdminHome/FormEditProductDetail?itemid='.$_GET['id']).'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                        // echo form_submit('Submit', 'Edit Product Size and Stock', $buttonadd);
+                        echo '<div class="row">';
+                            echo '<div class="col-1.5">';
+                                echo '<button type="submit" class="btn btn-primary">Edit Product Size and Stock</button>';
+                            echo '</div>';
+                            echo '<div class="col-1">';
+                                echo '<a href="'.base_url('index.php/AdminHome/FormEditProductDetail?itemid='.$_GET['itemid']).'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                            echo '</div>';
+                        echo '</div>';
+                        // echo '	<a href="'.base_url('index.php/AdminHome/FormEditProductDetail?itemid='.$_GET['itemid']).'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>

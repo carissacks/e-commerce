@@ -71,6 +71,7 @@ class AdminHome extends CI_Controller{
 
     public function showDetailTransaction(){
         $data['transaction']= $this->AdminHome_model->get_transaction($_GET['id']);
+        $data['shipping']= $this->AdminHome_model->get_shipping($_GET['id']);
         $data['totalpayment']= $this->AdminHome_model->get_totalpayment($_GET['id']);
         $data['style'] = $this->load->view('include/css', NULL, TRUE);
         $data['script'] = $this->load->view('include/js', NULL, TRUE);
@@ -246,7 +247,7 @@ class AdminHome extends CI_Controller{
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-        $data['datatabel'] = $this->load->view('include/Tabel', $data, TRUE);
+        $data['datatabel'] = $this->load->view('include/TabelToday', $data, TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
 
 		$this->load->view('pages/Today.php',$data);
@@ -259,7 +260,7 @@ class AdminHome extends CI_Controller{
         $data = array(
             'button' => 'Create',
             'type' => $this->AdminHome_model->getType(),
-            'type_selected' => $this->input->post('type') ? $this->input->post('type') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+            'type_selected' => $this->input->post('type') ? $this->input->post('type') : '',
         );
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
@@ -430,34 +431,37 @@ class AdminHome extends CI_Controller{
             'required' => '*You must input item color!'
         ]);
 
-        $this->form_validation->set_rules('weight', 'weight', 'required|trim|numeric|min_length[2]|max_length[3]',[
+        $this->form_validation->set_rules('weight', 'weight', 'required|trim|numeric|min_length[2]|max_length[3]|greater_than[9]',[
             'required' => '*You must input weight!',
             'numeric' => '*You should input a number not string!',
             'min_length' => '*Weight must be more than or equal to 10!',
-            'max_length' => '*Weight must be less than or equal to 999!'
+            'max_length' => '*Weight must be less than or equal to 999!',
+            'greater_than' => '*Weight must be more than or equal to 10!'
         ]);
 
-        $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim|numeric|min_length[4]|max_length[7]',[
+        $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim|numeric|min_length[4]|max_length[7]|greater_than[9999]',[
             'required' => '*You must input selling price!',
             'numeric' => '*You should input a number not string!',
             'min_length' => '*Weight must be more than or equal to 10000!',
-            'max_length' => '*Weight must be less than or equal to 9999999!'
+            'max_length' => '*Weight must be less than or equal to 9999999!',
+            'greater_than' => '*Weight must be more than or equal to 10000!'
         ]);
 
-        $this->form_validation->set_rules('buyingprice', 'buyingprice', 'required|trim|numeric|min_length[4]|max_length[7]',[
+        $this->form_validation->set_rules('buyingprice', 'buyingprice', 'required|trim|numeric|min_length[4]|max_length[7]|greater_than[9999]',[
             'required' => '*You must input selling price!',
             'numeric' => '*You should input a number not string!',
             'min_length' => '*Weight must be more than or equal to 10000!',
-            'max_length' => '*Weight must be less than or equal to 9999999!'
+            'max_length' => '*Weight must be less than or equal to 9999999!',
+            'greater_than' => '*Weight must be more than or equal to 10000!'
         ]);
 
-        $this->form_validation->set_rules('description', 'description', 'required|trim|min_length[10]|max_length[100]',[
+        $this->form_validation->set_rules('description', 'description', 'required|trim|min_length[10]|max_length[1000]',[
             'required' => '*You must input item description!',
             'min_length' => '*Input minimal 10 character in length!',
             'max_length' => '*The Description field cannot exceed 100 character in length!'
         ]);
 
-        $this->form_validation->set_rules('careinstruction', 'careinstruction', 'required|trim|min_length[10]|max_length[100]',[
+        $this->form_validation->set_rules('careinstruction', 'careinstruction', 'required|trim|min_length[10]|max_length[1000]',[
             'required' => '*You must input item description!',
             'min_length' => '*Input minimal 10 character in length!',
             'max_length' => '*The Description field cannot exceed 100 character in length!'
@@ -468,7 +472,7 @@ class AdminHome extends CI_Controller{
             $data = array(
                 'button' => 'Create',
                 'type' => $this->AdminHome_model->getType(),
-                'type_selected' => $this->input->post('type') ? $this->input->post('type') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+                'type_selected' => $this->input->post('type') ? $this->input->post('type') : '',
             );
             $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
             $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
@@ -521,7 +525,7 @@ class AdminHome extends CI_Controller{
         $data = array(
             'button' => 'Create',
             'color' => $this->AdminHome_model->get_data_color($_GET['itemid']),
-            'color_selected' => $this->input->post('color') ? $this->input->post('color') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+            'color_selected' => $this->input->post('color') ? $this->input->post('color') : '',
         );
         $data['data'] = $this->AdminHome_model->get_specific_item_detail($_GET['itemid']);
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
@@ -558,7 +562,7 @@ class AdminHome extends CI_Controller{
         $data = array(
             'button' => 'Create',
             'color' => $this->AdminHome_model->get_color_form($_GET['id']),
-            'color_selected' => $this->input->post('color') ? $this->input->post('color') : '', // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+            'color_selected' => $this->input->post('color') ? $this->input->post('color') : '',
         );
         $data['poster_attr']= $this->form_attr('item_photo');
         $data['photo']= $this->AdminHome_model->get_photo($_GET['id']);
@@ -612,9 +616,6 @@ class AdminHome extends CI_Controller{
         $show = $this->input->post('show');
         $color = $this->input->post('color');
 
-        echo $ItemId;
-        echo $show;
-        echo $color;
         $this->AdminHome_model->AddNewColor($ItemId, $show, $color);
         redirect('AdminHome/FormEditProductDetail?itemid='.$ItemId);
     }
@@ -643,23 +644,20 @@ class AdminHome extends CI_Controller{
         $data = array(
             'button' => 'Create',
             'type' => $this->AdminHome_model->getType(),
-            'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type, // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+            'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type,
         );
         $data['details']= $this->AdminHome_model->get_specific_data($_GET['id_item']);
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
         $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-        
+        $data['typebefore'] = $this->AdminHome_model->get_specific_type($_GET['id_item']);
+
         $this->load->view('pages/FormEditProduct.php',$data);
     }
 
     public function EditProduct()
 	{
-		$this->form_validation->set_rules('itemid', 'itemid', 'required|trim',[
-            'required' => '*You must input item ID!'
-        ]);
-
 		$this->form_validation->set_rules('itemname', 'itemname', 'required|trim',[
             'required' => '*You must input item name!'
         ]);
@@ -668,57 +666,58 @@ class AdminHome extends CI_Controller{
             'required' => '*You must input item type!'
         ]);
 
-        $this->form_validation->set_rules('itemcolor[]', 'itemcolor', 'required|trim',[
-            'required' => '*You must input item color!'
-        ]);
-
-        $this->form_validation->set_rules('weight', 'weight', 'required|trim|numeric|min_length[2]|max_length[3]',[
+        $this->form_validation->set_rules('weight', 'weight', 'required|trim|numeric|min_length[2]|max_length[3]|greater_than[9]',[
             'required' => '*You must input weight!',
             'numeric' => '*You should input a number not string!',
             'min_length' => '*Weight must be more than or equal to 10!',
-            'max_length' => '*Weight must be less than or equal to 999!'
+            'max_length' => '*Weight must be less than or equal to 999!',
+            'greater_than' => '*Weight must be more than or equal to 10!'
         ]);
 
-        $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim|numeric|min_length[4]|max_length[7]',[
+        $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim|numeric|min_length[4]|max_length[7]|greater_than[9999]',[
             'required' => '*You must input selling price!',
             'numeric' => '*You should input a number not string!',
             'min_length' => '*Weight must be more than or equal to 10000!',
-            'max_length' => '*Weight must be less than or equal to 9999999!'
+            'max_length' => '*Weight must be less than or equal to 9999999!',
+            'greater_than' => '*Weight must be more than or equal to 10000!'
         ]);
 
-        $this->form_validation->set_rules('buyingprice', 'buyingprice', 'required|trim|numeric|min_length[4]|max_length[7]',[
+        $this->form_validation->set_rules('buyingprice', 'buyingprice', 'required|trim|numeric|min_length[4]|max_length[7]|greater_than[9999]',[
             'required' => '*You must input selling price!',
             'numeric' => '*You should input a number not string!',
             'min_length' => '*Weight must be more than or equal to 10000!',
-            'max_length' => '*Weight must be less than or equal to 9999999!'
+            'max_length' => '*Weight must be less than or equal to 9999999!',
+            'greater_than' => '*Weight must be more than or equal to 10000!'
         ]);
 
-        $this->form_validation->set_rules('description', 'description', 'required|trim|min_length[10]|max_length[100]',[
-            'required' => '*You must input item description!',
-            'min_length' => '*Input minimal 10 character in length!',
-            'max_length' => '*The Description field cannot exceed 100 character in length!'
+        $this->form_validation->set_rules('description', 'description', 'required|trim',[
+            'required' => '*You must input item description!'
         ]);
 
-        $this->form_validation->set_rules('careinstruction', 'careinstruction', 'required|trim|min_length[10]|max_length[100]',[
-            'required' => '*You must input item description!',
-            'min_length' => '*Input minimal 10 character in length!',
-            'max_length' => '*The Description field cannot exceed 100 character in length!'
+        $this->form_validation->set_rules('careinstruction', 'careinstruction', 'required|trim',[
+            'required' => '*You must input item description!'
         ]);
+
         if($this->form_validation->run() == false){
-            $item_type = $_GET['type'];
+            $item_type = $this->input->post('type');
+            $ItemID = $this->input->post('itemid');
+            $id = $this->input->post('itemidcolored');
+
             $data['type']  = $this->AdminHome_model->getType();
             
             $data = array(
                 'button' => 'Create',
                 'type' => $this->AdminHome_model->getType(),
-                'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type, // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
+                'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type,
             );
-            $data['details']= $this->AdminHome_model->get_specific_data($_GET['id_item']);
+            $data['details']= $this->AdminHome_model->get_specific_data($ItemID);
             $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
             $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
             $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
             $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-            
+            $data['typebefore'] = $this->AdminHome_model->get_specific_type($ItemID);
+
+            // redirect('AdminHome/FormEditProduct?id='.$id.'&id_item='.$ItemID.'&type='.$item_type);
             $this->load->view('pages/FormEditProduct.php',$data);
         }
         else{
@@ -731,10 +730,91 @@ class AdminHome extends CI_Controller{
             $Buyingprice = $this->input->post('buyingprice');
             $Description = $this->input->post('description');
             $Careinstruction = $this->input->post('careinstruction');
-            
+            $typebefore = $this->input->post('typebefore');
+
+            if($typebefore != $ItemType)
+            {
+                $type_desc = $this->AdminHome_model->get_type_desc($ItemType);
+                $type = $type_desc[0]['type_desc'];
+
+                $old_path = './asset/images/' . $typebefore . "/"; 
+                $path = './asset/images/' . $type . "/";
+
+                $photos = $this->AdminHome_model->get_photo_array($ItemID);
+
+                foreach($photos as $row){
+                    $newPath = $path . $row['item_photo'];
+                    $oldPath = $old_path . $row['item_photo'];
+                    if(copy($oldPath, $newPath)){
+                        unlink($oldPath);
+                    }
+                }
+            }
             $this->AdminHome_model->EditProduct($ItemID, $ItemName, $ItemType, $ItemColor, $Weight, $Sellingprice, $Buyingprice, $Description, $Careinstruction);
             redirect('AdminHome/FormEditProductDetail?itemid='.$ItemID);
 		}
+    }
+
+    public function FormUpdateStatus()
+    {
+        $id_status = $_GET['status'];
+        $data['status']  = $this->AdminHome_model->getStatus();
+        
+        $data = array(
+            'button' => 'Create',
+            'status' => $this->AdminHome_model->getStatus(),
+            'status_selected' => $this->input->post('status') ? $this->input->post('status') : $id_status,
+        );
+        
+        $data['shipping']= $this->AdminHome_model->get_shipping($_GET['id']);
+        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        $data['statusbefore'] = $this->AdminHome_model->get_status($_GET['id']);
+        
+        $this->load->view('pages/UpdateStatus.php',$data);
+    }
+
+    public function UpdateStatus()
+    {
+        $statusbefore = $this->input->post('statusbefore');
+        $status = $this->input->post('status');
+        $id_trans = $this->input->post('id_trans');
+
+        $this->AdminHome_model->UpdateStatus($status, $id_trans);
+        redirect('AdminHome/AllTrasactionsView');
+    }
+
+    public function FormUpdateStatusToday()
+    {
+        $id_status = $_GET['status'];
+        $data['status']  = $this->AdminHome_model->getStatus();
+        
+        $data = array(
+            'button' => 'Create',
+            'status' => $this->AdminHome_model->getStatus(),
+            'status_selected' => $this->input->post('status') ? $this->input->post('status') : $id_status,
+        );
+        
+        $data['shipping']= $this->AdminHome_model->get_shipping($_GET['id']);
+        $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
+        $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
+        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+        $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
+        $data['statusbefore'] = $this->AdminHome_model->get_status($_GET['id']);
+        
+        $this->load->view('pages/UpdateStatusToday.php',$data);
+    }
+
+    public function UpdateStatusToday()
+    {
+        $statusbefore = $this->input->post('statusbefore');
+        $status = $this->input->post('status');
+        $id_trans = $this->input->post('id_trans');
+
+        $this->AdminHome_model->UpdateStatus($status, $id_trans);
+        redirect('AdminHome/TodayView');
     }
 
 /////////////////////////////////////////////////////////////// Delete Product

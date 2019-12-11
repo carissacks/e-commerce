@@ -9,11 +9,12 @@
 </head>
 <body>
     <?php echo $header; ?>
-    <div class="container-fluid flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-0">Transaction Detail</h4>
-        <?php
-            echo $Detail;
-        ?>
+    <div class="container card mb-4">
+        <div class="container-fluid flex-grow-1 container-p-y">
+            <?php
+                echo $Detail;
+            ?>
+        </div>
     </div>
     <?php echo $footer; ?>
 </body>

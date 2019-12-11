@@ -90,12 +90,19 @@
 						<br>
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<div class="row">
-								<a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+							<div class="col-1.5">
+								<a href="<?=base_url("index.php/AdminHome/Delete?id=$id")?>" class="btn btn-danger flex-c-m stext-101 cl0 size-101 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 									Delete
 								</a>
+								<!-- <a onclick="deletedata(<?php echo $id?>)" class="btn btn-danger flex-c-m stext-101 cl0 size-101 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									Delete
+								</a> -->
+								</div>
+								<div class="col-1">
 								<a href="<?=base_url("index.php/AdminHome/FormEditProduct?id=$id&id_item=$id_item&type=$id_type")?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 									Edit
 								</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -125,3 +132,30 @@
 		});
 	});
 </script>
+<!-- <script>
+	function deletedata($id){
+		Swal({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!',
+			closeOnConfirm: false
+		},
+		function(){
+			$.ajax({
+				url: "<?php echo base_url('index.php/AdminHome/Delete?') ?>",
+				type: "post",
+				data: {id:id},
+				success: function(){
+					swal('Success been deleted', 'success');
+				},
+				error: function(){
+					swal('gagal dihapus :(', 'error');
+				}
+			});
+		}})
+	}
+</script> -->

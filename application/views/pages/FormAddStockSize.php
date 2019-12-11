@@ -32,11 +32,6 @@
                             'max'=> "999"
                         );
 
-                        $buttonadd = array(
-                            'class' => 'btn btn-primary',
-                            'style' => 'width: 20%;'
-                        );
-
                         $attribute_label = array(
                             'class' => 'form-label'
                         );
@@ -69,16 +64,17 @@
                         echo "</div>"; 
 
                         echo '<div id="insert-forms"></div>';
+                        echo '<br>';
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-3'>";
-                                echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-add-form"> + Size & Stock </button>';
-                                echo '<button style="padding: 10px; margin: 2px;" type="button" id="btn-reset-forms">Reset</button>';
+                                echo '<button class="btn btn-primary" style="padding: 10px; margin: 2px;" type="button" id="btn-add-form"> + Size & Stock </button>';
+                                echo '<button class="btn btn-warning" style="padding: 10px; margin: 2px;" type="button" id="btn-reset-forms">Reset</button>';
                                 echo '<input type="hidden" id="jumlah-form" value="1">';
                             echo "</div>";
                         echo "</div>";
 
-                        echo form_submit('Submit', 'Add Product Detail', $buttonadd);
+                        echo '<button type="submit" class="btn btn-primary">Add Product Detail</button>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>
@@ -96,9 +92,10 @@
                 
                 $("#insert-forms").append(
                     "<div class='form-row'>" + 
-                    "<div class='form-group row col-md-4'>" + 
-                    "Item Size : <input type='text' class='form-control' name='itemsize[]' placeholder="+ '"Type Size"' + ">" + 
-                    "Ttem Stock : <input type='text' class='form-control' name='itemstock[]' placeholder="+ '"Type Stock"' + ">" +
+                    "<div class='form-label form-group row col-md-4'>" + "<br>" +
+                    "Item Size : <input type='text' class='form-control' name='itemsize[]' placeholder="+ '"Input Size"' + ">" + "<br>" +
+                    "Item Stock : <input type='text' class='form-control' name='itemstock[]' placeholder="+ '"Input Stock"' + ">" +
+                    "<br>" +
                     "</div></div>");
                 
                 $("#jumlah-form").val(nextform); // Ubah value textbox jumlah-form dengan variabel nextform

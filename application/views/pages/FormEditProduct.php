@@ -6,19 +6,15 @@
     <?php 
         echo $style;
         echo $script; 
-        // var_dump($details);
         foreach ($details as $row){
 			$id_item= $row['id_item'];
-			// $id_item_col= $row['id_item_colored'];
             $name_item= $row['item_name'];
-			// $color_item= $row['item_color'];
 			$desc_item= $row['item_desc'];
 			$price_item= $row['selling_price'];
 			$buying_item= $row['buying_price'];
-			// $type_item= $row['type_desc'];
 			$weight_item= $row['weight'];
 			$care_ins= $row['care_ins'];
-			// $id = $row['id_item_colored'];
+			$id_item_colored = $row['id_item_colored'];
 		}
     ?>
 </head>
@@ -29,14 +25,17 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <?php
-                        // echo $details;
-                        $id_item = $_GET['id_item'];
-                        $id_item_colored = $_GET['id'];
+                        $type_before = array(
+                            'name' => 'typebefore',
+                            'type' => 'hidden',
+                            'value' => $typebefore[0]['type_desc']
+                        );
+ 
                         echo form_open_multipart('AdminHome/EditProduct');
                         $style = array(
                             'class' => 'form-control'
                         );
-
+                        
                         $idItemColored = array(
                             'name' => 'itemidcolored',
                             'type' => 'hidden',
@@ -85,10 +84,11 @@
                             'value' => $buying_item
                         );
 
-                        $buttonadd = array(
-                            'class' => 'btn btn-primary',
-                            'style' => 'width: 15%;'
-                        );
+                        // $buttonadd = array(
+                        //     'type' => 'button',
+                        //     'class' => 'btn btn-primary',
+                        //     'style' => 'width: 15%;'
+                        // );
 
                         $attribute_label = array(
                             'class' => 'form-label'
@@ -109,11 +109,11 @@
                         echo "<div class='form-group row'>";
                                 echo form_input($idItemColored, '', $style);
                                 echo form_input($itemid, '', $style);
-                                echo form_error('itemid','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-5'>";
+                                echo form_input($type_before, '', $style);
                                 echo form_label('Item Name :',' ',$attribute_label) . form_input($itemname, '', $style);
                                 echo form_error('itemname','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
@@ -128,7 +128,7 @@
                         
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-12'>";
-                                echo form_label('Weight :',' ',$attribute_label) . form_input($weight, '', $style);
+                                echo form_label('weight :',' ',$attribute_label) . form_input($weight, '', $style);
                                 echo form_error('weight','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>";
@@ -150,16 +150,21 @@
                         
                         echo "<div class='form-group row'>";
                         echo form_label('Description :',' ',$attribute_label) . form_textarea($description, ' ', $style);
-                        echo form_error('description','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
                         echo "<div class='form-group row'>";
                         echo form_label('Care Instruction :',' ',$attribute_label) . form_textarea($careinstruction, ' ', $style);
-                        echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
-                        echo form_submit('Submit', 'Edit Product', $buttonadd);
-                        echo '<a href="'.base_url('index.php/AdminHome').'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                        // echo form_submit('Submit', 'Edit Product', $buttonadd);
+                        echo '<div class="row">';
+                            echo '<div class="col-1">';
+                                echo '<button type="submit" class="btn btn-primary">Submit</button>';
+                            echo '</div>';
+                            echo '<div class="col-1">';
+                                echo '<a href="'.base_url('index.php/AdminHome').'" style="margin-right: 20px;" class="btn btn-danger"> Cancel </a>';
+                            echo '</div>';
+                        echo '</div>';
                         echo form_close();
                         echo "<div class='demo-inline-spacing mt-3'>";
                     ?>

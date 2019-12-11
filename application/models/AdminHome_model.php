@@ -3,12 +3,13 @@ class AdminHome_model extends CI_Model{
 
 	public function ShowDataMonthly()
 	{
-		$query = $this->db->query("SELECT transaction_detail.id_trans as id, ms_users.name as name, transaction_detail.email_user as email, status.status_desc as status, transaction_detail.trans_date as date
+		$query = $this->db->query("SELECT transaction_detail.id_trans as id, ms_users.name as name, transaction_detail.email_user as email, status.status_desc as status, status.id_status, transaction_detail.trans_date as date
 									FROM transaction_detail
 									JOIN ms_users on transaction_detail.email_user = ms_users.email_user
 									JOIN status on status.id_status = transaction_detail.stats
 									JOIN transactions on transactions.id_trans = transaction_detail.id_trans
-									GROUP BY transaction_detail.id_trans");
+									GROUP BY transaction_detail.id_trans
+									ORDER BY transaction_detail.trans_date DESC");
 		return $query->result_array();
 	}
 
@@ -17,14 +18,26 @@ class AdminHome_model extends CI_Model{
         return $query->result();
 	}
 
+	function get_photo_array($id_item){
+		$query = $this->db->query(
+			"SELECT p.item_photo
+			FROM items as i 
+			JOIN item_colored as ic on i.id_item = ic.id_item
+			JOIN photos as p on p.id_item_colored = ic.id_item_colored
+			WHERE i.id_item = '$id_item'");
+		return $query->result_array();
+	}
+
 	public function ShowDataToday()
 	{
-		$query = $this->db->query("SELECT t.id_trans, t.quantity, t.UnitPrice, i.item_name 
-									FROM Transactions as t
-									JOIN item_colored as ic on t.id_item_colored=ic.id_item_colored
-									JOIN transaction_detail as td on t.id_trans=td.id_trans
-									JOIN items as i on i.id_item=ic.id_item
-									WHERE td.trans_date  =  current_date");
+		$query = $this->db->query("SELECT transaction_detail.id_trans as id, ms_users.name as name, transaction_detail.email_user as email, status.status_desc as status, status.id_status, transaction_detail.trans_date as date
+									FROM transaction_detail
+									JOIN ms_users on transaction_detail.email_user = ms_users.email_user
+									JOIN status on status.id_status = transaction_detail.stats
+									JOIN transactions on transactions.id_trans = transaction_detail.id_trans
+									WHERE transaction_detail.trans_date  =  current_date
+									GROUP BY transaction_detail.id_trans
+									ORDER BY transaction_detail.trans_date DESC");
 		return $query->result_array();
 	}
 
@@ -35,6 +48,34 @@ class AdminHome_model extends CI_Model{
 		return $hasil;
 	}
 
+	function get_type_desc($id_type){
+		$query = $this->db->query("SELECT * FROM `type` WHERE id_type = $id_type");
+		return $query->result_array();
+	}
+
+	function get_status($id){
+		$query = $this->db->query("SELECT td.stats, s.status_desc
+									FROM transaction_detail as td
+									JOIN transactions as t on t.id_trans = td.id_trans
+									JOIN Status as s on s.id_status = td.stats
+									WHERE t.id_trans = '$id' AND td.id_trans = t.id_trans");
+		return $query->result_array();
+	}
+
+	function get_status_desc($status){
+		$query = $this->db->query("SELECT * FROM `status` WHERE id_status = $status");
+		return $query->result_array();
+	}
+
+	function UpdateStatus($status, $id_trans){
+		$status = array(
+			'stats' => $status
+		);
+		
+		$this->db->where('id_trans', $id_trans);
+		$this->db->update('transaction_detail', $status);
+	}
+
 	function get_specific_type($itemID){
 
 		$query = $this->db->query("SELECT i.id_type, t.type_desc
@@ -42,13 +83,6 @@ class AdminHome_model extends CI_Model{
 									JOIN type as t on t.id_type = t.id_type 
 									WHERE i.id_item = '$itemID' AND i.id_type = t.id_type");
 		return $query->result_array();
-
-		// $this->db->select('i.id_type, t.type_desc');
-		// $this->db->from('items as i');
-		// $this->db->join('type as t', 't.id_type = i.id_type');
-		// $this->db->where('i.id_item', $itemID);
-		// $result = $this->db->get();
-		// return $result;
 	}
 
 	function get_specific_photo($itemID, $item_photo){
@@ -56,7 +90,6 @@ class AdminHome_model extends CI_Model{
 									FROM items as it
 									JOIN item_colored as ic on ic.id_item = it.id_item
 									join item_stock as ist on ist.id_item_colored = ic.id_item_colored
-									
 									JOIN photos as p on p.id_item_colored = ist.id_item_colored
 									JOIN type as t on t.id_type = it.id_type
 									WHERE it.id_item = '$itemID' AND p.item_photo = '$item_photo'");
@@ -215,7 +248,7 @@ class AdminHome_model extends CI_Model{
 		$this->db->join('transaction_detail', 'transactions.id_trans = transaction_detail.id_trans');
 		$this->db->join('item_colored', 'transactions.id_item_colored = item_colored.id_item_colored');
 		$this->db->join('items', 'items.id_item = item_colored.id_item');
-		$this->db->order_by("transactions.id_trans", "desc");
+		$this->db->order_by("transaction_detail.trans_date", "desc");
 
 		$hasil= $this->db->get();
 		return $hasil;
@@ -289,6 +322,19 @@ class AdminHome_model extends CI_Model{
         if ($result->num_rows() > 0) {
             foreach ($result->result() as $row) {
                 $dd[$row->id_type] = $row->type_desc;
+            }
+		}
+        return $dd;
+	}
+
+	function getStatus(){
+		$this->db->order_by('status_desc', 'asc');
+		$result = $this->db->get('status');
+
+		$dd[''] = 'Please Select';
+        if ($result->num_rows() > 0) {
+            foreach ($result->result() as $row) {
+                $dd[$row->id_status] = $row->status_desc;
             }
 		}
         return $dd;
@@ -509,6 +555,7 @@ class AdminHome_model extends CI_Model{
 		$this->db->where('item_colored.show = 1');
 		$this->db->where('item_stock.stock > 0');
 		$this->db->group_by('item_colored.id_item_colored');
+		// $this->db->order_by('items.id_item');
 
 		$query= $this->db->get();
 		return $query->result_array();
@@ -516,7 +563,7 @@ class AdminHome_model extends CI_Model{
 
 	function get_specific_data($id){
 		$query = $this->db->query(
-			"SELECT * FROM items WHERE id_item = '$id'"
+			"SELECT * FROM items JOIN item_colored on items.id_item = item_colored.id_item WHERE items.id_item = '$id'"
 		);
 
 		return $query->result_array();
@@ -573,13 +620,24 @@ class AdminHome_model extends CI_Model{
 		$this->db->select('*, transactions.quantity, (transactions.quantity*transactions.unitprice) as totalitem');
 		$this->db->from('items');
 		$this->db->join('item_colored', 'item_colored.id_item = items.id_item');
-		$this->db->join('photos', 'item_colored.id_item_colored = photos.id_item_colored');
 		$this->db->join('item_stock', 'item_colored.id_item_colored = item_stock.id_item_colored');
-		$this->db->join('type', 'items.id_type = type.id_type');
 		$this->db->join('transactions', 'item_colored.id_item_colored = transactions.id_item_colored');
 		$this->db->join('transaction_detail', 'transaction_detail.id_trans = transactions.id_trans');
 		$this->db->where('transactions.id_trans',$id);
 		$this->db->group_by('transactions.id_item_colored');
+		$this->db->group_by('transaction_detail.id_trans');
+
+		$query= $this->db->get();
+		return $query->result_array();
+	}
+
+	function get_shipping($id){
+		$this->db->select('*, transaction_detail.shipping_fee as shippingfee, sum(transaction_detail.shipping_fee + (quantity*UnitPrice)) as total');
+		$this->db->from('transaction_detail');
+		$this->db->join('transactions', 'transaction_detail.id_trans = transactions.id_trans');
+		$this->db->join('item_colored', 'item_colored.id_item_colored = transactions.id_item_colored');
+		$this->db->join('ms_users', 'transaction_detail.email_user = ms_users.email_user');
+		$this->db->where('transactions.id_trans',$id);
 		$this->db->group_by('transaction_detail.id_trans');
 
 		$query= $this->db->get();
@@ -676,7 +734,5 @@ class AdminHome_model extends CI_Model{
 									SET item_colored.show = 1
 									WHERE (item_colored.id_item_colored = $id) AND (item_stock.stock > 0)");
 	}
-	
-
 }
 ?>
