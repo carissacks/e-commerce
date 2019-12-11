@@ -137,13 +137,14 @@
                                     </div>
                                     <div class="col">
                                         <h6 class="mb-0 text-muted">Monthly <span class="text-primary">Earnings</span></h6>
-                                        <h4 class="mt-3 mb-0">IDR 
+                                        <h5 class="mt-3 mb-0">IDR 
                                             <?php 
                                                 foreach($monthlyearning->result_array() as $row){
-                                                    echo $total = $row['totalmonthlyearning'];
+                                                    $total = $row['totalmonthlyearning'];
+                                                    echo number_format($total,2,',','.');
                                                 }
                                             ?>
-                                        </h4>
+                                        </h5>
                                     </div>
                                 </div>
                                 <p class="mb-0 text-muted">From This Month</p>
@@ -180,13 +181,23 @@
                                         <table class="table table-hover card-table">
                                             <thead>
                                                 <tr>
+                                                    <th>No.</th>
                                                     <th>User</th>
                                                     <th>Wishlist</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($wishlist->result_array() as $row){ ?>
+                                                <?php 
+                                                    $counter = 1;
+                                                    foreach($wishlist->result_array() as $row){ ?>
                                                     <tr>
+                                                        <td>
+                                                            <div class="media mb-0">
+                                                                <div class="media-body align-self-center ml-3">
+                                                                    <h6 class="mb-0"><?php echo $counter++ ?>.</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <div class="media mb-0">
                                                                 <div class="media-body align-self-center ml-3">
@@ -213,19 +224,24 @@
                                         <table class="table table-hover card-table">
                                             <thead>
                                                 <tr>
+                                                    <th>No.</th>
                                                     <th>Product Name</th>
                                                     <th>Qty.</th>
                                                     <th>Sum.</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($latestsales->result_array() as $row){ ?>
+                                            <?php 
+                                                $counter = 1;
+                                                foreach($latestsales->result_array() as $row){ ?>
                                                 <tr>
+                                                    <td class="align-middle"><?php echo $counter++?>.</td>
                                                     <td class="align-middle">
-                                                        <a href="javascript:" class="text-dark"><?php echo $row['name']."-".$row['color'];?></a>
+                                                        <a href="<?=base_url('index.php/AdminHome/AllTrasactionsView')?>" class="text-dark"><?php echo $row['name']."-".$row['color'];?></a>
                                                     </td>
-                                                    <td class="align-middle"><?php echo $row['quantity'];?></td>
-                                                    <td class="align-middle"><?php echo $row['totalpembelian'];?></td>
+                                                    <td class="align-middle"><?php echo $row['quantity'];?> pcs</td>
+                                                    <td class="align-middle">IDR <?php $totalpembelian =  $row['totalpembelian'];
+                                                                                    echo number_format($totalpembelian,2,',','.');?></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

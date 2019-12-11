@@ -1,14 +1,16 @@
 <div class="layout-wrapper layout-2">
         <div class="layout-inner">
             <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-dark">
-                <div class="app-brand demo">
-                    <a href="<?=base_url()?>" class="app-brand-text demo sidenav-text font-weight-bold ml-2">EyeCandy</a>
+                <div class="app-brand demo" style="margin-top: 10px; margin-down: 10px;">
+                    <span class="app-brand-logo demo">
+                        <img src="<?=base_url('asset/images/icons/favicon.png')?>" alt="IMG-LOGO" height="30px;">
+                    </span>
+                    <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Eye Candy</a>
                     <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                         <i class="ion ion-md-menu align-middle"></i>
                     </a>
                 </div>
-                <div class="sidenav-divider mt-0"></div>
-
+                <br>
                 <ul class="sidenav-inner py-1">
                     <li class="sidenav-header small font-weight-semibold">Home</li>
                     <li class="sidenav-item">
@@ -81,9 +83,9 @@
                         </a>
                     </li>
                     <li class="sidenav-item">
-                        <a href="<?php echo base_url('index.php/AdminHome/MonthlyView') ?>" class="sidenav-link">
+                        <a href="<?php echo base_url('index.php/AdminHome/AllTrasactionsView') ?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-grid"></i>
-                            <div>Monthly Order</div>
+                            <div>All Transactions</div>
                         </a>
                     </li>
 
@@ -102,11 +104,13 @@
                     <li class="sidenav-header small font-weight-semibold">See More</li>
                         <li class="sidenav-item">
                             <a href="<?=base_url('index.php/AdminHome/HideProduct')?>" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-box"></i>
                                 <div>Products Hide</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
                             <a href="<?=base_url('index.php/AdminHome/OutStock')?>" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-box"></i>
                                 <div>Out of Stock</div>
                             </a>
                         </li>
@@ -115,18 +119,14 @@
             
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
-                <!-- [ Layout navbar ( Header ) ] Start -->
                 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x" id="layout-navbar">
 
-                    <!-- Brand demo (see assets/css/demo/demo.css) -->
                     <a href="index.html" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
                         <span class="app-brand-logo demo">
-                            <img src="assets/img/logo-dark.png" alt="Brand Logo" class="img-fluid">
+                            <img src="<?=base_url('asset/images/icons/logo-01.png')?>" alt="IMG-LOGO">
                         </span>
-                        <span class="app-brand-text demo font-weight-normal ml-2">Bhumlu</span>
-                    </a>
+                    </a> 
 
-                    <!-- Sidenav toggle (see assets/css/demo/demo.css) -->
                     <div class="layout-sidenav-toggle navbar-nav d-lg-none align-items-lg-center mr-auto">
                         <a class="nav-item nav-link px-0 mr-lg-4" href="javascript:">
                             <i class="ion ion-md-menu text-large align-middle"></i>
@@ -167,6 +167,7 @@
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                                         <img src="<?= base_url('asset/img/avatars/1.png') ?>" alt class="d-block ui-w-30 rounded-circle">
                                         <span class="px-1 mr-lg-2 ml-2 ml-lg-0">
+
                                             <?php 
                                                 echo $this->session->name; 
                                             ?>

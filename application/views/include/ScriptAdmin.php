@@ -35,3 +35,6 @@
 		$('#datatables').DataTable();
 	})
 </script>
+
+<script src="<?php echo base_url('asset/dist/sweetalert.min.js'); ?>"></script>
+<script src="<?php echo base_url('asset/dist/sweetalert-dev.js'); ?>"></script>

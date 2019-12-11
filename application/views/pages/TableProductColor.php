@@ -28,7 +28,7 @@
         <?php echo $datatabel; ?>
     </div>
     <div class="container-fluid flex-grow-1 container-p-y">
-    <button class="btn btn-secondary finish">Finish</button>
+    <button class="btn btn-info finish">Finish</button>
     </div>
     <?php echo $footer; ?>
 </body>

@@ -9,9 +9,11 @@
 </head>
 <body>
     <?php echo $header; ?>
-    <div class="container-fluid flex-grow-1 container-p-y">
+    <div class="container">
         <h4 class="font-weight-bold py-3 mb-0">Today's Order</h4>
+        <div class="container">
         <?php echo $datatabel; ?>
+        </div>
     </div>
     <?php echo $footer; ?>
 </body>

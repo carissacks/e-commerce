@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2019 at 03:07 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Nov 29, 2019 at 10:47 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -475,24 +475,6 @@ INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date
 (12, 'andre@gmail.com', '2', '2019-11-29', 0),
 (13, 'andre@gmail.com', '2', '2019-11-29', 0),
 (14, 'andre@gmail.com', '2', '2019-11-29', 0),
-(15, 'andre@gmail.com', '2', '2019-11-29', 0),
-(16, 'andre@gmail.com', '2', '2019-11-29', 0),
-(17, 'andre@gmail.com', '2', '2019-11-29', 0),
-(18, 'andre@gmail.com', '2', '2019-11-29', 0),
-(19, 'andre@gmail.com', '2', '2019-11-29', 0),
-(20, 'andre@gmail.com', '2', '2019-11-29', 0),
-(21, 'andre@gmail.com', '2', '2019-11-29', 0),
-(22, 'andre@gmail.com', '2', '2019-11-29', 0),
-(23, 'andre@gmail.com', '2', '2019-11-29', 0),
-(24, 'andre@gmail.com', '2', '2019-11-29', 0),
-(25, 'andre@gmail.com', '2', '2019-11-29', 0),
-(26, 'andre@gmail.com', '2', '2019-11-29', 0),
-(27, 'andre@gmail.com', '2', '2019-11-29', 0),
-(28, 'andre@gmail.com', '2', '2019-11-29', 0),
-(29, 'andre@gmail.com', '2', '2019-11-29', 0),
-(30, 'andre@gmail.com', '2', '2019-11-29', 0),
-(31, 'andre@gmail.com', '2', '2019-11-29', 0),
-(32, 'andre@gmail.com', '2', '2019-12-01', 0);
 
 -- --------------------------------------------------------
 
@@ -636,6 +618,12 @@ ALTER TABLE `status`
 --
 ALTER TABLE `transaction_detail`
   MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `transaction_detail`
+--
+ALTER TABLE `transaction_detail`
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `type`
