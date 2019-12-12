@@ -12,17 +12,17 @@
                 </div>
                 <br>
                 <ul class="sidenav-inner py-1">
-                    <li class="sidenav-header small font-weight-semibold">Home</li>
                     <li class="sidenav-item">
                         <a href="<?=base_url('index.php/AdminHome')?>" class="sidenav-link">
                             <i class="sidenav-icon feather icon-home"></i>
                             <div>Dashboards</div>
                         </a>
-                    </li>
+					</li>
+                    <li class="sidenav-header small font-weight-semibold">Products</li>
                     <li class="sidenav-item">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
-                            <i class="sidenav-icon feather icon-box"></i>
-                            <div>All Products</div>
+                            <i class="sidenav-icon feather icon-tag"></i>
+                            <div>Product Types</div>
                         </a>
                         <ul class="sidenav-menu">
                             <li class="sidenav-item">
@@ -91,10 +91,10 @@
 
                     <!-- Add & Edit Product -->
                     <li class="sidenav-divider mb-1"></li>
-                    <li class="sidenav-header small font-weight-semibold">Add & Edit Product</li>
+                    <li class="sidenav-header small font-weight-semibold">Add New Product</li>
                     <li class="sidenav-item">
                         <a href="<?php echo base_url('index.php/AdminHome/FormAddProduct') ?>" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-clipboard"></i>
+                            <i class="sidenav-icon feather icon-file-plus"></i>
                             <div>Add Product</div>
                         </a>
                     </li>
@@ -104,13 +104,13 @@
                     <li class="sidenav-header small font-weight-semibold">See More</li>
                         <li class="sidenav-item">
                             <a href="<?=base_url('index.php/AdminHome/HideProduct')?>" class="sidenav-link">
-                                <i class="sidenav-icon feather icon-box"></i>
-                                <div>Products Hide</div>
+                                <i class="sidenav-icon feather icon-eye-off"></i>
+                                <div>Hidden Products</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
                             <a href="<?=base_url('index.php/AdminHome/OutStock')?>" class="sidenav-link">
-                                <i class="sidenav-icon feather icon-box"></i>
+                                <i class="sidenav-icon feather icon-package"></i>
                                 <div>Out of Stock</div>
                             </a>
                         </li>
@@ -149,7 +149,7 @@
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-                                        <img src="<?= base_url('asset/img/avatars/1.png') ?>" alt class="d-block ui-w-30 rounded-circle">
+                                        <img src="<?= base_url('asset/images/icons/favicon.png') ?>" alt class="d-block ui-w-30 rounded-circle">
                                         <span class="px-1 mr-lg-2 ml-2 ml-lg-0">
                                             <?php 
                                                 echo $this->session->name; 

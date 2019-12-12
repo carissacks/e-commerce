@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 11, 2019 at 05:00 AM
--- Server version: 5.7.13-log
--- PHP Version: 7.0.8
+-- Host: 127.0.0.1
+-- Generation Time: Dec 11, 2019 at 08:42 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -238,6 +238,9 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (11, 'M', 10),
 (11, 'S', 10),
 (11, 'XL', 10),
+(12, '34', 10),
+(12, '36', 10),
+(12, '38', 10),
 (12, 'L', 10),
 (12, 'M', 10),
 (12, 'S', 10),
@@ -322,6 +325,10 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (36, '34', 10),
 (36, '36', 10),
 (36, '38', 10),
+(37, '32', 10),
+(37, '34', 10),
+(37, '36', 10),
+(37, '38', 10),
 (38, 'L', 10),
 (38, 'M', 10),
 (38, 'S', 10),
@@ -378,6 +385,10 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (52, 'M', 10),
 (52, 'S', 10),
 (52, 'XL', 10),
+(53, 'L', 10),
+(53, 'M', 10),
+(53, 'S', 10),
+(53, 'XL', 10),
 (54, 'L', 10),
 (54, 'M', 10),
 (54, 'S', 10),
@@ -656,70 +667,74 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T011-Blue-2.jpg', 21),
 ('T011-Blue-3.jpg', 21),
 ('T011-Blue-4.jpg', 21),
-('T012-white-135.jpg', 25),
-('T012-white-675.jpg', 25),
-('T012-white-996.jpg', 25),
-('T012-Black-535.jpg', 26),
-('T012-Black-797.jpg', 26),
-('T012-Black-821.jpg', 26),
-('T012-Denim Blue-139.jpg', 27),
-('T012-Denim Blue-152.jpg', 27),
-('T012-Denim Blue-887.jpg', 27),
-('T013-Light Denim Blue-24.jpg', 28),
-('T013-Light Denim Blue-426.jpg', 28),
-('T013-Light Denim Blue-774.jpg', 28),
-('T013-Grey-227.jpg', 29),
-('T013-Grey-454.jpg', 29),
-('T013-Grey-572.jpg', 29),
-('T014-Denim-Blue-166.jpg', 30),
-('T014-Denim-Blue-409.jpg', 30),
-('T014-Denim-Blue-755.jpg', 30),
-('T015-Light-Blue-23.jpg', 31),
-('T015-Light-Blue-52.jpg', 31),
-('T015-Light-Blue-711.jpg', 31),
-('T015-Batik-Pattern-342.jpg', 32),
-('T015-Batik-Pattern-506.jpg', 32),
-('T015-Batik-Pattern-556.jpg', 32),
+('T011-Brown-1.jpg', 20),
+('T011-Brown-2.jpg', 20),
+('T011-Brown-3.jpg', 20),
+('T011-Brown-4.jpg', 20),
+('T012-Black-1.jpg', 26),
+('T012-Black-2.jpg', 26),
+('T012-Black-3.jpg', 26),
+('T012-Denim Blue-1.jpg', 27),
+('T012-Denim Blue-2.jpg', 27),
+('T012-Denim Blue-3.jpg', 27),
+('T012-white-1.jpg', 25),
+('T012-white-2.jpg', 25),
+('T012-white-3.jpg', 25),
+('T013-Grey-1.jpg', 29),
+('T013-Grey-2.jpg', 29),
+('T013-Grey-3.jpg', 29),
+('T013-Light Denim Blue-1.jpg', 28),
+('T013-Light Denim Blue-2.jpg', 28),
+('T013-Light Denim Blue-3.jpg', 28),
+('T014-Denim-Blue-1.jpg', 30),
+('T014-Denim-Blue-2.jpg', 30),
+('T014-Denim-Blue-3.jpg', 30),
+('T015-Batik-Pattern-1.jpg', 32),
+('T015-Batik-Pattern-2.jpg', 32),
+('T015-Batik-Pattern-3.jpg', 32),
 ('T015-Batik-Pattern-792.jpg', 32),
-('T015-Cream-677.jpg', 33),
-('T015-Cream-896.jpg', 33),
-('T016-Light-Blue-362.jpg', 35),
-('T016-Light-Blue-479.jpg', 35),
-('T016-Light-Blue-786.jpg', 35),
-('T016-Blue-138.jpg', 36),
-('T016-Blue-150.jpg', 36),
-('T016-Blue-176.jpg', 36),
-('T016-Black-157.jpg', 37),
-('T016-Black-702.jpg', 37),
-('T016-Black-729.jpg', 37),
-('T017-Pink-648.jpg', 38),
-('T017-Pink-916.jpg', 38),
-('T017-Pink-980.jpg', 38),
-('T018-White-124.jpg', 40),
-('T018-White-381.jpg', 40),
-('T018-White-446.jpg', 40),
-('T019-Black-456.jpg', 41),
-('T019-Black-912.jpg', 41),
-('T019-Black-94.jpg', 41),
-('T019-White-214.jpg', 42),
-('T019-White-797.jpg', 42),
-('T019-White-875.jpg', 42),
-('T019-White-877.jpg', 42),
-('T019-Red-118.jpg', 43),
-('T019-Red-160.jpg', 43),
-('T019-Red-394.jpg', 43),
-('T019-Grey-208.jpg', 44),
-('T019-Grey-26.jpg', 44),
-('T019-Grey-451.jpg', 44),
-('T019-Red-Striped-241.jpg', 45),
-('T019-Red-Striped-271.jpg', 45),
-('T019-Red-Striped-56.jpg', 45),
-('T019-Greige-487.jpg', 46),
-('T019-Greige-591.jpg', 46),
-('T019-Greige-89.jpg', 46),
-('T019-Multicolored-Stripes-151.jpg', 47),
-('T019-Multicolored-Stripes-348.jpg', 47),
-('T019-Multicolored-Stripes-697.jpg', 47),
+('T015-Cream-1.jpg', 33),
+('T015-Cream-2.jpg', 33),
+('T015-Light-Blue-1.jpg', 31),
+('T015-Light-Blue-2.jpg', 31),
+('T015-Light-Blue-3.jpg', 31),
+('T016-Black-1.jpg', 37),
+('T016-Black-2.jpg', 37),
+('T016-Black-3.jpg', 37),
+('T016-Blue-1.jpg', 36),
+('T016-Blue-2.jpg', 36),
+('T016-Blue-3.jpg', 36),
+('T016-Light-Blue-1.jpg', 35),
+('T016-Light-Blue-2.jpg', 35),
+('T016-Light-Blue-3.jpg', 35),
+('T017-Pink-1.jpg', 38),
+('T017-Pink-2.jpg', 38),
+('T017-Pink-3.jpg', 38),
+('T018-White-1.jpg', 40),
+('T018-White-2.jpg', 40),
+('T018-White-3.jpg', 40),
+('T019-Black-1.jpg', 41),
+('T019-Black-2.jpg', 41),
+('T019-Black-3jpg', 41),
+('T019-Greige-1.jpg', 46),
+('T019-Greige-2.jpg', 46),
+('T019-Greige-3.jpg', 46),
+('T019-Grey-1.jpg', 44),
+('T019-Grey-2.jpg', 44),
+('T019-Grey-3.jpg', 44),
+('T019-Multicolored-Stripes-1.jpg', 47),
+('T019-Multicolored-Stripes-2.jpg', 47),
+('T019-Multicolored-Stripes-3.jpg', 47),
+('T019-Red-1.jpg', 43),
+('T019-Red-2.jpg', 43),
+('T019-Red-3.jpg', 43),
+('T019-Red-Striped-1.jpg', 45),
+('T019-Red-Striped-2.jpg', 45),
+('T019-Red-Striped-3.jpg', 45),
+('T019-White-1.jpg', 42),
+('T019-White-2.jpg', 42),
+('T019-White-3.jpg', 42),
+('T019-White-4.jpg', 42),
 ('T020-Green-180.jpg', 48),
 ('T020-Green-200.jpg', 48),
 ('T020-Green-99.jpg', 48),
@@ -739,73 +754,61 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T022-Cream-503.jpg', 52),
 ('T022-Cream-815.jpg', 52),
 ('T022-Cream-874.jpg', 52),
-('T022-Black-163.jpg', 53),
-('T022-Black-34.jpg', 53),
-('T022-Black-358.jpg', 53),
-('T022-Black-39.jpg', 53),
-('T022-Black-680.jpg', 53),
-('T022-Black-824.jpg', 53),
-('T023-Khaki-367.jpg', 54),
-('T023-Khaki-705.jpg', 54),
-('T023-Khaki-815.jpg', 54),
-('T023-Yellow-60.jpg', 55),
-('T023-Yellow-661.jpg', 55),
-('T023-Yellow-783.jpg', 55),
 ('T023-Black-695.jpg', 56),
 ('T023-Black-806.jpg', 56),
 ('T023-Black-873.jpg', 56),
+('T023-Khaki-367.jpg', 54),
+('T023-Khaki-705.jpg', 54),
+('T023-Khaki-815.jpg', 54),
 ('T023-White-Leopard-396.jpg', 57),
 ('T023-White-Leopard-584.jpg', 57),
 ('T023-White-Leopard-85.jpg', 57),
+('T023-Yellow-60.jpg', 55),
+('T023-Yellow-661.jpg', 55),
+('T023-Yellow-783.jpg', 55),
 ('T024-Black-494.jpg', 58),
 ('T024-Black-647.jpg', 58),
 ('T024-Black-897.jpg', 58),
+('T024-Checked-601.jpg', 60),
+('T024-Checked-663.jpg', 60),
 ('T024-Floral-442.jpg', 59),
 ('T024-Floral-532.jpg', 59),
 ('T024-Floral-613.jpg', 59),
-('T024-Checked-601.jpg', 60),
-('T024-Checked-663.jpg', 60),
-('T024-White-272.jpg', 61),
-('T024-Snake-Skin-144.jpg', 62),
-('T024-Snake-Skin-419.jpg', 62),
-('T024-Snake-Skin-442.jpg', 62),
-('T024-Zebra-Printed-227.jpg', 63),
-('T024-Zebra-Printed-518.jpg', 63),
-('T024-Zebra-Printed-771.jpg', 63),
 ('T024-Red-105.jpg', 64),
 ('T024-Red-214.jpg', 64),
 ('T024-Red-255.jpg', 64),
+('T024-Snake-Skin-144.jpg', 62),
+('T024-Snake-Skin-419.jpg', 62),
+('T024-Snake-Skin-442.jpg', 62),
+('T024-White-272.jpg', 61),
+('T024-Zebra-Printed-227.jpg', 63),
+('T024-Zebra-Printed-518.jpg', 63),
+('T024-Zebra-Printed-771.jpg', 63),
+('T025-Black-336.jpg', 85),
+('T025-Black-514.jpg', 85),
+('T025-Black-796.jpg', 85),
 ('T025-Dusky-Pink-36.jpg', 82),
 ('T025-Dusky-Pink-373.jpg', 82),
 ('T025-Dusky-Pink-885.jpg', 82),
 ('T025-Khaki-367.jpg', 83),
-('T025-White-400.jpg', 84),
-('T025-White-604.jpg', 84),
-('T025-White-640.jpg', 84),
-('T025-Black-336.jpg', 85),
-('T025-Black-514.jpg', 85),
-('T025-Black-796.jpg', 85),
-('T025-White-Yellow-Striped-227.jpg', 86),
-('T025-White-Yellow-Striped-632.jpg', 86),
-('T025-White-Yellow-Striped-90.jpg', 86),
-('T025-White-Green-Striped-63.jpg', 87),
-('T025-White-Green-Striped-738.jpg', 87),
-('T025-White-Green-Striped-807.jpg', 87),
 ('T025-Light-Blue-255.jpg', 88),
 ('T025-Light-Blue-37.jpg', 88),
 ('T025-Light-Blue-573.jpg', 88),
+('T025-White-400.jpg', 84),
+('T025-White-604.jpg', 84),
+('T025-White-640.jpg', 84),
 ('T025-White-Black-313.jpg', 89),
 ('T025-White-Black-537.jpg', 89),
 ('T025-White-Black-674.jpg', 89),
+('T025-White-Green-Striped-63.jpg', 87),
+('T025-White-Green-Striped-738.jpg', 87),
+('T025-White-Green-Striped-807.jpg', 87),
+('T025-White-Yellow-Striped-227.jpg', 86),
+('T025-White-Yellow-Striped-632.jpg', 86),
+('T025-White-Yellow-Striped-90.jpg', 86),
 ('T026-Black-Marl-5.jpg', 90),
 ('T026-Black-Marl-687.jpg', 90),
 ('T026-Black-Marl-914.jpg', 90),
-('T026-Green-Snakeskin-222.jpg', 91),
-('T026-Green-Snakeskin-56.jpg', 91),
-('T026-Green-Snakeskin-862.jpg', 91),
-('T026-Floral-167.jpg', 92),
-('T026-Floral-219.jpg', 92),
-('T026-Floral-259.jpg', 92),
 ('T026-Black-White-584.jpg', 93),
 ('T026-Black-White-679.jpg', 93),
 ('T026-Black-White-685.jpg', 93),
@@ -813,62 +816,48 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T026-Brown-White-65.jpg', 94),
 ('T026-Brown-White-787.jpg', 94),
 ('T026-Brown-White-99.jpg', 94),
-('T027-Denim-Blue-73.jpg', 95),
-('T027-Denim-Blue-737.jpg', 95),
-('T027-Denim-Blue-869.jpg', 95),
+('T026-Floral-167.jpg', 92),
+('T026-Floral-219.jpg', 92),
+('T026-Floral-259.jpg', 92),
+('T026-Green-Snakeskin-222.jpg', 91),
+('T026-Green-Snakeskin-56.jpg', 91),
+('T026-Green-Snakeskin-862.jpg', 91),
 ('T027-Black-34.jpg', 96),
-('T027-Khaki-166.jpg', 97),
-('T027-Khaki-322.jpg', 97),
-('T027-Khaki-941.jpg', 97),
-('T027-Black-White-26.jpg', 98),
-('T027-Black-White-539.jpg', 98),
-('T027-Black-White-602.jpg', 98),
 ('T027-Black-Twill-521.jpg', 99),
 ('T027-Black-Twill-874.jpg', 99),
 ('T027-Black-Twill-978.jpg', 99),
+('T027-Black-White-26.jpg', 98),
+('T027-Black-White-539.jpg', 98),
+('T027-Black-White-602.jpg', 98),
+('T027-Denim-Blue-73.jpg', 95),
+('T027-Denim-Blue-737.jpg', 95),
+('T027-Denim-Blue-869.jpg', 95),
+('T027-Khaki-166.jpg', 97),
+('T027-Khaki-322.jpg', 97),
+('T027-Khaki-941.jpg', 97),
+('T027-Old-Rose-429.jpg', 101),
+('T027-Old-Rose-697.jpg', 101),
 ('T027-Pigeon-Blue-509.jpg', 100),
 ('T027-Pigeon-Blue-715.jpg', 100),
 ('T027-Pigeon-Blue-814.jpg', 100),
-('T027-Old-Rose-429.jpg', 101),
-('T027-Old-Rose-697.jpg', 101),
 ('T028-Denim-Blue-25.jpg', 102),
 ('T028-Denim-Blue-450.jpg', 102),
 ('T028-Denim-Blue-986.jpg', 102),
 ('T028-White-120.jpg', 103),
 ('T028-White-235.jpg', 103),
 ('T028-White-357.jpg', 103),
-('T029-Grey-270.jpg', 104),
-('T029-Grey-438.jpg', 104),
-('T029-Grey-593.jpg', 104),
-('T029-Blue-143.jpg', 105),
-('T029-Blue-969.jpg', 105),
-('T029-Blue-977.jpg', 105),
 ('T029-Black-605.jpg', 106),
 ('T029-Black-730.jpg', 106),
 ('T029-Black-877.jpg', 106),
+('T029-Blue-143.jpg', 105),
+('T029-Blue-969.jpg', 105),
+('T029-Blue-977.jpg', 105),
+('T029-Grey-270.jpg', 104),
+('T029-Grey-438.jpg', 104),
+('T029-Grey-593.jpg', 104),
 ('T029-Light-Blue-161.jpg', 107),
 ('T029-Light-Blue-636.jpg', 107),
 ('T029-Light-Blue-700.jpg', 107);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reviews`
---
-
-CREATE TABLE `reviews` (
-  `id_item_colored` int(11) NOT NULL,
-  `email_user` varchar(50) NOT NULL,
-  `star` int(11) NOT NULL,
-  `description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `reviews`
---
-
-INSERT INTO `reviews` (`id_item_colored`, `email_user`, `star`, `description`) VALUES
-(1, 'agus@gmail.com', 4, 'Dress sangat nyaman digunakan dan cocok untuk digunakan dalam berbagai acara');
 
 -- --------------------------------------------------------
 
@@ -888,7 +877,7 @@ CREATE TABLE `shopping_cart` (
 --
 
 INSERT INTO `shopping_cart` (`id_item_colored`, `email_user`, `quantity`, `item_size`) VALUES
-(3, 'andy@gmail.com', 1, 'L');
+(3, 'andre@gmail.com', 1, 'L');
 
 -- --------------------------------------------------------
 
@@ -935,11 +924,6 @@ INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `UnitPric
 ('1', 1, 1, 799900, 'S'),
 ('1', 8, 1, 149900, 'S'),
 ('1', 13, 1, 399900, 'S'),
-('10', 12, 1, 449900, 'L'),
-('12', 102, 1, 449900, '32'),
-('13', 19, 1, 799900, 'S'),
-('13', 106, 1, 249900, '34'),
-('14', 107, 1, 249900, '32'),
 ('2', 14, 1, 599900, 'M'),
 ('2', 15, 2, 399900, 'S'),
 ('2', 19, 1, 799900, 'M'),
@@ -954,7 +938,11 @@ INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `UnitPric
 ('7', 13, 1, 399900, 'S'),
 ('8', 14, 1, 599900, 'XL'),
 ('8', 19, 1, 799900, 'S'),
-('9', 3, 1, 899900, 'S');
+('9', 3, 1, 899900, 'S'),
+('10', 12, 1, 449900, 'L'),
+('11', 19, 1, 799900, 'S'),
+('11', 106, 1, 249900, '34'),
+('12', 107, 1, 249900, '32');
 
 -- --------------------------------------------------------
 
@@ -978,15 +966,15 @@ INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date
 (1, 'andre@gmail.com', '2', '2019-11-01', 0),
 (2, 'linata@gmail.com', '6', '2019-10-17', 0),
 (3, 'caca@gmail.com', '2', '2019-10-30', 10000),
-(4, 'andre@gmail.com', '4', '2019-10-31', 0),
-(5, 'aldo@gmail.com', '5', '2019-09-20', 0),
+(4, 'andre@gmail.com', '4', '2019-10-31', 10000),
+(5, 'aldo@gmail.com', '5', '2019-09-20', 10000),
 (6, 'billy@gmail.com', '6', '2019-09-01', 0),
 (7, 'wahyudi@gmail.com', '2', '2019-11-03', 0),
 (8, 'linata@gmail.com', '5', '2019-11-11', 0),
-(9, 'andy@gmail.com', '5', '2019-11-06', 0),
-(10, 'ariel@gmail.com', '6', '2019-11-03', 0),
-(11, 'andy@gmail.com', '1', '2019-11-26', 0),
-(14, 'agus@gmail.com', '5', '2019-12-06', 10000);
+(9, 'andre@gmail.com', '5', '2019-11-06', 0),
+(10, 'ariel@gmail.com', '6', '2019-11-03', 10000),
+(11, 'andre@gmail.com', '1', '2019-11-26', 0),
+(12, 'agus@gmail.com', '5', '2019-12-06', 10000);
 
 -- --------------------------------------------------------
 
@@ -1064,13 +1052,6 @@ ALTER TABLE `photos`
   ADD KEY `photos_ibfk_1` (`id_item_colored`);
 
 --
--- Indexes for table `reviews`
---
-ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`id_item_colored`,`email_user`),
-  ADD KEY `reviews_ibfk_1` (`email_user`);
-
---
 -- Indexes for table `shopping_cart`
 --
 ALTER TABLE `shopping_cart`
@@ -1127,7 +1108,8 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `transaction_detail`
 --
 ALTER TABLE `transaction_detail`
-  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `type`
 --
@@ -1160,13 +1142,6 @@ ALTER TABLE `item_stock`
 --
 ALTER TABLE `photos`
   ADD CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`id_item_colored`) REFERENCES `item_colored` (`id_item_colored`);
-
---
--- Constraints for table `reviews`
---
-ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`email_user`) REFERENCES `ms_users` (`email_user`),
-  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`id_item_colored`) REFERENCES `item_colored` (`id_item_colored`);
 
 --
 -- Constraints for table `shopping_cart`

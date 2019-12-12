@@ -22,7 +22,7 @@
     <?php echo $header; ?>
         <div class="container-fluid flex-grow-1 container-p-y">
             <h4 class="font-weight-bold py-3 mb-0 card-header">Edit Product</h4>
-            <div class="card mb-4">
+            <div class="card mb-4 p-3">
                 <div class="card-body">
                     <?php
                         $type_before = array(

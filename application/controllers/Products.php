@@ -102,11 +102,11 @@ class Products extends CI_Controller{
 			'full_tag_close'  => '</ul>',
 			
 			'first_link'      => 'First', 
-			'first_tag_open'  => '<li flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04>',
+			'first_tag_open'  => '<li class="flex-c-m p-lr-8 stext-101 trans-04">',
 			'first_tag_close' => '</li>',
 			
 			'last_link'       => 'Last', 
-			'last_tag_open'   => '<li flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04>',
+			'last_tag_open'   => '<li class="flex-c-m p-lr-8 stext-101 trans-04">',
 			'last_tag_close'  => '</li>',
 			
 			'next_link'       => ' <i class="glyphicon glyphicon-menu-right"></i> ', 

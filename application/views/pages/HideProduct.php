@@ -9,9 +9,11 @@
 </head>
 <body>
     <?php echo $header; ?>
-    <div class="container-fluid flex-grow-1 container-p-y">
+    <div class="container">
         <h4 class="font-weight-bold py-3 mb-0">Hide Product</h4>
-        <?php echo $datatables; ?>
+		<div class="container">
+			<?php echo $datatables; ?>
+		</div>
     </div>
     <?php echo $footer; ?>
 </body>

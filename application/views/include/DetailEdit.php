@@ -68,7 +68,7 @@
 								</div>
 								<div class="card-body">
                                         <dl>
-											<dt>Categories</dt>
+											<dt>Type</dt>
                                             <dd>
 												<?= $type_item?>
 											</dd>

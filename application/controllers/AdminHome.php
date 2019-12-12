@@ -228,7 +228,7 @@ class AdminHome extends CI_Controller{
         $data['items']= $this->AdminHome_model->get_out_stock();
 		$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
         $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-        $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
+		$data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
         $data['datatables'] = $this->load->view('include/TabelProductSize', $data, TRUE);
         $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
 
@@ -310,36 +310,6 @@ class AdminHome extends CI_Controller{
 
 		$this->load->view('pages/TableProductColor.php',$data);
     }
-
-    // public function FormEditProductStock()
-    // {
-    //     $data['data'] = $this->AdminHome_model->get_all_size_and_stock($_GET['id'], $_GET['size']);
-    //     $data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-    //     $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-    //     $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-    //     $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-        
-    //     $this->load->view('pages/FormEditStockSize.php',$data);
-    // }
-
-    // public function FormEditProduct()
-	// {
-    //     $item_type = $_GET['type'];
-    //     $data['type']  = $this->AdminHome_model->getType();
-        
-    //     $data = array(
-    //         'button' => 'Create',
-    //         'type' => $this->AdminHome_model->getType(),
-    //         'type_selected' => $this->input->post('type') ? $this->input->post('type') : $item_type, // untuk edit ganti '' menjadi data dari database misalnya $row->provinsi
-    //     );
-    //     $data['typebefore'] = $this->AdminHome_model->get_specific_type($_GET['id_item']);
-    //     $data['details']= $this->AdminHome_model->get_specific_data($_GET['id_item']);
-	// 	$data['style'] = $this->load->view('include/StyleAdmin', NULL, TRUE);
-    //     $data['script'] = $this->load->view('include/ScriptAdmin', NULL, TRUE);
-    //     $data['header']= $this->load->view('include/HeaderAdmin',NULL,TRUE);
-    //     $data['footer']= $this->load->view('include/FooterAdmin',NULL,TRUE);
-	// 	$this->load->view('pages/FormEditProduct.php',$data);
-    // }
 
     public function AddProductDetail(){
         $this->form_validation->set_rules('itemsize[]', 'itemsize', 'required|trim|min_length[1]|max_length[2]',[
@@ -694,7 +664,7 @@ class AdminHome extends CI_Controller{
         $data['typebefore'] = $this->AdminHome_model->get_specific_type($_GET['id_item']);
 
         $this->load->view('pages/FormEditProduct.php',$data);
-    }
+	}
 
     public function EditProduct()
 	{

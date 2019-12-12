@@ -97,14 +97,17 @@ class Product_model extends CI_Model{
 	}
 
 	function total_data($type='none'){
-		if($type=='none') 
-			return $this->db->get('item_colored')->num_rows();
+		if($type=='none') {
+			// $this->db->where("show",1);
+			return $this->db->get_where('item_colored', array('show' => 1))->num_rows();
+		}
 		else {
 			$this->db->select('*');
 			$this->db->from('item_colored');
 			$this->db->join('items', 'item_colored.id_item = items.id_item');
 			$this->db->join('type', 'items.id_type = type.id_type');
 			$this->db->where('type.type_desc', $type);
+			$this->db->where("show",1);
 
 			return $this->db->get()->num_rows();
 		}

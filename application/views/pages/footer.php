@@ -89,7 +89,7 @@
 		</script>
 		<script src="<?=base_url('asset/vendor/isotope/isotope.pkgd.min.js')?>"></script>
 		<script src="<?=base_url('asset/vendor/sweetalert/sweetalert.min.js')?>"></script>
-		<script>
+		<!-- <script>
 			$('.js-addwish-b2').on('click', function (e) {
 				e.preventDefault();
 			});
@@ -115,7 +115,7 @@
 				});
 			});
 
-		</script>
+		</script> -->
 		<script src="<?=base_url('asset/vendor/perfect-scrollbar/perfect-scrollbar.min.js')?>"></script>
 		<script>
 			$('.js-pscroll').each(function () {

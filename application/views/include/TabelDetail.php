@@ -82,7 +82,7 @@
                         	<div class="panel-heading">Billing and Shipping Details : </div>
                         	<div class="panel-body">
                             	<strong><?= $name?></strong><br>
-                            			<?= $address?><br>
+                            	<?= $address?><br>
                         	</div>
                     	</div>
 				<?php endforeach;?>

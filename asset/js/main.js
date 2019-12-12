@@ -111,16 +111,6 @@
     /*==================================================================
     [ Isotope ]*/
     var $topeContainer = $('.isotope-grid');
-    var $filter = $('.filter-tope-group');
-
-    // filter items on button click
-    $filter.each(function () {
-        $filter.on('click', 'button', function () {
-            var filterValue = $(this).attr('data-filter');
-            $topeContainer.isotope({filter: filterValue});
-        });
-        
-    });
 
     // init Isotope
     $(window).on('load', function () {
@@ -151,13 +141,13 @@
 
     /*==================================================================
     [ Cart ]*/
-    $('.js-show-cart').on('click',function(){
-        $('.js-panel-cart').addClass('show-header-cart');
-    });
+    // $('.js-show-cart').on('click',function(){
+    //     $('.js-panel-cart').addClass('show-header-cart');
+    // });
 
-    $('.js-hide-cart').on('click',function(){
-        $('.js-panel-cart').removeClass('show-header-cart');
-    });
+    // $('.js-hide-cart').on('click',function(){
+    //     $('.js-panel-cart').removeClass('show-header-cart');
+    // });
 
     /*==================================================================
     [ Cart ]*/
@@ -183,57 +173,44 @@
 
     /*==================================================================
     [ Rating ]*/
-    $('.wrap-rating').each(function(){
-        var item = $(this).find('.item-rating');
-        var rated = -1;
-        var input = $(this).find('input');
-        $(input).val(0);
+    // $('.wrap-rating').each(function(){
+    //     var item = $(this).find('.item-rating');
+    //     var rated = -1;
+    //     var input = $(this).find('input');
+    //     $(input).val(0);
 
-        $(item).on('mouseenter', function(){
-            var index = item.index(this);
-            var i = 0;
-            for(i=0; i<=index; i++) {
-                $(item[i]).removeClass('zmdi-star-outline');
-                $(item[i]).addClass('zmdi-star');
-            }
+    //     $(item).on('mouseenter', function(){
+    //         var index = item.index(this);
+    //         var i = 0;
+    //         for(i=0; i<=index; i++) {
+    //             $(item[i]).removeClass('zmdi-star-outline');
+    //             $(item[i]).addClass('zmdi-star');
+    //         }
 
-            for(var j=i; j<item.length; j++) {
-                $(item[j]).addClass('zmdi-star-outline');
-                $(item[j]).removeClass('zmdi-star');
-            }
-        });
+    //         for(var j=i; j<item.length; j++) {
+    //             $(item[j]).addClass('zmdi-star-outline');
+    //             $(item[j]).removeClass('zmdi-star');
+    //         }
+    //     });
 
-        $(item).on('click', function(){
-            var index = item.index(this);
-            rated = index;
-            $(input).val(index+1);
-        });
+    //     $(item).on('click', function(){
+    //         var index = item.index(this);
+    //         rated = index;
+    //         $(input).val(index+1);
+    //     });
 
-        $(this).on('mouseleave', function(){
-            var i = 0;
-            for(i=0; i<=rated; i++) {
-                $(item[i]).removeClass('zmdi-star-outline');
-                $(item[i]).addClass('zmdi-star');
-            }
+    //     $(this).on('mouseleave', function(){
+    //         var i = 0;
+    //         for(i=0; i<=rated; i++) {
+    //             $(item[i]).removeClass('zmdi-star-outline');
+    //             $(item[i]).addClass('zmdi-star');
+    //         }
 
-            for(var j=i; j<item.length; j++) {
-                $(item[j]).addClass('zmdi-star-outline');
-                $(item[j]).removeClass('zmdi-star');
-            }
-        });
-    });
+    //         for(var j=i; j<item.length; j++) {
+    //             $(item[j]).addClass('zmdi-star-outline');
+    //             $(item[j]).removeClass('zmdi-star');
+    //         }
+    //     });
+    // });
     
-    /*==================================================================
-    [ Show modal1 ]*/
-    $('.js-show-modal1').on('click',function(e){
-        e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
-    });
-
-    $('.js-hide-modal1').on('click',function(){
-        $('.js-modal1').removeClass('show-modal1');
-    });
-
-
-
 })(jQuery);
