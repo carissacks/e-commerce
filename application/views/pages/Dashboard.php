@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Eyecandy</title>
+	<title>Admin Eyecandy</title>
     <?php 
         echo $style;
         echo $script;  

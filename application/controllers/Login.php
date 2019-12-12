@@ -80,14 +80,15 @@ class Login extends CI_Controller{
 					
 					$this->session->set_userdata($data_session);
 
+					if($status == 1){
+						redirect(base_url('index.php/AdminHome'));
+					}else {
+						redirect(base_url(''));
+					}
 				}
-				if($status == 1){
-					redirect(base_url('index.php/AdminHome'));
-				}else {
-					redirect(base_url());
-				}
-					
-				
+				else{
+					$this->index('Email or password is incorrect');
+				}	
 			}
 			else{
 				$this->index('Email or password is incorrect');
