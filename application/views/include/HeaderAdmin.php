@@ -5,7 +5,7 @@
                     <span class="app-brand-logo demo">
                         <img src="<?=base_url('asset/images/icons/favicon.png')?>" alt="IMG-LOGO" height="30px;">
                     </span>
-                    <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Eye Candy</a>
+                    <a href="#" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Eye Candy</a>
                     <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                         <i class="ion ion-md-menu align-middle"></i>
                     </a>
