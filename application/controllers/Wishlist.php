@@ -32,7 +32,7 @@ class Wishlist extends CI_Controller{
 
 	public function removeItem($id=-1){
 		$post= $this->input->post();
-		var_dump($post);
+		// var_dump($post);
 		if($post){
 			$id= $post['remove'];
 			$page= 1;
