@@ -16,12 +16,6 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $(".finish").click(function(){
-                // if(confirm('Do you want to submit ?'))
-                // {
-                //     if(confirm('Are you sure ?')){
-                //         window.location.href = "http://localhost/uaspemweb/index.php/AdminHome/";
-                //     }
-                // }
                 swal({
                     title: "Are you sure?",
                     text: "You will not be able to be in this form anymore!",

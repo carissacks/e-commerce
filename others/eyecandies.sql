@@ -808,7 +808,6 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T025-White-Yellow-Striped-3.jpg', 86),
 ('T026-Black-Marl-1.jpg', 90),
 ('T026-Black-Marl-2.jpg', 90),
-('T026-Black-Marl-3.jpg', 90),
 ('T026-Black-White-1.jpg', 93),
 ('T026-Black-White-2.jpg', 93),
 ('T026-Black-White-3.jpg', 93),
