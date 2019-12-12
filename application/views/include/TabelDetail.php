@@ -8,7 +8,7 @@
 					<br><br>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overfloe-x: auto">
                         <table class="table table-condensed">
                             <thead>
                                 <tr>

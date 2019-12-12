@@ -1,6 +1,6 @@
-<div class="container card mb-4">
-    <br>
-    <table id="datatables" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<div class="container card mb-4 p-4">
+	<div class="table-responsive">
+		<table id="datatables" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
                 <tr>
                     <th>No.</th>
@@ -51,9 +51,5 @@
                 ?>
             </tbody>
         </table>
-        <br>
+    </div>
 </div>
-    
-
-    
-    
