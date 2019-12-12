@@ -3,11 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2019 at 08:42 PM
+-- Generation Time: Dec 12, 2019 at 05:44 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -202,13 +204,13 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (2, 'M', 10),
 (2, 'S', 10),
 (2, 'XL', 10),
-(3, 'L', 10),
+(3, 'L', 8),
 (3, 'M', 10),
 (3, 'S', 10),
 (3, 'XL', 10),
 (4, 'L', 10),
 (4, 'M', 10),
-(4, 'S', 10),
+(4, 'S', 0),
 (4, 'XL', 10),
 (5, 'L', 10),
 (5, 'M', 10),
@@ -235,7 +237,7 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (10, 'S', 10),
 (10, 'XL', 10),
 (11, 'L', 10),
-(11, 'M', 10),
+(11, 'M', 8),
 (11, 'S', 10),
 (11, 'XL', 10),
 (12, '34', 10),
@@ -529,9 +531,9 @@ INSERT INTO `item_stock` (`id_item_colored`, `item_size`, `stock`) VALUES
 (105, '34', 10),
 (105, '36', 10),
 (105, '38', 10),
-(106, '32', 10),
-(106, '34', 9),
-(106, '36', 10),
+(106, '32', 8),
+(106, '34', 8),
+(106, '36', 9),
 (106, '38', 10),
 (107, '32', 9),
 (107, '34', 10),
@@ -587,50 +589,50 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
-('T001-Yellow-1.jpg', 1),
-('T001-Yellow-2.jpg', 1),
-('T001-Yellow-3.jpg', 1),
-('T001-Yellow-4.jpg', 1),
 ('T001-Lemon-1.jpg', 2),
 ('T001-Lemon-2.jpg', 2),
 ('T001-Lemon-3.jpg', 2),
 ('T001-Lemon-4.jpg', 2),
-('T002-Turquoise-1.jpg', 3),
-('T002-Turquoise-2.jpg', 3),
-('T002-Turquoise-3.jpg', 3),
-('T002-Turquoise-4.jpg', 3),
+('T001-Yellow-1.jpg', 1),
+('T001-Yellow-2.jpg', 1),
+('T001-Yellow-3.jpg', 1),
+('T001-Yellow-4.jpg', 1),
 ('T002-Rose-1.jpg', 4),
 ('T002-Rose-2.jpg', 4),
 ('T002-Rose-3.jpg', 4),
 ('T002-Rose-4.jpg', 4),
+('T002-Turquoise-1.jpg', 3),
+('T002-Turquoise-2.jpg', 3),
+('T002-Turquoise-3.jpg', 3),
+('T002-Turquoise-4.jpg', 3),
 ('T003-Black-1.jpg', 5),
 ('T003-Black-2.jpg', 5),
 ('T003-Black-3.jpg', 5),
-('T003-White-Blue-1.jpg', 6),
-('T003-White-Blue-2.jpg', 6),
-('T003-White-Blue-3.jpg', 6),
-('T003-Red-1.jpg', 7),
-('T003-Red-2.jpg', 7),
-('T003-Red-3.jpg', 7),
 ('T003-Floral-1.jpg', 8),
 ('T003-Floral-2.jpg', 8),
 ('T003-Floral-3.jpg', 8),
+('T003-Red-1.jpg', 7),
+('T003-Red-2.jpg', 7),
+('T003-Red-3.jpg', 7),
+('T003-White-Blue-1.jpg', 6),
+('T003-White-Blue-2.jpg', 6),
+('T003-White-Blue-3.jpg', 6),
 ('T004-Brown-1.jpg', 9),
 ('T004-Brown-2.jpg', 9),
 ('T004-Brown-3.jpg', 9),
 ('T004-Brown-4.jpg', 9),
-('T004-Patterned-1.jpg', 10),
-('T004-Patterned-2.jpg', 10),
-('T004-Patterned-3.jpg', 10),
-('T004-Patterned-4.jpg', 10),
-('T004-Green-1.jpg', 11),
-('T004-Green-2.jpg', 11),
-('T004-Green-3.jpg', 11),
-('T004-Green-4.jpg', 11),
 ('T004-Floral-1.jpg', 12),
 ('T004-Floral-2.jpg', 12),
 ('T004-Floral-3.jpg', 12),
 ('T004-Floral-4.jpg', 12),
+('T004-Green-1.jpg', 11),
+('T004-Green-2.jpg', 11),
+('T004-Green-3.jpg', 11),
+('T004-Green-4.jpg', 11),
+('T004-Patterned-1.jpg', 10),
+('T004-Patterned-2.jpg', 10),
+('T004-Patterned-3.jpg', 10),
+('T004-Patterned-4.jpg', 10),
 ('T005-Black-1.jpg', 13),
 ('T005-Black-2.jpg', 13),
 ('T005-Black-3.jpg', 13),
@@ -639,14 +641,14 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T006-Red-2.jpg', 14),
 ('T006-Red-3.jpg', 14),
 ('T006-Red-4.jpg', 14),
-('T007-Black-1.jpg', 15),
-('T007-Black-2.jpg', 15),
-('T007-Black-3.jpg', 15),
-('T007-Black-4.jpg', 15),
 ('T007-Beige-1.jpg', 16),
 ('T007-Beige-2.jpg', 16),
 ('T007-Beige-3.jpg', 16),
 ('T007-Beige-4.jpg', 16),
+('T007-Black-1.jpg', 15),
+('T007-Black-2.jpg', 15),
+('T007-Black-3.jpg', 15),
+('T007-Black-4.jpg', 15),
 ('T008-Khaki-1.jpg', 17),
 ('T008-Khaki-2.jpg', 17),
 ('T008-Khaki-3.jpg', 17),
@@ -735,25 +737,25 @@ INSERT INTO `photos` (`item_photo`, `id_item_colored`) VALUES
 ('T020-Green-2.jpg', 48),
 ('T020-Green-3.jpg', 48),
 ('T020-Green-4.jpg', 48),
+('T020-Snake-Skin-1.jpg', 50),
+('T020-Snake-Skin-2.jpg', 50),
+('T020-Snake-Skin-3.jpg', 50),
 ('T020-White-1.jpg', 49),
 ('T020-White-2.jpg', 49),
 ('T020-White-3.jpg', 49),
 ('T020-White-4.jpg', 49),
-('T020-Snake-Skin-1.jpg', 50),
-('T020-Snake-Skin-2.jpg', 50),
-('T020-Snake-Skin-3.jpg', 50),
 ('T021-BlackPink-Patterned-1.jpg', 51),
 ('T021-BlackPink-Patterned-2.jpg', 51),
 ('T021-BlackPink-Patterned-3.jpg', 51),
 ('T021-BlackPink-Patterned-4.jpg', 51),
-('T022-Cream-1.jpg', 52),
-('T022-Cream-2.jpg', 52),
-('T022-Cream-3.jpg', 52),
-('T022-Cream-4.jpg', 52),
 ('T022-Black-1.jpg', 53),
 ('T022-Black-2.jpg', 53),
 ('T022-Black-3.jpg', 53),
 ('T022-Black-4.jpg', 53),
+('T022-Cream-1.jpg', 52),
+('T022-Cream-2.jpg', 52),
+('T022-Cream-3.jpg', 52),
+('T022-Cream-4.jpg', 52),
 ('T023-Black-1.jpg', 56),
 ('T023-Black-2.jpg', 56),
 ('T023-Black-3.jpg', 56),
@@ -871,13 +873,6 @@ CREATE TABLE `shopping_cart` (
   `item_size` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `shopping_cart`
---
-
-INSERT INTO `shopping_cart` (`id_item_colored`, `email_user`, `quantity`, `item_size`) VALUES
-(3, 'andre@gmail.com', 1, 'L');
-
 -- --------------------------------------------------------
 
 --
@@ -923,6 +918,16 @@ INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `UnitPric
 ('1', 1, 1, 799900, 'S'),
 ('1', 8, 1, 149900, 'S'),
 ('1', 13, 1, 399900, 'S'),
+('10', 12, 1, 449900, 'L'),
+('11', 19, 1, 799900, 'S'),
+('11', 106, 1, 249900, '34'),
+('12', 107, 1, 249900, '32'),
+('13', 3, 2, 899900, 'L'),
+('13', 11, 2, 449900, 'M'),
+('14', 106, 2, 249900, '32'),
+('14', 106, 1, 249900, '34'),
+('14', 106, 1, 249900, '36'),
+('15', 4, 10, 899900, 'S'),
 ('2', 14, 1, 599900, 'M'),
 ('2', 15, 2, 399900, 'S'),
 ('2', 19, 1, 799900, 'M'),
@@ -937,11 +942,7 @@ INSERT INTO `transactions` (`id_trans`, `id_item_colored`, `quantity`, `UnitPric
 ('7', 13, 1, 399900, 'S'),
 ('8', 14, 1, 599900, 'XL'),
 ('8', 19, 1, 799900, 'S'),
-('9', 3, 1, 899900, 'S'),
-('10', 12, 1, 449900, 'L'),
-('11', 19, 1, 799900, 'S'),
-('11', 106, 1, 249900, '34'),
-('12', 107, 1, 249900, '32');
+('9', 3, 1, 899900, 'S');
 
 -- --------------------------------------------------------
 
@@ -973,7 +974,10 @@ INSERT INTO `transaction_detail` (`id_trans`, `email_user`, `stats`, `trans_date
 (9, 'andre@gmail.com', '5', '2019-11-06', 0),
 (10, 'ariel@gmail.com', '6', '2019-11-03', 10000),
 (11, 'andre@gmail.com', '1', '2019-11-26', 0),
-(12, 'agus@gmail.com', '5', '2019-12-06', 10000);
+(12, 'agus@gmail.com', '5', '2019-12-06', 10000),
+(13, 'andre@gmail.com', '2', '2019-12-12', 0),
+(14, 'andre@gmail.com', '2', '2019-12-12', 0),
+(15, 'andre@gmail.com', '2', '2019-12-12', 0);
 
 -- --------------------------------------------------------
 
@@ -1011,6 +1015,14 @@ CREATE TABLE `wishlist` (
   `email_user` varchar(50) NOT NULL,
   `item_size` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id_item_colored`, `email_user`, `item_size`) VALUES
+('107', 'andre@gmail.com', '34'),
+('44', 'andre@gmail.com', 'M');
 
 --
 -- Indexes for dumped tables
@@ -1098,22 +1110,25 @@ ALTER TABLE `wishlist`
 --
 ALTER TABLE `item_colored`
   MODIFY `id_item_colored` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `id_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `transaction_detail`
 --
 ALTER TABLE `transaction_detail`
-  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
   MODIFY `id_type` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- Constraints for dumped tables
 --
@@ -1165,6 +1180,7 @@ ALTER TABLE `transaction_detail`
 --
 ALTER TABLE `wishlist`
   ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`email_user`) REFERENCES `ms_users` (`email_user`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
