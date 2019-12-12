@@ -30,6 +30,9 @@
                         if (result.value) {
                             swal('Finished!', 'Your new product has been saved!', 'success')
                             window.location.href = "http://localhost/uaspemweb/index.php/AdminHome/";
+                            // kalo di web: 
+                            // window.location.href = "http://eyecandypemweb.000webhostapp.com/index.php/AdminHome/";
+                            
                         }
                     });
             });

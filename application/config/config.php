@@ -24,6 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/uaspemweb';
+//Kalo di web
+//$config['base_url'] = 'http://eyecandypemweb.000webhostapp.com/';
 
 /*
 |--------------------------------------------------------------------------
