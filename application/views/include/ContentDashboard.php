@@ -86,7 +86,6 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <p class="mb-0 text-muted">From The Last 24 Hours</p>
                             </div>
                         </div>
                         <div class="d-flex col-md-6 col-lg-3 align-items-center">
@@ -96,7 +95,7 @@
                                         <i class="lnr lnr-cart text-primary display-4"></i>
                                     </div>
                                     <div class="col">
-                                        <h6 class="mb-0 text-muted"><span class="text-primary">Order</span> Status</h6>
+                                        <h6 class="mb-0 text-muted"><span class="text-primary">Today's Order</span></h6>
                                         <h4 class="mt-3 mb-0">
                                             <?php 
                                                 foreach($countorder->result_array() as $row){
@@ -207,8 +206,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-inline-block align-middle">
-                                                                <h6 class="mb-1 text-success"><?php echo $wishlist = $row['email'];?></h6>
-                                                                <p class="text-muted mb-0"><?php echo $wishlist = $row['item_name'];?></p>
+                                                                <h6 class="mb-1 text" style="color: purple;"><?php echo $wishlist = $row['item_name'];?></h6>
+                                                                <p class="text-muted mb-0">Color : <?php echo $wishlist = $row['color'];?></p>
                                                                 <p>Size : <?php echo $wishlist = $row['size'];?></p>
                                                             </div>
                                                         </td>

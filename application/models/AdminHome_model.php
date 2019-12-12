@@ -232,7 +232,7 @@ class AdminHome_model extends CI_Model{
 	}
 	
 	function wishlist(){
-		$this->db->select('name as nama, item_name as item_name, ms_users.email_user as email, wishlist.item_size as size');
+		$this->db->select('name as nama, item_name as item_name, ms_users.email_user as email, wishlist.item_size as size, item_colored.item_color as color');
 		$this->db->from('wishlist');
 		$this->db->join('item_colored', 'wishlist.id_item_colored = item_colored.id_item_colored');
 		$this->db->join('items', 'item_colored.id_item = items.id_item');
@@ -271,8 +271,9 @@ class AdminHome_model extends CI_Model{
 
 	function countorder(){
 		$this->db->select('count(id_trans) as totalorder'); 
-		$this->db->where('extract(month from trans_date) = extract(month from current_date)');
+		$this->db->where('extract(day from trans_date) = extract(day from current_date)');
 		$this->db->where('stats != 6');
+		
 		$hasil = $this->db->get('transaction_detail');
 		return $hasil;
 	}

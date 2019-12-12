@@ -32,7 +32,9 @@
 
 <script>
 	$(document).ready(function(){
-		$('#datatables').DataTable();
+		$('#datatables').DataTable(){
+			responsive : true
+		}
 	})
 </script>
 
