@@ -165,6 +165,9 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a href="http://localhost/uaspemweb/index.php/Login/logging_out" class="dropdown-item">
+                                    <!-- kalo di web :  -->
+                                    <!-- <a href="http://eyecandypemweb.000webhostapp.com/index.php/Login/logging_out" class="dropdown-item"> -->
+                                    
                                     <i class="feather icon-power text-danger"></i> &nbsp; Log Out</a>
                                 </div>
                             </div>
