@@ -67,7 +67,8 @@
                                             echo form_upload($poster_attr);
                                         echo '</div>';
                                     echo '</div>';
-                                    echo form_close();
+                                    echo "<br>";
+                                    echo '<button type="submit" class="btn btn-primary">Add More Photos</button>';
                                     echo "</span>";
                                     echo form_close();
                                     echo "</dd>";
