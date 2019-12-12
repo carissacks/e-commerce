@@ -1,6 +1,8 @@
 <!-- Google fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 
+<link rel="icon" type="image.png" href="<?=base_url('asset/images/icons/favicon.png')?>"/>
+
 <!-- Icon fonts -->
 <link rel="stylesheet" href="<?= base_url('asset/fonts/fontawesome.css')?>">
 <!-- untuk garis sidebar -->

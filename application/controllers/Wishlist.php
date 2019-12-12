@@ -45,26 +45,24 @@ class Wishlist extends CI_Controller{
 
 	private function head_class(){
 		if($this->session->has_userdata('login')) {
-			$login=true;
-			$email= $this->session->email;
-			return array(
-				'login'=> $login,
-				'new_class' => '',
-				'shop_class' => '',
-				'sale_class' => '',
-				'total_cart_items' => $this->cart_model->get_totalCartData($email),
-				'total_wishlist_items' => $this->wishlist_model->get_totalWishlistData($email)
-			);
+			if($this->session->priv ==0) {
+				$login=true;
+				$email= $this->session->email;
+				return array(
+					'userlogin'=> $login,
+					'new_class' => '',
+					'shop_class' => '',
+					'total_cart_items' => $this->cart_model->get_totalCartData($email),
+					'total_wishlist_items' => $this->wishlist_model->get_totalWishlistData($email)
+				);
+			}
 		}
-		else {
-			$login=false;
-			return array(
-				'login'=> $login,
-				'new_class' => '',
-				'shop_class' => '',
-				'sale_class' => '',
-			);
-		}
+		$login=false;
+		return array(
+			'userlogin'=> $login,
+			'new_class' => '',
+			'shop_class' => ''
+		);
 	}
 }
 ?>

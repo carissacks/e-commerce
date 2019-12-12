@@ -7,6 +7,9 @@ class Login extends CI_Controller{
 	}
 
 	function index($error=''){
+		if($this->session->has_userdata('login')){
+			redirect(base_url(''));
+		}
 		$this->load->view('pages/header.php',$this->head_class());
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
 		$data['label_attr']= array('class' =>'col-sm-2 col-form-label');
@@ -20,9 +23,10 @@ class Login extends CI_Controller{
 	function FormSignUp($error=''){
 		$this->load->view('pages/header.php',$this->head_class());
 		$data['footer']= $this->load->view('pages/footer.php',NULL,TRUE);
-		$data['label_attr']= array('class' =>'col-sm-2 col-form-label');
+		$data['label_attr']= array('class' =>'col-sm-6 col-form-label');
 		$data['email_attr']= $this->form_attr_signup('email');
 		$data['password_attr']= $this->form_attr_signup('password');
+		$data['passwordconf_attr']= $this->form_attr_signup('passwordconf');
 		$data['name_attr']= $this->form_attr_signup('name');
 		$data['address_attr']= $this->form_attr_signup('address');
 		$data['submit_attr']['class']= 'btn cl2 bg8 bor13 hov-btn3';
@@ -76,14 +80,15 @@ class Login extends CI_Controller{
 					
 					$this->session->set_userdata($data_session);
 
+					if($status == 1){
+						redirect(base_url('index.php/AdminHome'));
+					}else {
+						redirect(base_url(''));
+					}
 				}
-				if($status == 1){
-					redirect(base_url('index.php/AdminHome'));
-				}else {
-					redirect(base_url());
-				}
-					
-				
+				else{
+					$this->index('Email or password is incorrect');
+				}	
 			}
 			else{
 				$this->index('Email or password is incorrect');
@@ -114,14 +119,19 @@ class Login extends CI_Controller{
 	}
 
 	public function form_attr_signup($name){
+		if($name=="passwordconf")
+			return array(
+				'class'=>'form-control',
+				'name'=>$name,
+				'id'=>$name,
+				'type'=>'password',
+				'placeholder'=>'Please insert your password'
+			);
 		if($name=='password')
 			$type='password';
 		else if($name == 'email')
 			$type='email';
-		else if($name == 'name')
-			$type='name';
-		else if($name == 'address')
-			$type='address';
+		else $type='text';
 		return array(
 			'class'=>'form-control',
 			'name'=>$name,
@@ -133,10 +143,9 @@ class Login extends CI_Controller{
 
 	private function head_class(){
 		return array(
-			'login' => false,
+			'userlogin' => false,
 			'new_class' => '',
-			'shop_class' => '',
-			'sale_class' => ''
+			'shop_class' => ''
 		);
 	}
 
@@ -175,33 +184,45 @@ class Login extends CI_Controller{
 			array(
 				'field' => 'email',
 				'label' => 'Email',
-				'rules' => 'required',
+				'rules' => 'required|trim|is_unique[ms_users.email_user]',
 				'errors' => array(
-					'required' => 'You must provide an %s.'
+					'required' => 'You must provide an %s.',
+					'is_unique' => 'This email is registered.'
 				)
 			),
 			array(
 				'field' => 'password',
 				'label' => 'Password',
-				'rules' => 'required',
+				'rules' => 'required|trim|min_length[8]',
 				'errors' => array(
-					'required' => 'Please input your %s.'
+					'required' => 'Please input your %s.',
+					'min_length' => 'Must have at least {param} characters.'
+				)
+			),
+			array(
+				'field' => 'passwordconf',
+				'label' => 'Password Confirmation',
+				'rules' => 'required|trim|matches[password]',
+				'errors' => array(
+					'required' => 'Please input your password.'
 				)
 			),
 			array(
 				'field' => 'name',
 				'label' => 'Full Name',
-				'rules' => 'required',
+				'rules' => 'required|trim|min_length[3]',
 				'errors' => array(
-					'required' => 'Please input your %s.'
+					'required' => 'Please input your %s.',
+					'min_length' => 'Your name must have at least {param} characters.'
 				)
 			),
 			array(
 				'field' => 'address',
 				'label' => 'address',
-				'rules' => 'required',
+				'rules' => 'required|min_length[25]',
 				'errors' => array(
-					'required' => 'Please input your %s.'
+					'required' => 'Please input your %s.',
+					'min_length' => 'Please input your full address.'
 				)
 			)
 		);

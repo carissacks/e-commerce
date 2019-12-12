@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Eyecandy</title>
+    <title>Admin Eyecandy</title>
     <script src="<?php echo base_url("js/jquery.min.js"); ?>" type="text/javascript"></script>
     <?php 
         echo $script;

@@ -80,10 +80,6 @@
 									</li>
 								</ul>
 							</li>
-
-							<!-- <li class="label1 <?=$sale_class?>" data-label1="hot">
-								<a href="shoping-cart.html">SALE</a>
-							</li> -->
 						</ul>
 					</div>
 
@@ -93,7 +89,7 @@
 							<i class="zmdi zmdi-search"></i>
 						</div> -->
 
-						<?php if($login):?>
+						<?php if($userlogin):?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
 							data-notify="<?=$total_cart_items?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
@@ -138,7 +134,7 @@
 				<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
 				</div> -->
-			<?php if($login):?>
+			<?php if($userlogin):?>
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
 				data-notify="<?=$total_cart_items?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
