@@ -98,7 +98,7 @@ class Cart extends CI_Controller{
 				$this->cart_model->insert_transaction($id_trans, $item['id_item_colored'], $item['quantity'],$item['selling_price'], $item['item_size']);
 				$this->cart_model->minStock($item['id_item_colored'],$item['item_size'], $item['quantity']);
 				$stock= $this->cart_model->get_itemStock($item['id_item_colored'],$item['item_size']);
-				var_dump($stock);
+
 				if($stock!=0){
 					$this->cart_model->decrease_itemcart($item['id_item_colored'],$item['item_size'],$stock);
 				}else{
