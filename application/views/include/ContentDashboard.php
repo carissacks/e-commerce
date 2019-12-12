@@ -105,7 +105,7 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <p class="mb-0 text-muted">From This Month</p>
+                                <!-- <p class="mb-0 text-muted">From This Month</p> -->
                             </div>
                         </div>
                         <div class="d-flex col-md-6 col-lg-3 align-items-center">
