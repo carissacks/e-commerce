@@ -68,3 +68,10 @@ Acknowledgement
 
 The CodeIgniter team would like to thank EllisLab, all the
 contributors to the CodeIgniter project and you, the CodeIgniter user.
+
+***************
+Result
+***************
+
+You can check the website online on the following URL
+candypemweb.000webhostapp.com
