@@ -18,6 +18,12 @@
                             <div>Dashboards</div>
                         </a>
 					</li>
+					<li class="sidenav-item">
+                        <a href="<?=base_url('')?>" target="_blank" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-store icon-store"></i>
+                            <div>Shop Preview</div>
+                        </a>
+					</li>
                     <li class="sidenav-header small font-weight-semibold">Products</li>
                     <li class="sidenav-item">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">

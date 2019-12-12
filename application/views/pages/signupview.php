@@ -25,6 +25,13 @@
 									echo "<div class='col-sm-12'>";
 									echo form_input($password_attr, set_value('password'));
 									echo "<small class='text-danger'>".form_error('password')."</small>";
+									echo "</div></div>";
+									
+									echo "<div class='form-group'>";
+									echo form_label('Password Confirmation', 'passwordconf', $label_attr);
+									echo "<div class='col-sm-12'>";
+									echo form_input($passwordconf_attr, set_value('passwordconf'));
+									echo "<small class='text-danger'>".form_error('passwordconf')."</small>";
                                     echo "</div></div>";
                                     
                                     echo "<div class='form-group'>";
