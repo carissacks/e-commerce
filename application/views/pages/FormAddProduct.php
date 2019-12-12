@@ -74,18 +74,18 @@
                         );
                         
                         echo "<div class='form-group row'>";
-                                echo form_label('Item ID :',' ',$attribute_label) . form_input('itemid', '', $style);
+                                echo form_label('Item ID :',' ',$attribute_label) . form_input('itemid', set_value('itemid'), $style);
                                 echo form_error('itemid','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-5'>";
-                                echo form_label('Item Name :',' ',$attribute_label) . form_input('itemname', '', $style);
+                                echo form_label('Item Name :',' ',$attribute_label) . form_input('itemname', set_value('itemname'), $style);
                                 echo form_error('itemname','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
 
                             echo "<div class='form-group row col-md-5 offset-2'>";
-                                echo form_label('Item Type  :', ' ',$attribute_label);
+                                echo form_label('Item Type  :', set_value('type'),$attribute_label);
                                 $types = 'class="form-control select2"';
                                 echo form_dropdown('type', $type, $type_selected, $types);
                                 echo form_error('type','<small class="text-danger">','</small>');
@@ -94,7 +94,7 @@
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-4'>";
-                                echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor[]', '', $style);
+                                echo form_label('Item Color :',' ',$attribute_label) . form_input('itemcolor[]', set_value('itemcolor[]'), $style);
                                 echo form_error('itemcolor[]','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>";
@@ -111,14 +111,14 @@
                         
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-12'>";
-                                echo form_label('Weight :',' ',$attribute_label) . form_input($weight, '', $style);
+                                echo form_label('Weight :',' ',$attribute_label) . form_input($weight, set_value('weight'), $style);
                                 echo form_error('weight','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>";
 
                         echo "<div class='form-row'>";
                             echo "<div class='form-group row col-md-5'>";
-                                echo form_label('Selling Price :',' ',$attribute_label) . form_input($sellingprice, '', $style);
+                                echo form_label('Selling Price :',' ',$attribute_label) . form_input($sellingprice, set_value('sellingprice'), $style);
                                 echo form_error('sellingprice','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
 
@@ -126,18 +126,18 @@
                             echo "</div>";
 
                             echo "<div class='form-group row col-md-5'>";
-                                echo form_label('Buying Price :',' ',$attribute_label) . form_input($buyingprice, '', $style);
+                                echo form_label('Buying Price :',' ',$attribute_label) . form_input($buyingprice, set_value('buyingprice'), $style);
                                 echo form_error('buyingprice','<small class="text-danger">','</small>') . "<br>";
                             echo "</div>";
                         echo "</div>";
                         
                         echo "<div class='form-group row'>";
-                        echo form_label('Description :',' ',$attribute_label) . form_textarea($description, ' ', $style);
+                        echo form_label('Description :',' ',$attribute_label) . form_textarea($description, set_value('description'), $style);
                         echo form_error('description','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 
                         echo "<div class='form-group row'>";
-                        echo form_label('Care Instruction :',' ',$attribute_label) . form_textarea($careinstruction, ' ', $style);
+                        echo form_label('Care Instruction :',' ',$attribute_label) . form_textarea($careinstruction, set_value('careinstruction'), $style);
                         echo form_error('careinstruction','<small class="text-danger">','</small>') . "<br>";
                         echo "</div>";
 

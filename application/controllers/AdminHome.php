@@ -417,7 +417,7 @@ class AdminHome extends CI_Controller{
         }
         else {
             $this->AdminHome_model->AddPhoto($ItemIDColored, $filename);
-            redirect('AdminHome/showProductColor?id='.$ItemID); 
+            redirect('AdminHome/showProductColor?id='.$ItemID.'&status=Ok'); 
         }
             
     }
@@ -471,7 +471,7 @@ class AdminHome extends CI_Controller{
         ]);
 
         $this->form_validation->set_rules('careinstruction', 'careinstruction', 'required|trim|min_length[10]|max_length[1000]',[
-            'required' => '*You must input item description!',
+            'required' => '*You must input item Care Instruction!',
             'min_length' => '*Input minimal 10 character in length!',
             'max_length' => '*The Description field cannot exceed 100 character in length!'
         ]);
