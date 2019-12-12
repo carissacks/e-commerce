@@ -57,7 +57,7 @@ class AdminHome_model extends CI_Model{
 		$query = $this->db->query("SELECT td.stats, s.status_desc
 									FROM transaction_detail as td
 									JOIN transactions as t on t.id_trans = td.id_trans
-									JOIN Status as s on s.id_status = td.stats
+									JOIN status as s on s.id_status = td.stats
 									WHERE t.id_trans = '$id' AND td.id_trans = t.id_trans");
 		return $query->result_array();
 	}
