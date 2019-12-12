@@ -73,5 +73,5 @@ contributors to the CodeIgniter project and you, the CodeIgniter user.
 Result
 ***************
 
-You can check the website online on the following URL
-candypemweb.000webhostapp.com
+You can check the website online on
+`Eyecandy e-commerce<http://candypemweb.000webhostapp.com>`_
