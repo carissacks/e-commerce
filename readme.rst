@@ -1,5 +1,5 @@
 ###################
-What is CodeIgniter
+CodeIgniter
 ###################
 
 CodeIgniter is an Application Development Framework - a toolkit - for people
@@ -75,3 +75,10 @@ Result
 
 You can check the website online on
 `Eyecandy e-commerce <http://eyecandypemweb.000webhostapp.com>`_
+
+***************
+Credits
+***************
+Carissa Komalasari -User
+Jaosn Wenardi -Admin
+Vanessa Ardelia -Admin
