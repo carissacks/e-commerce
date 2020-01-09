@@ -79,6 +79,6 @@ You can check the website online on
 ***************
 Credits
 ***************
-Carissa Komalasari -User
-Jaosn Wenardi -Admin
-Vanessa Ardelia -Admin
+- Carissa Komalasari -User
+- Jason Wenardi -Admin
+- Vanessa Ardelia -Admin
